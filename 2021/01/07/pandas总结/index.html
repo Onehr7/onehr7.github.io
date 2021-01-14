@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="pandas浅析"><meta name="keywords" content="pandas"><meta name="author" content="Hairui Wang"><meta name="copyright" content="Hairui Wang"><title>pandas浅析 | WHR blogs</title><link rel="shortcut icon" href="https://i.loli.net/2021/01/14/e3vagq7WDQYRb2u.png"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '5.3.0'
+} </script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="WHR blogs" type="application/atom+xml">
+</head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BADataFrame"><span class="toc-number">1.</span> <span class="toc-text">创建DataFrame</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9DataFrame%E5%80%BC"><span class="toc-number">2.</span> <span class="toc-text">修改DataFrame值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.</span> <span class="toc-text">类型转换</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/01/14/STbxQl9M7XLJUkY.jpg"></div><div class="author-info__name text-center">Hairui Wang</div><div class="author-info__description text-center">调参工程师</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/Onehr7">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">24</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">14</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">6</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/edocteel-3/">Leetcode</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">WHR blogs</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">pandas浅析</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-01-07</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/python/">python</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h4 id="创建DataFrame"><a href="#创建DataFrame" class="headerlink" title="创建DataFrame"></a>创建DataFrame</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>读取csv文件并转为DataFrame</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csv_data = pd.read_csv(<span class="string">&quot;test_data.csv&quot;</span>, encoding = <span class="string">&quot;ISO-8859-1&quot;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字典转为DataFrame</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;col1&#x27;</span>: [<span class="number">1</span>, <span class="number">2</span>], <span class="string">&#x27;col2&#x27;</span>: [<span class="number">3</span>, <span class="number">4</span>]&#125;</span><br><span class="line">df = pd.DataFrame(data=d)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">col1</th>
+<th align="right"><strong>col2</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">4</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>双层列表转为DataFrame</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data = [[<span class="string">&#x27;tom&#x27;</span>, <span class="number">10</span>], [<span class="string">&#x27;nick&#x27;</span>, <span class="number">15</span>], [<span class="string">&#x27;juli&#x27;</span>, <span class="number">14</span>]] </span><br><span class="line"></span><br><span class="line"><span class="comment"># Create the pandas DataFrame </span></span><br><span class="line">df = pd.DataFrame(data, columns = [<span class="string">&#x27;Name&#x27;</span>, <span class="string">&#x27;Age&#x27;</span>]) </span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Name</th>
+<th align="right">Age</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">0</td>
+<td align="right">tom</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">nick</td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">juli</td>
+<td align="right">14</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>列表字典转DataFrame</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = [&#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>:<span class="number">3</span>&#125;, </span><br><span class="line">        &#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">10</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">20</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">30</span>&#125;] </span><br><span class="line"></span><br><span class="line"><span class="comment"># Creates DataFrame. </span></span><br><span class="line">df = pd.DataFrame(data) </span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">a</th>
+<th align="right">b</th>
+<th align="right">c</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">20</td>
+<td align="right">30</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>指定index</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(data, index =[<span class="string">&#x27;rank1&#x27;</span>, </span><br><span class="line">                                <span class="string">&#x27;rank2&#x27;</span>, </span><br><span class="line">                                <span class="string">&#x27;rank3&#x27;</span>, </span><br><span class="line">                                <span class="string">&#x27;rank4&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h4 id="修改DataFrame值"><a href="#修改DataFrame值" class="headerlink" title="修改DataFrame值"></a>修改DataFrame值</h4><ol>
+<li><p>修改一列的值</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;data&quot;</span>] = df[<span class="string">&quot;data&quot;</span>].<span class="built_in">map</span>(<span class="keyword">lambda</span> x: <span class="number">0</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>修改多列的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index, row <span class="keyword">in</span> df_res.iterrows():</span><br><span class="line">    df_res.at[index, <span class="string">&#x27;data1&#x27;</span>] = <span class="number">0</span></span><br><span class="line">    df_res.at[index, <span class="string">&#x27;data2&#x27;</span>] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><ol>
+<li><p>整体转为str</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = df.astype(<span class="built_in">str</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>整体转为int</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = df.astype(<span class="built_in">int</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Hairui Wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://onehr7.github.io/2021/01/07/pandas总结/">https://onehr7.github.io/2021/01/07/pandas总结/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/pandas/">pandas</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2020/11/20/Python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/"><span>Python装饰器实现日志输出</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2021 By Hairui Wang</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
