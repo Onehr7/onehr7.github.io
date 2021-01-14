@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>WHR blogs</title>
   
-  
+  <subtitle>奉献给热爱的一切</subtitle>
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
@@ -10,7 +10,7 @@
   <id>https://onehr7.github.io/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>Hairui Wang</name>
     
   </author>
   
