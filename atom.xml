@@ -6,7 +6,7 @@
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
-  <updated>2021-03-07T09:50:16.219Z</updated>
+  <updated>2021-03-07T09:54:41.624Z</updated>
   <id>https://onehr7.github.io/</id>
   
   <author>
@@ -21,18 +21,12 @@
     <link href="https://onehr7.github.io/2021/03/05/Pyinstaller%20%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
     <id>https://onehr7.github.io/2021/03/05/Pyinstaller%20%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%A4%B9/</id>
     <published>2021-03-05T09:12:38.000Z</published>
-    <updated>2021-03-07T09:50:16.219Z</updated>
+    <updated>2021-03-07T09:54:41.624Z</updated>
     
-    <content type="html"><![CDATA[<p>Pyinstaller 打包配置文件夹</p><ol><li><p>生成资源文件目录访问路径</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resource_path</span>(<span class="params">relative_path</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">getattr</span>(sys, <span class="string">&#x27;frozen&#x27;</span>, <span class="literal">False</span>):</span><br><span class="line">        base_path = sys._MEIPASS</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        base_path = os.path.abspath(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> os.path.join(base_path, relative_path)</span><br></pre></td></tr></table></figure></li><li><p>修改需要读取路径的文件或文件夹</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resource_path(os.path.join(<span class="string">&quot;config&quot;</span>, <span class="string">&quot;data.txt&quot;</span>))</span><br></pre></td></tr></table></figure></li><li><p>打包py文件生成.spec文件</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller <span class="operator">-F</span> QueryGui.py</span><br></pre></td></tr></table></figure></li><li><p>修改.spec文件中datas项，添加配置文件目录和待生成的文件夹名</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = Analysis([<span class="string">&#x27;&#x27;</span>],</span><br><span class="line">             pathex=[<span class="string">&#x27;&#x27;</span>],</span><br><span class="line">             binaries=[],</span><br><span class="line">             datas=[(<span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;config&#x27;</span>)],</span><br></pre></td></tr></table></figure></li><li><p>删除build和dist文件夹，重新生成打包文件</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F QueryGui.spec</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    <content type="html"><![CDATA[<p>Pyinstaller 打包配置文件夹</p><a id="more"></a><ol><li><p>生成资源文件目录访问路径</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resource_path</span>(<span class="params">relative_path</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">getattr</span>(sys, <span class="string">&#x27;frozen&#x27;</span>, <span class="literal">False</span>):</span><br><span class="line">        base_path = sys._MEIPASS</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        base_path = os.path.abspath(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> os.path.join(base_path, relative_path)</span><br></pre></td></tr></table></figure></li><li><p>修改需要读取路径的文件或文件夹</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resource_path(os.path.join(<span class="string">&quot;config&quot;</span>, <span class="string">&quot;data.txt&quot;</span>))</span><br></pre></td></tr></table></figure></li><li><p>打包py文件生成.spec文件</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller <span class="operator">-F</span> QueryGui.py</span><br></pre></td></tr></table></figure></li><li><p>修改.spec文件中datas项，添加配置文件目录和待生成的文件夹名</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = Analysis([<span class="string">&#x27;&#x27;</span>],</span><br><span class="line">             pathex=[<span class="string">&#x27;&#x27;</span>],</span><br><span class="line">             binaries=[],</span><br><span class="line">             datas=[(<span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;config&#x27;</span>)],</span><br></pre></td></tr></table></figure></li><li><p>删除build和dist文件夹，重新生成打包文件</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F QueryGui.spec</span><br></pre></td></tr></table></figure></li></ol>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;p&gt;Pyinstaller 打包配置文件夹&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;生成资源文件目录访问路径&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;lin</summary>
-      
+    <summary type="html">&lt;p&gt;Pyinstaller 打包配置文件夹&lt;/p&gt;</summary>
     
     
     
@@ -46,17 +40,17 @@
     <link href="https://onehr7.github.io/2021/03/02/%E4%B8%80%E6%AC%A1%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E8%B8%A9%E5%9D%91/"/>
     <id>https://onehr7.github.io/2021/03/02/%E4%B8%80%E6%AC%A1%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E8%B8%A9%E5%9D%91/</id>
     <published>2021-03-02T02:29:38.000Z</published>
-    <updated>2021-03-07T09:49:01.153Z</updated>
+    <updated>2021-03-07T09:54:26.126Z</updated>
     
-    <content type="html"><![CDATA[<p>Python venv虚拟环境 pip安装失败， 实际环境安装成功</p><p>​        pip install –upgrade pip 🤬🤬🤬</p><p>当由于权限更新失败后，运行easy_install pip</p>]]></content>
+    <content type="html"><![CDATA[<a id="more"></a><p>Python venv虚拟环境 pip安装失败， 实际环境安装成功</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade pip 🤬🤬🤬</span><br></pre></td></tr></table></figure><p>当由于权限更新失败后，运行easy_install pip</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;Python venv虚拟环境 pip安装失败， 实际环境安装成功&lt;/p&gt;
-&lt;p&gt;​        pip install –upgrade pip 🤬🤬🤬&lt;/p&gt;
-&lt;p&gt;当由于权限更新失败后，运行easy_install pip&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;Python venv虚拟环境 pip安装失败， 实际环境安装成功&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;</summary>
       
     
     
