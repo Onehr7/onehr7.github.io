@@ -6,7 +6,7 @@
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
-  <updated>2021-01-26T14:37:31.284Z</updated>
+  <updated>2021-03-07T09:50:16.219Z</updated>
   <id>https://onehr7.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Pyinstaller打包配置文件</title>
+    <link href="https://onehr7.github.io/2021/03/05/Pyinstaller%20%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
+    <id>https://onehr7.github.io/2021/03/05/Pyinstaller%20%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%A4%B9/</id>
+    <published>2021-03-05T09:12:38.000Z</published>
+    <updated>2021-03-07T09:50:16.219Z</updated>
+    
+    <content type="html"><![CDATA[<p>Pyinstaller 打包配置文件夹</p><ol><li><p>生成资源文件目录访问路径</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resource_path</span>(<span class="params">relative_path</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">getattr</span>(sys, <span class="string">&#x27;frozen&#x27;</span>, <span class="literal">False</span>):</span><br><span class="line">        base_path = sys._MEIPASS</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        base_path = os.path.abspath(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> os.path.join(base_path, relative_path)</span><br></pre></td></tr></table></figure></li><li><p>修改需要读取路径的文件或文件夹</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resource_path(os.path.join(<span class="string">&quot;config&quot;</span>, <span class="string">&quot;data.txt&quot;</span>))</span><br></pre></td></tr></table></figure></li><li><p>打包py文件生成.spec文件</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller <span class="operator">-F</span> QueryGui.py</span><br></pre></td></tr></table></figure></li><li><p>修改.spec文件中datas项，添加配置文件目录和待生成的文件夹名</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = Analysis([<span class="string">&#x27;&#x27;</span>],</span><br><span class="line">             pathex=[<span class="string">&#x27;&#x27;</span>],</span><br><span class="line">             binaries=[],</span><br><span class="line">             datas=[(<span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;config&#x27;</span>)],</span><br></pre></td></tr></table></figure></li><li><p>删除build和dist文件夹，重新生成打包文件</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F QueryGui.spec</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Pyinstaller 打包配置文件夹&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;生成资源文件目录访问路径&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;lin</summary>
+      
+    
+    
+    
+    <category term="python" scheme="https://onehr7.github.io/categories/python/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一次虚拟环境踩坑</title>
+    <link href="https://onehr7.github.io/2021/03/02/%E4%B8%80%E6%AC%A1%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E8%B8%A9%E5%9D%91/"/>
+    <id>https://onehr7.github.io/2021/03/02/%E4%B8%80%E6%AC%A1%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E8%B8%A9%E5%9D%91/</id>
+    <published>2021-03-02T02:29:38.000Z</published>
+    <updated>2021-03-07T09:49:01.153Z</updated>
+    
+    <content type="html"><![CDATA[<p>Python venv虚拟环境 pip安装失败， 实际环境安装成功</p><p>​        pip install –upgrade pip 🤬🤬🤬</p><p>当由于权限更新失败后，运行easy_install pip</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Python venv虚拟环境 pip安装失败， 实际环境安装成功&lt;/p&gt;
+&lt;p&gt;​        pip install –upgrade pip 🤬🤬🤬&lt;/p&gt;
+&lt;p&gt;当由于权限更新失败后，运行easy_install pip&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="python" scheme="https://onehr7.github.io/categories/python/"/>
+    
+    
+    <category term="pip" scheme="https://onehr7.github.io/tags/pip/"/>
+    
+  </entry>
   
   <entry>
     <title>Selenium获取请求信息</title>
@@ -155,8 +207,8 @@
   
   <entry>
     <title>Python虚拟环境配置</title>
-    <link href="https://onehr7.github.io/2020/11/16/Python%E4%BD%BF%E7%94%A8Virtualenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%20/"/>
-    <id>https://onehr7.github.io/2020/11/16/Python%E4%BD%BF%E7%94%A8Virtualenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%20/</id>
+    <link href="https://onehr7.github.io/2020/11/16/Python%E4%BD%BF%E7%94%A8Virtualenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/"/>
+    <id>https://onehr7.github.io/2020/11/16/Python%E4%BD%BF%E7%94%A8Virtualenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</id>
     <published>2020-11-16T14:56:28.000Z</published>
     <updated>2021-01-26T14:39:06.318Z</updated>
     
@@ -445,58 +497,6 @@
     
     
     <category term="树" scheme="https://onehr7.github.io/tags/%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>连续子数组的最大和</title>
-    <link href="https://onehr7.github.io/2019/09/05/%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/"/>
-    <id>https://onehr7.github.io/2019/09/05/%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/</id>
-    <published>2019-09-05T09:13:33.000Z</published>
-    <updated>2021-01-11T16:05:30.646Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><blockquote><p>HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1)</p></blockquote><br/>#### 问题分析<ul><li>通过遍历数组，一个一个进行处理</li><li>将第一个数记录为最大值</li><li>从第一个加到最后，当比最大值大时，更新最大值</li><li>当前和为负数时，则下个数为开始值</li></ul><br/><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">FindGreatestSumOfSubArray</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = array[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> j = array[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; array.length; i++)&#123;</span><br><span class="line">            System.out.println(max);</span><br><span class="line">            <span class="keyword">if</span>(j &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                j = array[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                j = j + array[i];</span><br><span class="line">            &#125;</span><br><span class="line">             </span><br><span class="line">            <span class="keyword">if</span>(max &lt; j)&#123;</span><br><span class="line">                    max = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模</summary>
-      
-    
-    
-    
-    <category term="剑指offer" scheme="https://onehr7.github.io/categories/%E5%89%91%E6%8C%87offer/"/>
-    
-    
-    <category term="数组" scheme="https://onehr7.github.io/tags/%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>从尾到头打印链表</title>
-    <link href="https://onehr7.github.io/2019/09/05/%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8/"/>
-    <id>https://onehr7.github.io/2019/09/05/%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8/</id>
-    <published>2019-09-05T03:07:33.000Z</published>
-    <updated>2021-01-11T16:05:32.035Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><blockquote><p>输入一个链表，按链表从尾到头的顺序返回一个ArrayList</p></blockquote><br/>#### 问题分析<ul><li>先将链表数据全部压入栈中</li><li>通过运用栈后入先出的性质</li><li>即可将数据反转</li></ul><br/>#### 知识点* ArrayList<Integer> list = new ArrayList<Integer>();* stack.push() || pop()* list.add(value);<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*    public class ListNode &#123;</span></span><br><span class="line"><span class="comment">*        int val;</span></span><br><span class="line"><span class="comment">*        ListNode next = null;</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">*        ListNode(int val) &#123;</span></span><br><span class="line"><span class="comment">*            this.val = val;</span></span><br><span class="line"><span class="comment">*        &#125;</span></span><br><span class="line"><span class="comment">*    &#125;</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">printListFromTailToHead</span><span class="params">(ListNode listNode)</span> </span>&#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//将链表中的数据压入栈中</span></span><br><span class="line">        <span class="keyword">while</span>(listNode!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            stack.push(listNode.val);</span><br><span class="line">            listNode = listNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//将栈中数据返回给ArrayList</span></span><br><span class="line">        <span class="keyword">while</span>(!stack.empty())&#123;</span><br><span class="line">            list.add(stack.pop());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;输入一个链表，按链表从尾到头的顺序返回一个ArrayList&lt;/p&gt;
-&lt;/blockquote&gt;
-</summary>
-      
-    
-    
-    
-    <category term="剑指offer" scheme="https://onehr7.github.io/categories/%E5%89%91%E6%8C%87offer/"/>
-    
-    
-    <category term="链表" scheme="https://onehr7.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
     
   </entry>
   
