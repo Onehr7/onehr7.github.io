@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Python剑指27 - 二叉树的镜像, WHR blogs">
+    <meta name="keywords" content="CentOS7安装三节点Hadoop集群, WHR blogs">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Python剑指27 - 二叉树的镜像 | WHR blogs</title>
+    <title>CentOS7安装三节点Hadoop集群 | WHR blogs</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Python剑指27 - 二叉树的镜像</h1>
+                    <h1 class="description center-align post-title">CentOS7安装三节点Hadoop集群</h1>
                 </div>
             </div>
         </div>
@@ -430,13 +430,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E6%A0%91/">
-                                <span class="chip bg-color">树</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -444,8 +440,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%89%91%E6%8C%87offer/" class="post-category">
-                                剑指offer
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                大数据
                             </a>
                         
                     </div>
@@ -457,7 +453,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-01-19
+                    2021-03-22
                 </div>
                 
 
@@ -466,14 +462,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    253
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -488,76 +484,316 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/">题目来源</a></p>
-</blockquote>
-<ul>
-<li><p>描述</p>
-<p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。</p>
-<a id="more"></a>
+                <h4 id="一-服务器配置"><a href="#一-服务器配置" class="headerlink" title="一 服务器配置"></a>一 服务器配置</h4><ul>
+<li><p>关闭防火墙</p>
+<pre><code># 查看状态
+firewall-cmd --state
 
-<p>例如输入：</p>
-<pre><code>     4
-   /   \
-  2     7
- / \   / \
-1   3 6   9</code></pre>
-<p>镜像输出：</p>
-<pre><code>     4
-   /   \
-  7     2
- / \   / \
-9   6 3   1</code></pre>
-<p>示例 1：</p>
-<pre><code>输入：root = [4,2,7,1,3,6,9]
-输出：[4,7,2,9,6,3,1]</code></pre>
+# 停止防火墙
+systemctl stop firewalld.service
+
+# 禁止开机自启动
+systemctl disable firewalld.service</code></pre>
+</li>
+<li><p>关闭selinux</p>
+<pre><code>vi /etc/sysconfig/selinux
+
+SELINUX=disabled</code></pre>
+</li>
+</ul>
+<h4 id="二-网络配置"><a href="#二-网络配置" class="headerlink" title="二 网络配置"></a>二 网络配置</h4><ul>
+<li><p>找到待配置网卡</p>
+<pre><code>cd /etc/sysconfig/network-scripts/
+ls
+
+# 这里选择ifcfg-enp3s0
+
+vi ifcfg-enp3s0</code></pre>
+</li>
+<li><p>修改下列配置</p>
+<pre><code>BOOTPROTO=static
+ONBOOT=yes
+IPADDR=192.168.0.200
+GATEWAY=192.168.0.1
+DNS1=8.8.8.8</code></pre>
+</li>
+<li><p>网络测试</p>
+<pre><code>service network restart
+# 局域网测试
+ping 192.168.0.229
+
+# 外网测试
+ping www.baidu.com</code></pre>
+</li>
+</ul>
+<h4 id="三-安装Java"><a href="#三-安装Java" class="headerlink" title="三 安装Java"></a>三 安装Java</h4><ul>
+<li><p>创建安装目录</p>
+<pre><code>cd /home/whr
+mkdir java
+cd java</code></pre>
+</li>
+<li><p>安装wget</p>
+<pre><code>yum -y install wget</code></pre>
 </li>
 </ul>
 <ul>
-<li>分析</li>
+<li><p>下载解压</p>
+<p>使用wget下载或通过官网下载后，使用WinSCP传到 /home/whr/java 目录下</p>
+<pre><code>cd /home/whr/java
+
+tar -zxvf jdk-8u281-linux-x64.tar.gz</code></pre>
+</li>
+<li><p>设置环境变量</p>
+<pre><code>vi /etc/profile
+
+# 末尾添加
+export JAVA_HOME=/home/whr/java/jdk1.8.0_281
+export JRE_HOME=$&#123;JAVA_HOME&#125;/jre
+export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib
+export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH
+
+# 激活环境变量
+source /etc/profile</code></pre>
+</li>
+<li><p>添加软链接</p>
+<pre><code>ln -s /home/whr/java/jdk1.8.0_281/bin/java /usr/bin/java</code></pre>
+</li>
+<li><p>安装完成</p>
+<pre><code>java -version</code></pre>
+</li>
 </ul>
-<ol>
-<li><p>使用递归解决，分别递归左右子节点，结束条件为root为空。每次递归时交换当前节点的左右子节点。</p>
-<p>时间复杂度：O(N)</p>
-<p>空间复杂度：O(N)</p>
+<h4 id="四-配置hosts"><a href="#四-配置hosts" class="headerlink" title="四 配置hosts"></a>四 配置hosts</h4><ul>
+<li><p>节点规划</p>
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>NodeType</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.0.200</td>
+<td>DataNode</td>
+<td>slave1</td>
+</tr>
+<tr>
+<td>192.168.0.201</td>
+<td>DataNode</td>
+<td>slave2</td>
+</tr>
+<tr>
+<td>192.168.0.202</td>
+<td>NameNode / DataNode</td>
+<td>master</td>
+</tr>
+</tbody></table>
 </li>
-</ol>
-<ol start="2">
-<li><p>使用迭代</p>
-<p>将所有节点放入列表，并交换每个节点的左右子节点</p>
+<li><p>hosts 配置</p>
+<pre><code>vi /etc/hosts
+
+# 配置如下
+127.0.0.1   localhost
+192.168.0.200 slave1
+192.168.0.201 slave2
+192.168.0.202 master</code></pre>
 </li>
-</ol>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># Definition for a binary tree node.</span>
-<span class="token comment" spellcheck="true"># class TreeNode:</span>
-<span class="token comment" spellcheck="true">#     def __init__(self, x):</span>
-<span class="token comment" spellcheck="true">#         self.val = x</span>
-<span class="token comment" spellcheck="true">#         self.left = None</span>
-<span class="token comment" spellcheck="true">#         self.right = None</span>
+</ul>
+<h4 id="五-配置SSH（主节点）"><a href="#五-配置SSH（主节点）" class="headerlink" title="五 配置SSH（主节点）"></a>五 配置SSH（主节点）</h4><ul>
+<li><p>修改配置文件</p>
+<pre><code>vi /etc/ssh/sshd_config
 
-<span class="token comment" spellcheck="true"># 递归</span>
-<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">mirrorTree</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> root<span class="token punctuation">:</span> TreeNode<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> TreeNode<span class="token punctuation">:</span>
-        <span class="token keyword">if</span> <span class="token operator">not</span> root<span class="token punctuation">:</span>
-            <span class="token keyword">return</span>
-        root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> root<span class="token punctuation">.</span>right <span class="token operator">=</span> root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> root<span class="token punctuation">.</span>left
-        self<span class="token punctuation">.</span>mirrorTree<span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>mirrorTree<span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> root
+AuthorizedKeysFile      .ssh/authorized_keys
+PubkeyAuthentication yes</code></pre>
+</li>
+<li><p>生成秘钥</p>
+<pre><code>ssh-keygen -t dsa -P &#39;&#39; -f ~/.ssh/id_dsa</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>分发公钥</p>
+<pre><code>ssh-copy-id -i ~/.ssh/id_dsa.pub master
+ssh-copy-id -i ~/.ssh/id_dsa.pub slave1
+ssh-copy-id -i ~/.ssh/id_dsa.pub slave2
 
-<span class="token comment" spellcheck="true"># 迭代</span>
-<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">mirrorTree</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> root<span class="token punctuation">:</span> TreeNode<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> TreeNode<span class="token punctuation">:</span>
-        <span class="token keyword">if</span> <span class="token operator">not</span> root<span class="token punctuation">:</span>
-            <span class="token keyword">return</span>
-        node_list <span class="token operator">=</span> <span class="token punctuation">[</span>root<span class="token punctuation">]</span>
-        <span class="token keyword">while</span> node_list<span class="token punctuation">:</span>
-            cur_node <span class="token operator">=</span> node_list<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">if</span> cur_node<span class="token punctuation">.</span>left<span class="token punctuation">:</span>
-                node_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>cur_node<span class="token punctuation">.</span>left<span class="token punctuation">)</span>
-            <span class="token keyword">if</span> cur_node<span class="token punctuation">.</span>right<span class="token punctuation">:</span>
-                node_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>cur_node<span class="token punctuation">.</span>right<span class="token punctuation">)</span>
-            cur_node<span class="token punctuation">.</span>left<span class="token punctuation">,</span> cur_node<span class="token punctuation">.</span>right <span class="token operator">=</span>  cur_node<span class="token punctuation">.</span>right<span class="token punctuation">,</span> cur_node<span class="token punctuation">.</span>left
-        <span class="token keyword">return</span> root</code></pre>
+# 验证
+ssh master
+ssh slave1
+ssh slave2</code></pre>
+</li>
+</ul>
+<h4 id="六-安装Hadoop（主节点）"><a href="#六-安装Hadoop（主节点）" class="headerlink" title="六 安装Hadoop（主节点）"></a>六 安装Hadoop（主节点）</h4><ul>
+<li><p>下载</p>
+<pre><code>cd /home/whr
+mkdir hadoop
+cd hadoop
+
+wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
+# 或本地下载使用WinSCP传送</code></pre>
+</li>
+<li><p>安装</p>
+<pre><code>tar zxvf hadoop-3.2.1.tar.gz
+
+# 创建软链接
+ln -s /home/whr/hadoop/hadoop-3.2.1  /usr/local/hadoop</code></pre>
+</li>
+<li><p>配置Hadoop环境变量</p>
+<pre><code>vi /etc/profile
+
+# 末尾添加
+export HADOOP_HOME=/home/whr/hadoop/hadoop-3.2.1
+export PATH=$&#123;HADOOP_HOME&#125;/bin:$PATH
+
+source /etc/profile</code></pre>
+</li>
+<li><p>修改配置文件</p>
+<pre><code>cd /usr/local/hadoop/etc/hadoop</code></pre>
+<ul>
+<li><p>配置hadoop-env.sh</p>
+<pre><code>vi hadoop-env.sh
+
+export JAVA_HOME=/home/whr/java/jdk1.8.0_281</code></pre>
+</li>
+<li><p>配置core-site.xml</p>
+<pre><code>vi core-site.xml
+
+&lt;configuration&gt;
+    &lt;property&gt;
+      &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+   &lt;value&gt;/home/whr/hadoop/tmp&lt;/value&gt;
+   &lt;description&gt;Abase for other temporary directories.&lt;/description&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+      &lt;name&gt;fs.default.name&lt;/name&gt;
+      &lt;value&gt;hdfs://master:9000&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;</code></pre>
+</li>
+<li><p>配置hdfs-site.xml</p>
+<pre><code>vi hdfs-site.xml
+
+&lt;configuration&gt;
+    &lt;property&gt;
+      &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+      &lt;value&gt;/home/whr/hadoop/dfs/name&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+      &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+      &lt;value&gt;/home/whr/hadoop/dfs/data&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;</code></pre>
+</li>
+<li><p>配置yarn-site.xml</p>
+<pre><code>vi yarn-site.xml
+
+&lt;configuration&gt;
+    &lt;property&gt;
+      &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+      &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+      &lt;name&gt;yarn.nodemanager.aux-services.mapreduce_shuffle.class&lt;/name&gt;
+      &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+      &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
+      &lt;value&gt;master&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;</code></pre>
+</li>
+<li><p>配置mapred-site.xml</p>
+<pre><code>vi mapred-site.xml
+
+&lt;configuration&gt;
+    &lt;property&gt;
+      &lt;name&gt;mapred.job.tracker&lt;/name&gt;
+      &lt;value&gt;master:49001&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+      &lt;name&gt;mapred.local.dir&lt;/name&gt;
+      &lt;value&gt;/home/whr/hadoop/var&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+      &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+      &lt;value&gt;yarn&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;</code></pre>
+</li>
+<li><p>配置workers</p>
+<pre><code>vi workers
+
+master
+slave1
+slave2</code></pre>
+</li>
+<li><p>修改hdfs启动和停止脚本</p>
+<pre><code>cd /usr/local/hadoop/sbin
+
+vi start-dfs.sh
+vi stop-dfs.sh
+
+# 在最前面加如下内容
+HDFS_DATANODE_USER=root
+HADOOP_SECURE_DN_USER=root
+HDFS_NAMENODE_USER=root
+HDFS_SECONDARYNAMENODE_USER=root</code></pre>
+</li>
+<li><p>修改yarn启动和停止脚本</p>
+<pre><code>cd /usr/local/hadoop/sbin
+
+vi start-yarn.sh
+vi stop-yarn.sh
+# 在文件前添加如下内容
+YARN_RESOURCEMANAGER_USER=root
+HADOOP_SECURE_DN_USER=root
+YARN_NODEMANAGER_USER=root</code></pre>
+</li>
+</ul>
+</li>
+<li><p>从节点配置Hadoop</p>
+<pre><code># 将配置好的Hadoop复制到从节点
+scp -r /home/whr/hadoop/hadoop-3.2.1 root@192.168.0.201:/home/whr/hadoop/
+
+# 设置软链接
+ssh slave1
+ln -s /home/whr/hadoop/hadoop-3.2.1  /usr/local/hadoop
+exit
+
+ssh slave2
+ln -s /home/whr/hadoop/hadoop-3.2.1  /usr/local/hadoop
+exit</code></pre>
+</li>
+</ul>
+<h4 id="七-启动测试"><a href="#七-启动测试" class="headerlink" title="七 启动测试"></a>七 启动测试</h4><ul>
+<li><p>格式化namenode</p>
+<pre><code>hdfs namenode -format
+
+# 重新格式化需要删除tmp和dfs文件夹</code></pre>
+</li>
+<li><p>启动hdfs</p>
+<pre><code>cd /usr/local/hadoop/sbin
+
+bash start-all.sh</code></pre>
+</li>
+<li><p>启动yarn</p>
+<pre><code>bash start-all.sh</code></pre>
+</li>
+<li><p>验证</p>
+<pre><code>jps
+
+4800 NodeManager
+4002 NameNode
+4387 SecondaryNameNode
+4666 ResourceManager
+13355 Jps
+4126 DataNode
+
+</code></pre>
+</li>
+</ul>
+<h1 id="客户端访问"><a href="#客户端访问" class="headerlink" title="客户端访问"></a>客户端访问</h1><p>  <a target="_blank" rel="noopener" href="http://192.168.0.202:9870/">http://192.168.0.202:9870/</a><br>  <a target="_blank" rel="noopener" href="http://192.168.0.202:8088/">http://192.168.0.202:8088/</a></p>
+<pre><code></code></pre>
 
                 
             </div>
@@ -584,7 +820,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://onehr7.github.io/2021/01/19/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F/">https://onehr7.github.io/2021/01/19/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F/</a>
+                    <a href="https://onehr7.github.io/2021/03/22/CentOS7%E5%AE%89%E8%A3%85%E4%B8%89%E8%8A%82%E7%82%B9Hadoop%E9%9B%86%E7%BE%A4/">https://onehr7.github.io/2021/03/22/CentOS7%E5%AE%89%E8%A3%85%E4%B8%89%E8%8A%82%E7%82%B9Hadoop%E9%9B%86%E7%BE%A4/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -621,11 +857,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E6%A0%91/">
-                                    <span class="chip bg-color">树</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -667,49 +899,43 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/01/26/Selenium%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E4%BF%A1%E6%81%AF/">
+                <a href="/2021/03/22/CentOS7%E5%AE%89%E8%A3%85%E4%B8%89%E8%8A%82%E7%82%B9Hadoop%E9%9B%86%E7%BE%A4/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Selenium获取请求信息">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="CentOS7安装三节点Hadoop集群">
                         
-                        <span class="card-title">Selenium获取请求信息</span>
+                        <span class="card-title">CentOS7安装三节点Hadoop集群</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前言​    在获取facebook analytics数据时，抓取到的请求需要携带token，且具有时效性。
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-26
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%88%AC%E8%99%AB/" class="post-category">
-                                    爬虫
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                    大数据
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/selenium/">
-                        <span class="chip bg-color">selenium</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -720,46 +946,36 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/01/18/%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%8F%8APython%E5%AE%9E%E7%8E%B0/">
+                <a href="/2021/03/05/Pyinstaller%20%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%A4%B9/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="并查集及Python实现">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Pyinstaller打包配置文件">
                         
-                        <span class="card-title">并查集及Python实现</span>
+                        <span class="card-title">Pyinstaller打包配置文件</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-并查集：在计算机科学中，并查集是一种树型的数据结构，用于处理一些不交集（Disjoint Sets）的合并及查询问题。   —wiki
-
+                            Pyinstaller 打包配置文件夹
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
-                                    数据结构
+                            <a href="/categories/python/" class="post-category">
+                                    python
                                 </a>
                             
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
-                        <span class="chip bg-color">并查集</span>
-                    </a>
-                    
                 </div>
                 
             </div>
