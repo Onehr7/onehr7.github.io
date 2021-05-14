@@ -462,14 +462,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    872
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    4 分
                 </div>
                 
 
@@ -486,7 +486,7 @@
             <div id="articleContent">
                 <h4 id="一-服务器配置"><a href="#一-服务器配置" class="headerlink" title="一 服务器配置"></a>一 服务器配置</h4><ul>
 <li><p>关闭防火墙</p>
-<pre><code># 查看状态
+<pre class=" language-shell"><code class="language-shell"># 查看状态
 firewall-cmd --state
 
 # 停止防火墙
@@ -496,14 +496,14 @@ systemctl stop firewalld.service
 systemctl disable firewalld.service</code></pre>
 </li>
 <li><p>关闭selinux</p>
-<pre><code>vi /etc/sysconfig/selinux
+<pre class=" language-shell"><code class="language-shell">vi /etc/sysconfig/selinux
 
 SELINUX=disabled</code></pre>
 </li>
 </ul>
 <h4 id="二-网络配置"><a href="#二-网络配置" class="headerlink" title="二 网络配置"></a>二 网络配置</h4><ul>
 <li><p>找到待配置网卡</p>
-<pre><code>cd /etc/sysconfig/network-scripts/
+<pre class=" language-shell"><code class="language-shell">cd /etc/sysconfig/network-scripts/
 ls
 
 # 这里选择ifcfg-enp3s0
@@ -511,14 +511,14 @@ ls
 vi ifcfg-enp3s0</code></pre>
 </li>
 <li><p>修改下列配置</p>
-<pre><code>BOOTPROTO=static
+<pre class=" language-shell"><code class="language-shell">BOOTPROTO=static
 ONBOOT=yes
 IPADDR=192.168.0.200
 GATEWAY=192.168.0.1
 DNS1=8.8.8.8</code></pre>
 </li>
 <li><p>网络测试</p>
-<pre><code>service network restart
+<pre class=" language-shell"><code class="language-shell">service network restart
 # 局域网测试
 ping 192.168.0.229
 
@@ -528,23 +528,23 @@ ping www.baidu.com</code></pre>
 </ul>
 <h4 id="三-安装Java"><a href="#三-安装Java" class="headerlink" title="三 安装Java"></a>三 安装Java</h4><ul>
 <li><p>创建安装目录</p>
-<pre><code>cd /home/whr
+<pre class=" language-shell"><code class="language-shell">cd /home/whr
 mkdir java
 cd java</code></pre>
 </li>
 <li><p>安装wget</p>
-<pre><code>yum -y install wget</code></pre>
+<pre class=" language-shell"><code class="language-shell">yum -y install wget</code></pre>
 </li>
 </ul>
 <ul>
 <li><p>下载解压</p>
 <p>使用wget下载或通过官网下载后，使用WinSCP传到 /home/whr/java 目录下</p>
-<pre><code>cd /home/whr/java
+<pre class=" language-shell"><code class="language-shell">cd /home/whr/java
 
 tar -zxvf jdk-8u281-linux-x64.tar.gz</code></pre>
 </li>
 <li><p>设置环境变量</p>
-<pre><code>vi /etc/profile
+<pre class=" language-shell"><code class="language-shell">vi /etc/profile
 
 # 末尾添加
 export JAVA_HOME=/home/whr/java/jdk1.8.0_281
@@ -556,10 +556,10 @@ export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH
 source /etc/profile</code></pre>
 </li>
 <li><p>添加软链接</p>
-<pre><code>ln -s /home/whr/java/jdk1.8.0_281/bin/java /usr/bin/java</code></pre>
+<pre class=" language-shell"><code class="language-shell">ln -s /home/whr/java/jdk1.8.0_281/bin/java /usr/bin/java</code></pre>
 </li>
 <li><p>安装完成</p>
-<pre><code>java -version</code></pre>
+<pre class=" language-shell"><code class="language-shell">java -version</code></pre>
 </li>
 </ul>
 <h4 id="四-配置hosts"><a href="#四-配置hosts" class="headerlink" title="四 配置hosts"></a>四 配置hosts</h4><ul>
@@ -590,7 +590,7 @@ source /etc/profile</code></pre>
 </tbody></table>
 </li>
 <li><p>hosts 配置</p>
-<pre><code>vi /etc/hosts
+<pre class=" language-shell"><code class="language-shell">vi /etc/hosts
 
 # 配置如下
 127.0.0.1   localhost
@@ -601,18 +601,18 @@ source /etc/profile</code></pre>
 </ul>
 <h4 id="五-配置SSH（主节点）"><a href="#五-配置SSH（主节点）" class="headerlink" title="五 配置SSH（主节点）"></a>五 配置SSH（主节点）</h4><ul>
 <li><p>修改配置文件</p>
-<pre><code>vi /etc/ssh/sshd_config
+<pre class=" language-shell"><code class="language-shell">vi /etc/ssh/sshd_config
 
 AuthorizedKeysFile      .ssh/authorized_keys
 PubkeyAuthentication yes</code></pre>
 </li>
 <li><p>生成秘钥</p>
-<pre><code>ssh-keygen -t dsa -P &#39;&#39; -f ~/.ssh/id_dsa</code></pre>
+<pre class=" language-shell"><code class="language-shell">ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa</code></pre>
 </li>
 </ul>
 <ul>
 <li><p>分发公钥</p>
-<pre><code>ssh-copy-id -i ~/.ssh/id_dsa.pub master
+<pre class=" language-shell"><code class="language-shell">ssh-copy-id -i ~/.ssh/id_dsa.pub master
 ssh-copy-id -i ~/.ssh/id_dsa.pub slave1
 ssh-copy-id -i ~/.ssh/id_dsa.pub slave2
 
@@ -624,7 +624,7 @@ ssh slave2</code></pre>
 </ul>
 <h4 id="六-安装Hadoop（主节点）"><a href="#六-安装Hadoop（主节点）" class="headerlink" title="六 安装Hadoop（主节点）"></a>六 安装Hadoop（主节点）</h4><ul>
 <li><p>下载</p>
-<pre><code>cd /home/whr
+<pre class=" language-shell"><code class="language-shell">cd /home/whr
 mkdir hadoop
 cd hadoop
 
@@ -632,13 +632,13 @@ wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.2.1/hado
 # 或本地下载使用WinSCP传送</code></pre>
 </li>
 <li><p>安装</p>
-<pre><code>tar zxvf hadoop-3.2.1.tar.gz
+<pre class=" language-shell"><code class="language-shell">tar zxvf hadoop-3.2.1.tar.gz
 
 # 创建软链接
 ln -s /home/whr/hadoop/hadoop-3.2.1  /usr/local/hadoop</code></pre>
 </li>
 <li><p>配置Hadoop环境变量</p>
-<pre><code>vi /etc/profile
+<pre class=" language-shell"><code class="language-shell">vi /etc/profile
 
 # 末尾添加
 export HADOOP_HOME=/home/whr/hadoop/hadoop-3.2.1
@@ -647,88 +647,88 @@ export PATH=$&#123;HADOOP_HOME&#125;/bin:$PATH
 source /etc/profile</code></pre>
 </li>
 <li><p>修改配置文件</p>
-<pre><code>cd /usr/local/hadoop/etc/hadoop</code></pre>
+<pre class=" language-shell"><code class="language-shell">cd /usr/local/hadoop/etc/hadoop</code></pre>
 <ul>
 <li><p>配置hadoop-env.sh</p>
-<pre><code>vi hadoop-env.sh
+<pre class=" language-shell"><code class="language-shell">vi hadoop-env.sh
 
 export JAVA_HOME=/home/whr/java/jdk1.8.0_281</code></pre>
 </li>
 <li><p>配置core-site.xml</p>
-<pre><code>vi core-site.xml
+<pre class=" language-shell"><code class="language-shell">vi core-site.xml
 
-&lt;configuration&gt;
-    &lt;property&gt;
-      &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
-   &lt;value&gt;/home/whr/hadoop/tmp&lt;/value&gt;
-   &lt;description&gt;Abase for other temporary directories.&lt;/description&gt;
-    &lt;/property&gt;
+<configuration>
+    <property>
+      <name>hadoop.tmp.dir</name>
+   <value>/home/whr/hadoop/tmp</value>
+   <description>Abase for other temporary directories.</description>
+    </property>
 
-    &lt;property&gt;
-      &lt;name&gt;fs.default.name&lt;/name&gt;
-      &lt;value&gt;hdfs://master:9000&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;</code></pre>
+    <property>
+      <name>fs.default.name</name>
+      <value>hdfs://master:9000</value>
+    </property>
+</configuration></code></pre>
 </li>
 <li><p>配置hdfs-site.xml</p>
-<pre><code>vi hdfs-site.xml
+<pre class=" language-shell"><code class="language-shell">vi hdfs-site.xml
 
-&lt;configuration&gt;
-    &lt;property&gt;
-      &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
-      &lt;value&gt;/home/whr/hadoop/dfs/name&lt;/value&gt;
-    &lt;/property&gt;
-    &lt;property&gt;
-      &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
-      &lt;value&gt;/home/whr/hadoop/dfs/data&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;</code></pre>
+<configuration>
+    <property>
+      <name>dfs.namenode.name.dir</name>
+      <value>/home/whr/hadoop/dfs/name</value>
+    </property>
+    <property>
+      <name>dfs.datanode.data.dir</name>
+      <value>/home/whr/hadoop/dfs/data</value>
+    </property>
+</configuration></code></pre>
 </li>
 <li><p>配置yarn-site.xml</p>
-<pre><code>vi yarn-site.xml
+<pre class=" language-shell"><code class="language-shell">vi yarn-site.xml
 
-&lt;configuration&gt;
-    &lt;property&gt;
-      &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
-      &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
-    &lt;/property&gt;
-    &lt;property&gt;
-      &lt;name&gt;yarn.nodemanager.aux-services.mapreduce_shuffle.class&lt;/name&gt;
-      &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;
-    &lt;/property&gt;
-    &lt;property&gt;
-      &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
-      &lt;value&gt;master&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;</code></pre>
+<configuration>
+    <property>
+      <name>yarn.nodemanager.aux-services</name>
+      <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+      <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
+      <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+    </property>
+    <property>
+      <name>yarn.resourcemanager.hostname</name>
+      <value>master</value>
+    </property>
+</configuration></code></pre>
 </li>
 <li><p>配置mapred-site.xml</p>
-<pre><code>vi mapred-site.xml
+<pre class=" language-shell"><code class="language-shell">vi mapred-site.xml
 
-&lt;configuration&gt;
-    &lt;property&gt;
-      &lt;name&gt;mapred.job.tracker&lt;/name&gt;
-      &lt;value&gt;master:49001&lt;/value&gt;
-    &lt;/property&gt;
-    &lt;property&gt;
-      &lt;name&gt;mapred.local.dir&lt;/name&gt;
-      &lt;value&gt;/home/whr/hadoop/var&lt;/value&gt;
-    &lt;/property&gt;
-    &lt;property&gt;
-      &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
-      &lt;value&gt;yarn&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;</code></pre>
+<configuration>
+    <property>
+      <name>mapred.job.tracker</name>
+      <value>master:49001</value>
+    </property>
+    <property>
+      <name>mapred.local.dir</name>
+      <value>/home/whr/hadoop/var</value>
+    </property>
+    <property>
+      <name>mapreduce.framework.name</name>
+      <value>yarn</value>
+    </property>
+</configuration></code></pre>
 </li>
 <li><p>配置workers</p>
-<pre><code>vi workers
+<pre class=" language-shell"><code class="language-shell">vi workers
 
 master
 slave1
 slave2</code></pre>
 </li>
 <li><p>修改hdfs启动和停止脚本</p>
-<pre><code>cd /usr/local/hadoop/sbin
+<pre class=" language-shell"><code class="language-shell">cd /usr/local/hadoop/sbin
 
 vi start-dfs.sh
 vi stop-dfs.sh
@@ -740,7 +740,7 @@ HDFS_NAMENODE_USER=root
 HDFS_SECONDARYNAMENODE_USER=root</code></pre>
 </li>
 <li><p>修改yarn启动和停止脚本</p>
-<pre><code>cd /usr/local/hadoop/sbin
+<pre class=" language-shell"><code class="language-shell">cd /usr/local/hadoop/sbin
 
 vi start-yarn.sh
 vi stop-yarn.sh
@@ -752,7 +752,7 @@ YARN_NODEMANAGER_USER=root</code></pre>
 </ul>
 </li>
 <li><p>从节点配置Hadoop</p>
-<pre><code># 将配置好的Hadoop复制到从节点
+<pre class=" language-shell"><code class="language-shell"># 将配置好的Hadoop复制到从节点
 scp -r /home/whr/hadoop/hadoop-3.2.1 root@192.168.0.201:/home/whr/hadoop/
 
 # 设置软链接
@@ -767,20 +767,20 @@ exit</code></pre>
 </ul>
 <h4 id="七-启动测试"><a href="#七-启动测试" class="headerlink" title="七 启动测试"></a>七 启动测试</h4><ul>
 <li><p>格式化namenode</p>
-<pre><code>hdfs namenode -format
+<pre class=" language-shell"><code class="language-shell">hdfs namenode -format
 
 # 重新格式化需要删除tmp和dfs文件夹</code></pre>
 </li>
 <li><p>启动hdfs</p>
-<pre><code>cd /usr/local/hadoop/sbin
+<pre class=" language-shell"><code class="language-shell">cd /usr/local/hadoop/sbin
 
 bash start-all.sh</code></pre>
 </li>
 <li><p>启动yarn</p>
-<pre><code>bash start-all.sh</code></pre>
+<pre class=" language-shell"><code class="language-shell">bash start-all.sh</code></pre>
 </li>
 <li><p>验证</p>
-<pre><code>jps
+<pre class=" language-shell"><code class="language-shell">jps
 
 4800 NodeManager
 4002 NameNode
@@ -793,7 +793,9 @@ bash start-all.sh</code></pre>
 </li>
 </ul>
 <h1 id="客户端访问"><a href="#客户端访问" class="headerlink" title="客户端访问"></a>客户端访问</h1><p>  <a target="_blank" rel="noopener" href="http://192.168.0.202:9870/">http://192.168.0.202:9870/</a><br>  <a target="_blank" rel="noopener" href="http://192.168.0.202:8088/">http://192.168.0.202:8088/</a></p>
-<pre><code></code></pre>
+<pre><code>
+
+</code></pre>
 
                 
             </div>
@@ -899,18 +901,17 @@ bash start-all.sh</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/22/CentOS7%E5%AE%89%E8%A3%85%E4%B8%89%E8%8A%82%E7%82%B9Hadoop%E9%9B%86%E7%BE%A4/">
+                <a href="/2021/05/14/Python%E6%97%B6%E9%97%B4%E4%B8%8E%E6%97%B6%E9%97%B4%E6%88%B3%E4%BA%92%E8%BD%AC/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="CentOS7安装三节点Hadoop集群">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Python日期时间转换">
                         
-                        <span class="card-title">CentOS7安装三节点Hadoop集群</span>
+                        <span class="card-title">Python日期时间转换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -920,22 +921,21 @@ bash start-all.sh</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-22
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-14
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
-                                    大数据
+                            <a href="/categories/python/" class="post-category">
+                                    python
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -1176,7 +1176,7 @@ bash start-all.sh</code></pre>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">9.1k</span>&nbsp;字
+                class="white-color">9k</span>&nbsp;字
             
             
             

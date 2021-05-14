@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Python生产者消费者模型, WHR blogs">
+    <meta name="keywords" content="Python日期时间转换, WHR blogs">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Python生产者消费者模型 | WHR blogs</title>
+    <title>Python日期时间转换 | WHR blogs</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Python生产者消费者模型</h1>
+                    <h1 class="description center-align post-title">Python日期时间转换</h1>
                 </div>
             </div>
         </div>
@@ -430,13 +430,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E5%B9%B6%E5%8F%91/">
-                                <span class="chip bg-color">并发</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -457,7 +453,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-06
+                    2021-05-14
                 </div>
                 
 
@@ -466,7 +462,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    237
+                    164
                 </div>
                 
 
@@ -488,58 +484,53 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <a id="more"></a>
+                <h4 id="Python日期时间转换"><a href="#Python日期时间转换" class="headerlink" title="Python日期时间转换"></a>Python日期时间转换</h4><ul>
+<li><p>时间转时间戳（UNIX时间戳）</p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> time
-<span class="token keyword">import</span> queue
-<span class="token keyword">import</span> threading
+cus_date_time <span class="token operator">=</span> <span class="token string">"2021-05-11 00:00:00"</span>
+timeArray <span class="token operator">=</span> time<span class="token punctuation">.</span>strptime<span class="token punctuation">(</span>cus_date_time<span class="token punctuation">,</span> <span class="token string">"%Y-%m-%d %H:%M:%S"</span><span class="token punctuation">)</span>
+cus_timestamp <span class="token operator">=</span> time<span class="token punctuation">.</span>mktime<span class="token punctuation">(</span>timeArray<span class="token punctuation">)</span></code></pre>
+</li>
+</ul>
+<ul>
+<li><p>时间戳转时间</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> time
 
+cus_timestamp <span class="token operator">=</span> <span class="token number">1620662400</span>
 
-<span class="token keyword">class</span> <span class="token class-name">ThreadProductorConsumer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-
-    <span class="token comment" spellcheck="true"># 初始化模型</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 大小为15的缓冲池，用于容纳产品</span>
-        self<span class="token punctuation">.</span>q <span class="token operator">=</span> queue<span class="token punctuation">.</span>Queue<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>screen_lock <span class="token operator">=</span> threading<span class="token punctuation">.</span>Semaphore<span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">productor</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> product<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 生产者不停的每3秒生产一个产品</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>q<span class="token punctuation">.</span>put<span class="token punctuation">(</span>product<span class="token punctuation">)</span>
-            cur_time <span class="token operator">=</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y-%m-%d %H:%M:%S'</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            cur_name <span class="token operator">=</span> threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name
-            <span class="token comment" spellcheck="true"># print是线程不安全的,需要信号量确保没有冲突</span>
-            self<span class="token punctuation">.</span>screen_lock<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>cur_time<span class="token operator">+</span><span class="token string">"  "</span> <span class="token operator">+</span> cur_name <span class="token operator">+</span> <span class="token string">" 生产了一个产品"</span><span class="token punctuation">,</span> sep<span class="token operator">=</span><span class="token string">'\n'</span><span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>screen_lock<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">consumer</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 消费者不停的每2秒消费一个产品</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            cur_time <span class="token operator">=</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y-%m-%d %H:%M:%S'</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            cur_name <span class="token operator">=</span> threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name
-            self<span class="token punctuation">.</span>screen_lock<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>cur_time <span class="token operator">+</span> <span class="token string">"  "</span> <span class="token operator">+</span> cur_name <span class="token operator">+</span> <span class="token string">" 消费了一个产品"</span><span class="token punctuation">,</span> sep<span class="token operator">=</span><span class="token string">'\n'</span><span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>screen_lock<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
-
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
-    tpc <span class="token operator">=</span> ThreadProductorConsumer<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-    p <span class="token operator">=</span> <span class="token string">"product"</span>
-    <span class="token comment" spellcheck="true"># 实例化了3个生产者</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        t <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>tpc<span class="token punctuation">.</span>productor<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-    <span class="token comment" spellcheck="true"># 实例化了6个消费者</span>
-    <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        v <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>tpc<span class="token punctuation">.</span>consumer<span class="token punctuation">)</span>
-        v<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre>
+<span class="token comment" spellcheck="true"># 加time.timezone转为UTC时间，不加为系统时间</span>
+time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">"%Y-%m-%d %H:%M:%S"</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>cus_timestamp <span class="token operator">+</span> time<span class="token punctuation">.</span>timezone<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</li>
+</ul>
+<ul>
+<li><p>时间转字符串</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> datetime <span class="token keyword">import</span> datetime
+now <span class="token operator">=</span> datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>now<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>now<span class="token punctuation">)</span><span class="token punctuation">)</span>
+now_str <span class="token operator">=</span> now<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">"%Y-%m-%d %H:%M:%S"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>now_str<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>now_str<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</li>
+</ul>
+<ul>
+<li><p>字符串转时间</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> datetime <span class="token keyword">import</span> datetime
+now_str <span class="token operator">=</span> <span class="token string">'2021-05-12 16:47:16'</span>
+now <span class="token operator">=</span> datetime<span class="token punctuation">.</span>strptime<span class="token punctuation">(</span>now_str<span class="token punctuation">,</span> <span class="token string">"%Y-%m-%d %H:%M:%S"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>now<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>now<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</li>
+</ul>
+<ul>
+<li><p>时间加减</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> datetime <span class="token keyword">import</span> datetime<span class="token punctuation">,</span> timedelta
+now <span class="token operator">=</span> datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>now<span class="token punctuation">)</span>
+now <span class="token operator">=</span> now <span class="token operator">+</span> timedelta<span class="token punctuation">(</span>days<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> hours<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>now<span class="token punctuation">)</span></code></pre>
+</li>
+</ul>
 
                 
             </div>
@@ -566,7 +557,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://onehr7.github.io/2020/11/06/Python%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/">https://onehr7.github.io/2020/11/06/Python%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/</a>
+                    <a href="https://onehr7.github.io/2021/05/14/Python%E6%97%B6%E9%97%B4%E4%B8%8E%E6%97%B6%E9%97%B4%E6%88%B3%E4%BA%92%E8%BD%AC/">https://onehr7.github.io/2021/05/14/Python%E6%97%B6%E9%97%B4%E4%B8%8E%E6%97%B6%E9%97%B4%E6%88%B3%E4%BA%92%E8%BD%AC/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -603,11 +594,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E5%B9%B6%E5%8F%91/">
-                                    <span class="chip bg-color">并发</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -649,31 +636,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/11/16/Python%E4%BD%BF%E7%94%A8Virtualenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">
+                <a href="/2021/05/14/Python%E6%97%B6%E9%97%B4%E4%B8%8E%E6%97%B6%E9%97%B4%E6%88%B3%E4%BA%92%E8%BD%AC/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Python虚拟环境配置">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Python日期时间转换">
                         
-                        <span class="card-title">Python虚拟环境配置</span>
+                        <span class="card-title">Python日期时间转换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Python 配置Windows10 virtualenv环境
-安装 virtualenv
-pip install virtualenv
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -686,6 +672,7 @@ pip install virtualenv
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -696,38 +683,31 @@ pip install virtualenv
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/10/27/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                <a href="/2021/03/22/CentOS7%E5%AE%89%E8%A3%85%E4%B8%89%E8%8A%82%E7%82%B9Hadoop%E9%9B%86%E7%BE%A4/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="JavaScript浅析">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="CentOS7安装三节点Hadoop集群">
                         
-                        <span class="card-title">JavaScript浅析</span>
+                        <span class="card-title">CentOS7安装三节点Hadoop集群</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、数据类型
-Number :
-
-整数，浮点数，NaN（Not a Number）,Infinity（无限大）
-NaN 与任何值都不相同，包括自己，可通过isNaN()函数判断NaN
-
-
-
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-22
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JavaScript/" class="post-category">
-                                    JavaScript
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                    大数据
                                 </a>
                             
                             
