@@ -6,7 +6,7 @@
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
-  <updated>2021-05-14T14:30:45.446Z</updated>
+  <updated>2021-05-24T15:55:14.941Z</updated>
   <id>https://onehr7.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PyQt5解决界面显示不全和假死</title>
+    <link href="https://onehr7.github.io/2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/"/>
+    <id>https://onehr7.github.io/2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/</id>
+    <published>2021-05-24T15:54:35.000Z</published>
+    <updated>2021-05-24T15:55:14.941Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Python" scheme="https://onehr7.github.io/categories/Python/"/>
+    
+    
+    <category term="PyQt5" scheme="https://onehr7.github.io/tags/PyQt5/"/>
+    
+  </entry>
   
   <entry>
     <title>Python日期时间转换</title>
@@ -458,31 +483,6 @@ CORS(app, supports_credentials=True)&lt;/code&gt;&lt;/pre&gt;</summary>
     
     
     <category term="并发" scheme="https://onehr7.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git常用操作</title>
-    <link href="https://onehr7.github.io/2019/10/28/git/"/>
-    <id>https://onehr7.github.io/2019/10/28/git/</id>
-    <published>2019-10-28T14:11:00.000Z</published>
-    <updated>2021-01-11T16:05:33.967Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;git常用操作&quot;&gt;&lt;a href=&quot;#git常用操作&quot; class=&quot;headerlink&quot; title=&quot;git常用操作&quot;&gt;&lt;/a&gt;git常用操作&lt;/h3&gt;&lt;h4 id=&quot;本地项目同步到github&quot;&gt;&lt;a href=&quot;#本地项目同步到github&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="指令" scheme="https://onehr7.github.io/categories/%E6%8C%87%E4%BB%A4/"/>
-    
-    
-    <category term="git" scheme="https://onehr7.github.io/tags/git/"/>
     
   </entry>
   

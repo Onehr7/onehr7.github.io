@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Flask Vue跨域配置, WHR blogs">
+    <meta name="keywords" content="PyQt5解决界面显示不全和假死, WHR blogs">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Flask Vue跨域配置 | WHR blogs</title>
+    <title>PyQt5解决界面显示不全和假死 | WHR blogs</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Flask Vue跨域配置</h1>
+                    <h1 class="description center-align post-title">PyQt5解决界面显示不全和假死</h1>
                 </div>
             </div>
         </div>
@@ -432,8 +432,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Web/">
-                                <span class="chip bg-color">Web</span>
+                            <a href="/tags/PyQt5/">
+                                <span class="chip bg-color">PyQt5</span>
                             </a>
                         
                     </div>
@@ -444,8 +444,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/python/" class="post-category">
-                                python
+                            <a href="/categories/Python/" class="post-category">
+                                Python
                             </a>
                         
                     </div>
@@ -457,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-27
+                    2021-05-24
                 </div>
                 
 
@@ -466,14 +466,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    97
+                    501
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -488,28 +488,142 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <ul>
-<li><h4 id="配置Flask"><a href="#配置Flask" class="headerlink" title="配置Flask"></a>配置Flask</h4><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 安装flask_cors</span>
-pip install flask_cors
-
-<span class="token keyword">from</span> flask_cors <span class="token keyword">import</span> <span class="token operator">*</span>
-<span class="token comment" spellcheck="true">#全局配置</span>
-CORS<span class="token punctuation">(</span>app<span class="token punctuation">,</span> supports_credentials<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre>
-<a id="more"></a>
-</li>
-<li><h4 id="配置Vue"><a href="#配置Vue" class="headerlink" title="配置Vue"></a>配置Vue</h4><p>1.找到config目录下的index.js，在proxyTable下添加配置信息:</p>
-<pre class=" language-js"><code class="language-js"><span class="token string">'/api'</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
- target<span class="token punctuation">:</span> <span class="token string">'http://localhost:5000/'</span><span class="token punctuation">,</span>    <span class="token comment" spellcheck="true">//后端接口地址</span>
- changeOrigin<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>                <span class="token comment" spellcheck="true">//是否允许跨越</span>
- pathRewrite<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token string">'^/api'</span><span class="token punctuation">:</span> <span class="token string">'http://localhost:5000/'</span> <span class="token comment" spellcheck="true">//路径重写</span>
- <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
-</li>
+                <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><blockquote>
+<p>在PyQt应用中，当程序执行耗时操作时，界面出现假死卡顿的状态，最终通过Pyqt的多线程（QThread）和信号（pyqtSignal）解决</p>
+</blockquote>
+<h5 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h5><ul>
+<li>queryUI.py</li>
 </ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/9403344-10e8372429b51b34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt="proxyTable配置.png"></p>
-<p>  2.在axios中，请求地址改为：’api/xxx/xxx’<br><img src="https://upload-images.jianshu.io/upload_images/9403344-aaa1a996feda6586.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="url.png"></p>
-<p>  至此，跨域问题解决。</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 请求框UI</span>
+<span class="token comment" spellcheck="true"># -*- coding: utf-8 -*-</span>
+
+<span class="token comment" spellcheck="true"># Form implementation generated from reading ui file 'query.ui'</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># Created by: PyQt5 UI code generator 5.15.4</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># WARNING: Any manual changes made to this file will be lost when pyuic5 is</span>
+<span class="token comment" spellcheck="true"># run again.  Do not edit this file unless you know what you are doing.</span>
+
+
+<span class="token keyword">from</span> PyQt5 <span class="token keyword">import</span> QtCore<span class="token punctuation">,</span> QtGui<span class="token punctuation">,</span> QtWidgets
+
+
+<span class="token keyword">class</span> <span class="token class-name">Ui_Dialog</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">setupUi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> Dialog<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        Dialog<span class="token punctuation">.</span>setObjectName<span class="token punctuation">(</span><span class="token string">"Dialog"</span><span class="token punctuation">)</span>
+        Dialog<span class="token punctuation">.</span>resize<span class="token punctuation">(</span><span class="token number">246</span><span class="token punctuation">,</span> <span class="token number">148</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>label <span class="token operator">=</span> QtWidgets<span class="token punctuation">.</span>QLabel<span class="token punctuation">(</span>Dialog<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>label<span class="token punctuation">.</span>setGeometry<span class="token punctuation">(</span>QtCore<span class="token punctuation">.</span>QRect<span class="token punctuation">(</span><span class="token number">70</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">131</span><span class="token punctuation">,</span> <span class="token number">61</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        font <span class="token operator">=</span> QtGui<span class="token punctuation">.</span>QFont<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        font<span class="token punctuation">.</span>setFamily<span class="token punctuation">(</span><span class="token string">"Agency FB"</span><span class="token punctuation">)</span>
+        font<span class="token punctuation">.</span>setPointSize<span class="token punctuation">(</span><span class="token number">14</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>label<span class="token punctuation">.</span>setFont<span class="token punctuation">(</span>font<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>label<span class="token punctuation">.</span>setObjectName<span class="token punctuation">(</span><span class="token string">"label"</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>retranslateUi<span class="token punctuation">(</span>Dialog<span class="token punctuation">)</span>
+        QtCore<span class="token punctuation">.</span>QMetaObject<span class="token punctuation">.</span>connectSlotsByName<span class="token punctuation">(</span>Dialog<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">retranslateUi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> Dialog<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        _translate <span class="token operator">=</span> QtCore<span class="token punctuation">.</span>QCoreApplication<span class="token punctuation">.</span>translate
+        Dialog<span class="token punctuation">.</span>setWindowTitle<span class="token punctuation">(</span>_translate<span class="token punctuation">(</span><span class="token string">"Dialog"</span><span class="token punctuation">,</span> <span class="token string">"测试请求"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>label<span class="token punctuation">.</span>setText<span class="token punctuation">(</span>_translate<span class="token punctuation">(</span><span class="token string">"Dialog"</span><span class="token punctuation">,</span> <span class="token string">"正在请求 . . ."</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>testUI.py</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 主界面UI</span>
+<span class="token comment" spellcheck="true"># -*- coding: utf-8 -*-</span>
+
+<span class="token comment" spellcheck="true"># Form implementation generated from reading ui file 'test.ui'</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># Created by: PyQt5 UI code generator 5.15.4</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># WARNING: Any manual changes made to this file will be lost when pyuic5 is</span>
+<span class="token comment" spellcheck="true"># run again.  Do not edit this file unless you know what you are doing.</span>
+
+
+<span class="token keyword">from</span> PyQt5 <span class="token keyword">import</span> QtCore<span class="token punctuation">,</span> QtGui<span class="token punctuation">,</span> QtWidgets
+
+
+<span class="token keyword">class</span> <span class="token class-name">Ui_Form</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">setupUi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> Form<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        Form<span class="token punctuation">.</span>setObjectName<span class="token punctuation">(</span><span class="token string">"Form"</span><span class="token punctuation">)</span>
+        Form<span class="token punctuation">.</span>resize<span class="token punctuation">(</span><span class="token number">276</span><span class="token punctuation">,</span> <span class="token number">180</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>pushButton <span class="token operator">=</span> QtWidgets<span class="token punctuation">.</span>QPushButton<span class="token punctuation">(</span>Form<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>pushButton<span class="token punctuation">.</span>setGeometry<span class="token punctuation">(</span>QtCore<span class="token punctuation">.</span>QRect<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">80</span><span class="token punctuation">,</span> <span class="token number">75</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>pushButton<span class="token punctuation">.</span>setObjectName<span class="token punctuation">(</span><span class="token string">"pushButton"</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>retranslateUi<span class="token punctuation">(</span>Form<span class="token punctuation">)</span>
+        QtCore<span class="token punctuation">.</span>QMetaObject<span class="token punctuation">.</span>connectSlotsByName<span class="token punctuation">(</span>Form<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">retranslateUi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> Form<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        _translate <span class="token operator">=</span> QtCore<span class="token punctuation">.</span>QCoreApplication<span class="token punctuation">.</span>translate
+        Form<span class="token punctuation">.</span>setWindowTitle<span class="token punctuation">(</span>_translate<span class="token punctuation">(</span><span class="token string">"Form"</span><span class="token punctuation">,</span> <span class="token string">"主菜单"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>pushButton<span class="token punctuation">.</span>setText<span class="token punctuation">(</span>_translate<span class="token punctuation">(</span><span class="token string">"Form"</span><span class="token punctuation">,</span> <span class="token string">"测试"</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<ul>
+<li>main.py</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 逻辑代码</span>
+<span class="token comment" spellcheck="true"># -*- coding: utf-8 -*-</span>
+<span class="token comment" spellcheck="true"># @Time    : 2021/5/18 10:19</span>
+<span class="token comment" spellcheck="true"># @Author  : Wanghairui</span>
+<span class="token comment" spellcheck="true"># @function:</span>
+<span class="token keyword">import</span> sys
+
+<span class="token keyword">from</span> PyQt5<span class="token punctuation">.</span>QtCore <span class="token keyword">import</span> pyqtSignal
+<span class="token keyword">from</span> PyQt5<span class="token punctuation">.</span>QtWidgets <span class="token keyword">import</span> QApplication<span class="token punctuation">,</span> QMainWindow<span class="token punctuation">,</span> QMessageBox
+<span class="token keyword">from</span> PyQt5<span class="token punctuation">.</span>Qt <span class="token keyword">import</span> QThread
+<span class="token keyword">from</span> testUI <span class="token keyword">import</span> Ui_Form
+<span class="token keyword">from</span> queryUI <span class="token keyword">import</span> Ui_Dialog
+<span class="token keyword">from</span> time <span class="token keyword">import</span> sleep
+
+
+<span class="token keyword">class</span> <span class="token class-name">MyMainForm</span><span class="token punctuation">(</span>QMainWindow<span class="token punctuation">,</span> Ui_Form<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> parent<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>MyMainForm<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>parent<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>thread_query <span class="token operator">=</span> QueryThread<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 创建线程</span>
+        self<span class="token punctuation">.</span>setupUi<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>queryUI <span class="token operator">=</span> queryForm<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>pushButton<span class="token punctuation">.</span>clicked<span class="token punctuation">.</span>connect<span class="token punctuation">(</span>self<span class="token punctuation">.</span>query<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">query</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 绑定信号到指定回调</span>
+        self<span class="token punctuation">.</span>thread_query<span class="token punctuation">.</span>signal<span class="token punctuation">.</span>connect<span class="token punctuation">(</span>self<span class="token punctuation">.</span>callback<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>queryUI<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>thread_query<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 开始线程</span>
+
+    <span class="token comment" spellcheck="true"># 回调函数</span>
+    <span class="token keyword">def</span> <span class="token function">callback</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>queryUI<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        QMessageBox<span class="token punctuation">.</span>about<span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token string">"完成"</span><span class="token punctuation">,</span> <span class="token string">"请求完成"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">queryForm</span><span class="token punctuation">(</span>QMainWindow<span class="token punctuation">,</span> Ui_Dialog<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> parent<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>queryForm<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>parent<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>setupUi<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">QueryThread</span><span class="token punctuation">(</span>QThread<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    signal <span class="token operator">=</span> pyqtSignal<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
+        sleep<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># 运行结束，发送信号执行回调</span>
+        self<span class="token punctuation">.</span>signal<span class="token punctuation">.</span>emit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    app <span class="token operator">=</span> QApplication<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">)</span>
+    myWin <span class="token operator">=</span> MyMainForm<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    myWin<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span>app<span class="token punctuation">.</span>exec_<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
 
                 
             </div>
@@ -536,7 +650,7 @@ CORS<span class="token punctuation">(</span>app<span class="token punctuation">,
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://onehr7.github.io/2020/10/27/%E9%85%8D%E7%BD%AEFlask+Vue%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/">https://onehr7.github.io/2020/10/27/%E9%85%8D%E7%BD%AEFlask+Vue%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/</a>
+                    <a href="https://onehr7.github.io/2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/">https://onehr7.github.io/2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -574,8 +688,8 @@ CORS<span class="token punctuation">(</span>app<span class="token punctuation">,
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Web/">
-                                    <span class="chip bg-color">Web</span>
+                                <a href="/tags/PyQt5/">
+                                    <span class="chip bg-color">PyQt5</span>
                                 </a>
                             
                         </div>
@@ -619,47 +733,50 @@ CORS<span class="token punctuation">(</span>app<span class="token punctuation">,
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/10/27/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                <a href="/2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="JavaScript浅析">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="PyQt5解决界面显示不全和假死">
                         
-                        <span class="card-title">JavaScript浅析</span>
+                        <span class="card-title">PyQt5解决界面显示不全和假死</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、数据类型
-Number :
-
-整数，浮点数，NaN（Not a Number）,Infinity（无限大）
-NaN 与任何值都不相同，包括自己，可通过isNaN()函数判断NaN
-
-
-
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JavaScript/" class="post-category">
-                                    JavaScript
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PyQt5/">
+                        <span class="chip bg-color">PyQt5</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -671,13 +788,13 @@ NaN 与任何值都不相同，包括自己，可通过isNaN()函数判断NaN
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/10/14/Python%E4%BD%BF%E7%94%A8asyncio.Semaphore%E6%8E%A7%E5%88%B6%E5%8D%8F%E7%A8%8B%E5%B9%B6%E5%8F%91%E9%87%8F/">
+                <a href="/2021/05/14/Python%E6%97%B6%E9%97%B4%E4%B8%8E%E6%97%B6%E9%97%B4%E6%88%B3%E4%BA%92%E8%BD%AC/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="asyncio.Semaphore控制协程并发量">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Python日期时间转换">
                         
-                        <span class="card-title">asyncio.Semaphore控制协程并发量</span>
+                        <span class="card-title">Python日期时间转换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -688,7 +805,7 @@ NaN 与任何值都不相同，包括自己，可通过isNaN()函数判断NaN
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-14
                             </span>
                         <span class="publish-author">
                             
@@ -701,14 +818,6 @@ NaN 与任何值都不相同，包括自己，可通过isNaN()函数判断NaN
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%8D%8F%E7%A8%8B/">
-                        <span class="chip bg-color">协程</span>
-                    </a>
-                    
                 </div>
                 
             </div>
