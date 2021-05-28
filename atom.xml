@@ -6,7 +6,7 @@
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
-  <updated>2021-05-24T15:55:14.941Z</updated>
+  <updated>2021-05-28T15:18:36.802Z</updated>
   <id>https://onehr7.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Pyinstall打包ssl验证错误</title>
+    <link href="https://onehr7.github.io/2021/05/28/Pyinstall%E6%89%93%E5%8C%85ssl%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF/"/>
+    <id>https://onehr7.github.io/2021/05/28/Pyinstall%E6%89%93%E5%8C%85ssl%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF/</id>
+    <published>2021-05-28T15:17:35.000Z</published>
+    <updated>2021-05-28T15:18:36.802Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;使用Google api，程序能正常运行，但使用PyInstaller打包后出现ssl验证错误&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Error: Exception in</summary>
+        
+      
+    
+    
+    
+    <category term="Python" scheme="https://onehr7.github.io/categories/Python/"/>
+    
+    
+    <category term="PyInstaller" scheme="https://onehr7.github.io/tags/PyInstaller/"/>
+    
+  </entry>
   
   <entry>
     <title>PyQt5解决界面显示不全和假死</title>
@@ -456,33 +483,6 @@ CORS(app, supports_credentials=True)&lt;/code&gt;&lt;/pre&gt;</summary>
     
     
     <category term="排序" scheme="https://onehr7.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程基础二</title>
-    <link href="https://onehr7.github.io/2019/11/06/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%802/"/>
-    <id>https://onehr7.github.io/2019/11/06/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%802/</id>
-    <published>2019-11-06T11:21:00.000Z</published>
-    <updated>2021-01-11T16:05:32.352Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;Java并发编程基础二&quot;&gt;&lt;a href=&quot;#Java并发编程基础二&quot; class=&quot;headerlink&quot; title=&quot;Java并发编程基础二&quot;&gt;&lt;/a&gt;Java并发编程基础二&lt;/h2&gt;&lt;hr&gt;
-&lt;hr&gt;
-&lt;h4 id=&quot;1、多线程并发编程&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="Java并发" scheme="https://onehr7.github.io/categories/Java%E5%B9%B6%E5%8F%91/"/>
-    
-    
-    <category term="并发" scheme="https://onehr7.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   

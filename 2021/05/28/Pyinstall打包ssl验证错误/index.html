@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="asyncio.Semaphore控制协程并发量, WHR blogs">
+    <meta name="keywords" content="Pyinstall打包ssl验证错误, WHR blogs">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>asyncio.Semaphore控制协程并发量 | WHR blogs</title>
+    <title>Pyinstall打包ssl验证错误 | WHR blogs</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">asyncio.Semaphore控制协程并发量</h1>
+                    <h1 class="description center-align post-title">Pyinstall打包ssl验证错误</h1>
                 </div>
             </div>
         </div>
@@ -432,8 +432,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%8D%8F%E7%A8%8B/">
-                                <span class="chip bg-color">协程</span>
+                            <a href="/tags/PyInstaller/">
+                                <span class="chip bg-color">PyInstaller</span>
                             </a>
                         
                     </div>
@@ -444,8 +444,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/python/" class="post-category">
-                                python
+                            <a href="/categories/Python/" class="post-category">
+                                Python
                             </a>
                         
                     </div>
@@ -457,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-14
+                    2021-05-28
                 </div>
                 
 
@@ -466,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    90
+                    82
                 </div>
                 
 
@@ -488,38 +488,24 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: utf-8 -*-</span>
-<span class="token comment" spellcheck="true"># @Time    : 2020/10/12 12:03</span>
-<span class="token comment" spellcheck="true"># @Author  : Wanghairui</span>
-
-<span class="token keyword">import</span> asyncio
-<span class="token keyword">import</span> time
-
-
-<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># 控制并发数 20</span>
-    sem <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>Semaphore<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span>
-    tasks <span class="token operator">=</span> <span class="token punctuation">[</span>asyncio<span class="token punctuation">.</span>create_task<span class="token punctuation">(</span>print_something<span class="token punctuation">(</span><span class="token string">"c"</span><span class="token operator">+</span>str<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> sem<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-    start <span class="token operator">=</span> time<span class="token punctuation">.</span>perf_counter<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">await</span> asyncio<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token operator">*</span>tasks<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"运行结束"</span><span class="token punctuation">)</span>
-    res <span class="token operator">=</span> <span class="token punctuation">[</span>t<span class="token punctuation">.</span>result<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> t <span class="token keyword">in</span> tasks<span class="token punctuation">]</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
-    elapsed <span class="token operator">=</span> <span class="token punctuation">(</span>time<span class="token punctuation">.</span>perf_counter<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>elapsed<span class="token punctuation">)</span>
-
-
-<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">print_something</span><span class="token punctuation">(</span>thing<span class="token punctuation">,</span> sem<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">async</span> <span class="token keyword">with</span> sem<span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>thing<span class="token punctuation">)</span>
-        <span class="token keyword">await</span> asyncio<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> <span class="token string">"A"</span>
-
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
-    asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-</code></pre>
+                <p>使用Google api，程序能正常运行，但使用PyInstaller打包后出现ssl验证错误</p>
+<blockquote>
+<p>Error: Exception in ‘grpc._cython.cygrpc.ssl_roots_override_callback’ ignored</p>
+<p>assertion failed: pem_root_certs != nullptr</p>
+</blockquote>
+<ul>
+<li><p>解决办法</p>
+<p>找到Python安装路径下的\Lib\site-packages\grpc_cython_credentials\roots.pem,</p>
+<p>并拷贝到打包后的exe文件目录下。</p>
+</li>
+</ul>
+<ul>
+<li><p>参考链接</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/grpc/grpc/issues/9223#issuecomment-412054216">https://github.com/grpc/grpc/issues/9223#issuecomment-412054216</a></p>
+</blockquote>
+</li>
+</ul>
 
                 
             </div>
@@ -546,7 +532,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://onehr7.github.io/2020/10/14/Python%E4%BD%BF%E7%94%A8asyncio.Semaphore%E6%8E%A7%E5%88%B6%E5%8D%8F%E7%A8%8B%E5%B9%B6%E5%8F%91%E9%87%8F/">https://onehr7.github.io/2020/10/14/Python%E4%BD%BF%E7%94%A8asyncio.Semaphore%E6%8E%A7%E5%88%B6%E5%8D%8F%E7%A8%8B%E5%B9%B6%E5%8F%91%E9%87%8F/</a>
+                    <a href="https://onehr7.github.io/2021/05/28/Pyinstall%E6%89%93%E5%8C%85ssl%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF/">https://onehr7.github.io/2021/05/28/Pyinstall%E6%89%93%E5%8C%85ssl%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -584,8 +570,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%8D%8F%E7%A8%8B/">
-                                    <span class="chip bg-color">协程</span>
+                                <a href="/tags/PyInstaller/">
+                                    <span class="chip bg-color">PyInstaller</span>
                                 </a>
                             
                         </div>
@@ -629,52 +615,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/10/27/%E9%85%8D%E7%BD%AEFlask+Vue%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/">
+                <a href="/2021/05/28/Pyinstall%E6%89%93%E5%8C%85ssl%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Flask Vue跨域配置">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Pyinstall打包ssl验证错误">
                         
-                        <span class="card-title">Flask Vue跨域配置</span>
+                        <span class="card-title">Pyinstall打包ssl验证错误</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-配置Flask# 安装flask_cors
-pip install flask_cors
-
-from flask_cors import *
-#全局配置
-CORS(app, supports_credentials=True)
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/python/" class="post-category">
-                                    python
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Web/">
-                        <span class="chip bg-color">Web</span>
+                    <a href="/tags/PyInstaller/">
+                        <span class="chip bg-color">PyInstaller</span>
                     </a>
                     
                 </div>
@@ -688,13 +670,13 @@ CORS(app, supports_credentials=True)
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/22/Python%20%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC/">
+                <a href="/2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Python常用脚本">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="PyQt5解决界面显示不全和假死">
                         
-                        <span class="card-title">Python常用脚本</span>
+                        <span class="card-title">PyQt5解决界面显示不全和假死</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -705,19 +687,27 @@ CORS(app, supports_credentials=True)
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-24
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/python/" class="post-category">
-                                    python
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PyQt5/">
+                        <span class="chip bg-color">PyQt5</span>
+                    </a>
+                    
                 </div>
                 
             </div>

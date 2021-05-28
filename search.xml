@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Pyinstall打包ssl验证错误</title>
+      <link href="2021/05/28/Pyinstall%E6%89%93%E5%8C%85ssl%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF/"/>
+      <url>2021/05/28/Pyinstall%E6%89%93%E5%8C%85ssl%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF/</url>
+      
+        <content type="html"><![CDATA[<p>使用Google api，程序能正常运行，但使用PyInstaller打包后出现ssl验证错误</p><blockquote><p>Error: Exception in ‘grpc._cython.cygrpc.ssl_roots_override_callback’ ignored</p><p>assertion failed: pem_root_certs != nullptr</p></blockquote><ul><li><p>解决办法</p><p>找到Python安装路径下的\Lib\site-packages\grpc_cython_credentials\roots.pem,</p><p>并拷贝到打包后的exe文件目录下。</p></li></ul><ul><li><p>参考链接</p><blockquote><p><a href="https://github.com/grpc/grpc/issues/9223#issuecomment-412054216">https://github.com/grpc/grpc/issues/9223#issuecomment-412054216</a></p></blockquote></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> PyInstaller </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PyQt5解决界面显示不全和假死</title>
       <link href="2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/"/>
       <url>2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/</url>
