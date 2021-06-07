@@ -6,7 +6,7 @@
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
-  <updated>2021-05-28T15:18:36.802Z</updated>
+  <updated>2021-06-07T14:50:56.266Z</updated>
   <id>https://onehr7.github.io/</id>
   
   <author>
@@ -21,18 +21,14 @@
     <link href="https://onehr7.github.io/2021/05/28/Pyinstall%E6%89%93%E5%8C%85ssl%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF/"/>
     <id>https://onehr7.github.io/2021/05/28/Pyinstall%E6%89%93%E5%8C%85ssl%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF/</id>
     <published>2021-05-28T15:17:35.000Z</published>
-    <updated>2021-05-28T15:18:36.802Z</updated>
+    <updated>2021-06-07T14:50:56.266Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;p&gt;使用Google api，程序能正常运行，但使用PyInstaller打包后出现ssl验证错误&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Error: Exception in</summary>
-        
-      
+&lt;p&gt;Error: Exception in ‘grpc._cython.cygrpc.ssl_roots_override_callback’ ignored&lt;/p&gt;
+&lt;p&gt;assertion failed: pem_root_certs != nullptr&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -48,16 +44,12 @@
     <link href="https://onehr7.github.io/2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/"/>
     <id>https://onehr7.github.io/2021/05/24/PyQt5%E9%98%B2%E6%AD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E5%92%8C%E5%81%87%E6%AD%BB/</id>
     <published>2021-05-24T15:54:35.000Z</published>
-    <updated>2021-05-24T15:55:14.941Z</updated>
+    <updated>2021-06-07T14:50:23.585Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">&lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h5&gt;&lt;blockquote&gt;
+&lt;p&gt;在PyQt应用中，当程序执行耗时操作时，界面出现假死卡顿的状态，最终通过Pyqt的多线程（QThread）和信号（pyqtSignal）解决&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -73,16 +65,17 @@
     <link href="https://onehr7.github.io/2021/05/14/Python%E6%97%B6%E9%97%B4%E4%B8%8E%E6%97%B6%E9%97%B4%E6%88%B3%E4%BA%92%E8%BD%AC/"/>
     <id>https://onehr7.github.io/2021/05/14/Python%E6%97%B6%E9%97%B4%E4%B8%8E%E6%97%B6%E9%97%B4%E6%88%B3%E4%BA%92%E8%BD%AC/</id>
     <published>2021-05-14T14:27:38.000Z</published>
-    <updated>2021-05-14T14:30:45.446Z</updated>
+    <updated>2021-06-07T14:50:00.438Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h4 id=&quot;Python日期时间转换&quot;&gt;&lt;a href=&quot;#Python日期时间转换&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">&lt;h4 id=&quot;Python日期时间转换&quot;&gt;&lt;a href=&quot;#Python日期时间转换&quot; class=&quot;headerlink&quot; title=&quot;Python日期时间转换&quot;&gt;&lt;/a&gt;Python日期时间转换&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;时间转时间戳（UNIX时间戳）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;import time
+cus_date_time = &amp;quot;2021-05-11 00:00:00&amp;quot;
+timeArray = time.strptime(cus_date_time, &amp;quot;%Y-%m-%d %H:%M:%S&amp;quot;)
+cus_timestamp = time.mktime(timeArray)&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</summary>
     
     
     
@@ -96,18 +89,24 @@
     <link href="https://onehr7.github.io/2021/03/22/CentOS7%E5%AE%89%E8%A3%85%E4%B8%89%E8%8A%82%E7%82%B9Hadoop%E9%9B%86%E7%BE%A4/"/>
     <id>https://onehr7.github.io/2021/03/22/CentOS7%E5%AE%89%E8%A3%85%E4%B8%89%E8%8A%82%E7%82%B9Hadoop%E9%9B%86%E7%BE%A4/</id>
     <published>2021-03-22T15:14:35.000Z</published>
-    <updated>2021-05-14T14:33:44.586Z</updated>
+    <updated>2021-06-07T14:49:21.256Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;h4 id=&quot;一-服务器配置&quot;&gt;&lt;a href=&quot;#一-服务器配置&quot; class=&quot;headerlink&quot; title=&quot;一 服务器配置&quot;&gt;&lt;/a&gt;一 服务器配置&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;关闭防火墙&lt;/p&gt;
-&lt;pre class=&quot;</summary>
-        
-      
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;# 查看状态
+firewall-cmd --state
+
+# 停止防火墙
+systemctl stop firewalld.service
+
+# 禁止开机自启动
+systemctl disable firewalld.service&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;关闭selinux&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;vi /etc/sysconfig/selinux
+
+SELINUX=disabled&lt;/code&gt;&lt;/pre&gt;</summary>
     
     
     
@@ -270,15 +269,14 @@
     <link href="https://onehr7.github.io/2020/11/20/Python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/"/>
     <id>https://onehr7.github.io/2020/11/20/Python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/</id>
     <published>2020-11-20T04:18:02.000Z</published>
-    <updated>2021-01-26T14:38:07.763Z</updated>
+    <updated>2021-06-07T14:51:55.370Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;pre class=&quot; language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;# -*- coding:</summary>
+    <summary type="html">&lt;pre class=&quot; language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;# -*- coding: utf-8</summary>
         
       
     
