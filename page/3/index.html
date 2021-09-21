@@ -15,7 +15,127 @@
   },
   hexoVersion: '5.3.0'
 } </script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="WHR blogs" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/01/14/STbxQl9M7XLJUkY.jpg"></div><div class="author-info__name text-center">Hairui Wang</div><div class="author-info__description text-center"></div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/Onehr7">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">34</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">20</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">10</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/edocteel-3/">Leetcode</a></div></div></div><nav id="nav" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">WHR blogs</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">WHR blogs</div><div id="site-sub-title">Less hesitation, More action</div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/10/15/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6/">二叉树的深度</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/%E6%A0%91/">树</a></span><div class="content"><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><blockquote>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/01/14/STbxQl9M7XLJUkY.jpg"></div><div class="author-info__name text-center">Hairui Wang</div><div class="author-info__description text-center"></div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/Onehr7">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">35</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">21</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">11</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/edocteel-3/">Leetcode</a></div></div></div><nav id="nav" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">WHR blogs</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">WHR blogs</div><div id="site-sub-title">Less hesitation, More action</div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/10/16/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">并发编程基础一</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-16</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/%E5%B9%B6%E5%8F%91/">并发</a></span><div class="content"><h2 id="Java并发编程基础一"><a href="#Java并发编程基础一" class="headerlink" title="Java并发编程基础一"></a>Java并发编程基础一</h2><hr>
+<hr>
+<br/>
+#### 线程定义
+    线程是进程的一个执行路径，一个进程中至少有一个线程，进程中的多个线程共享进程的资源
+    线程中有程序计数器和栈，程序计数器记录要执行的指令地址，栈存放该线程的局部变量
+***
+<br/>
+#### 线程创建和运行
+##### 线程的创建
+
+<pre><code> 1. 实 现Runnable接口的run()方法
+ 2. 继承Theread类，重写run方法
+ 3. 使用FutureTask</code></pre>
+<h5 id="三种方式比较"><a href="#三种方式比较" class="headerlink" title="三种方式比较"></a>三种方式比较</h5><pre><code>通过继承：方便传参，但不支持多继承
+通过Runnable：可以实现多接口，但不方便传参
+通过FutureTask：可以拿到任务的返回结果</code></pre>
+<h5 id="线程的运行"><a href="#线程的运行" class="headerlink" title="线程的运行"></a>线程的运行</h5><blockquote>
+<ul>
+<li>通过继承Theread类，当调用了start()方法后才真正启动了线程</li>
+<li>当run方法执行完毕后，线程就处于终止状态</li>
+</ul>
+</blockquote>
+<hr>
+<br/>
+#### 线程等待和通知
+##### wait()
+    * 调用wait前需获取当前变量监视器锁synchronized
+    * 使用wait后线程进入阻塞，并释放当前变量监视器锁
+虚假唤醒：没有使用notify()、notifyAll()，线程也从挂起状态转变为运行状态 
+```java
+//预防虚假唤醒
+synchronized(obj){
+    while (条件不满足){
+        obj.wait（）；
+    }
+}
+```
+
+<h5 id="wait-long-timeout"><a href="#wait-long-timeout" class="headerlink" title="wait(long timeout)"></a>wait(long timeout)</h5><pre><code>在指定时间挂起，超时后则结束并返回;
+wait()方法执行的是wait(0);</code></pre>
+<h5 id="wait-long-timeout-int-nanos"><a href="#wait-long-timeout-int-nanos" class="headerlink" title="wait(long timeout,int nanos)"></a>wait(long timeout,int nanos)</h5><pre><code>在wait(long timeout)的基础上加入了纳秒级的额外时间</code></pre>
+<h5 id="notify"><a href="#notify" class="headerlink" title="notify()"></a>notify()</h5><pre><code>唤醒一个在该共享变量上调用wait系列方法后被挂起的线程，若存在多个线程等待，则唤醒是随机的
+在唤醒前需获得其共享变量的监视器锁</code></pre>
+<h5 id="notifyAll"><a href="#notifyAll" class="headerlink" title="notifyAll()"></a>notifyAll()</h5><pre><code>唤醒所有在该共享变量上调用了wait()方法后而被挂起的线程
+只能唤醒调用notifyAll前由于wait而挂起的线程</code></pre>
+<hr>
+<h4 id="4、等待线程执行终止"><a href="#4、等待线程执行终止" class="headerlink" title="4、等待线程执行终止"></a>4、等待线程执行终止</h4><h5 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h5><ul>
+<li>通过Thread类直接提供</li>
+<li>该方法无参无返回值</li>
+</ul>
+<hr>
+<h4 id="5、sleep"><a href="#5、sleep" class="headerlink" title="5、sleep()"></a>5、sleep()</h4><ul>
+<li>线程在睡眠时不会释放监视器资源</li>
+</ul>
+<hr>
+<p>####6、 yield()</p>
+<ul>
+<li>让出CPU执行权</li>
+<li>sleep()让自己阻塞起来，yield使自己处于就绪状态<br/>
+</li>
+</ul>
+<hr>
+<h4 id="7、线程中断方法"><a href="#7、线程中断方法" class="headerlink" title="7、线程中断方法"></a>7、线程中断方法</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void interrupt()</td>
+<td>设置线程的中断标志。当阻塞时调用，会抛出InterruptedException异常</td>
+</tr>
+<tr>
+<td>boolean isInterrupted()</td>
+<td>检测当前线程是否被中断，是返回true</td>
+</tr>
+<tr>
+<td>boolean interrupted()</td>
+<td>检测当前线程是否被中断，是返回true，不过如果发现被中断，会清除中断标志</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="8、线程上下文切换"><a href="#8、线程上下文切换" class="headerlink" title="8、线程上下文切换"></a>8、线程上下文切换</h4><ul>
+<li>当前线程使用完时间片后，让出CPU供其他线程占用的过程</li>
+<li>需要保存现场</li>
+<li>切换时机<ul>
+<li>当前线程的CPU时间片用完处于就绪状态</li>
+<li>当前线程被其他线程中断时</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="9、线程死锁"><a href="#9、线程死锁" class="headerlink" title="9、线程死锁"></a>9、线程死锁</h4><ul>
+<li>产生条件<ul>
+<li>1.互斥条件</li>
+<li>2.请求并持有条件</li>
+<li>3.不可剥夺条件</li>
+<li>4.环路等待条件<br/></li>
+</ul>
+</li>
+<li>避免死锁<ul>
+<li>破坏一个条件（请求并持有、环路等待）</li>
+<li>使资源的申请有序性(使多个线程获取资源的顺序一致)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="10、守护线程和用户线程"><a href="#10、守护线程和用户线程" class="headerlink" title="10、守护线程和用户线程"></a>10、守护线程和用户线程</h4><h5 id="守护线程daemon"><a href="#守护线程daemon" class="headerlink" title="守护线程daemon"></a>守护线程daemon</h5><ul>
+<li>不影响JVM退出</li>
+<li>通过daemonThread.setDaemon(true)设置守护线程<h5 id="用户线程user"><a href="#用户线程user" class="headerlink" title="用户线程user"></a>用户线程user</h5></li>
+<li>所有用户线程结束时，JVM正常退出，如main函数</li>
+</ul>
+<hr>
+<h4 id="11、ThreadLocal"><a href="#11、ThreadLocal" class="headerlink" title="11、ThreadLocal"></a>11、ThreadLocal</h4><ul>
+<li>每个线程通过复制一个变量到自己的本地内存</li>
+<li>创建<pre class=" language-java"><code class="language-java">ThreadLocal<span class="token operator">&lt;</span>String<span class="token operator">></span> localVariable <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadLocal</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</li>
+</ul>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/10/15/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6/">二叉树的深度</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/%E6%A0%91/">树</a></span><div class="content"><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><blockquote>
 <p>输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度</p>
 </blockquote>
 <br/>
