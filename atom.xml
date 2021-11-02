@@ -6,7 +6,7 @@
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
-  <updated>2021-09-21T13:34:44.178Z</updated>
+  <updated>2021-11-02T16:29:05.329Z</updated>
   <id>https://onehr7.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>259周赛总结</title>
+    <link href="https://onehr7.github.io/2021/11/02/265%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
+    <id>https://onehr7.github.io/2021/11/02/265%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</id>
+    <published>2021-11-02T12:32:00.000Z</published>
+    <updated>2021-11-02T16:29:05.329Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ol&gt;
+&lt;li&gt;&lt;h4 id=&quot;值相等的最小索引&quot;&gt;&lt;a href=&quot;#值相等的最小索引&quot; class=&quot;headerlink&quot; title=&quot;值相等的最小索引&quot;&gt;&lt;/a&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="周赛" scheme="https://onehr7.github.io/categories/%E5%91%A8%E8%B5%9B/"/>
+    
+    
+    <category term="LeetCode" scheme="https://onehr7.github.io/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>259周赛总结</title>
@@ -442,29 +468,6 @@ CORS(app, supports_credentials=True)&lt;/code&gt;&lt;/pre&gt;</summary>
     
     
     <category term="协程" scheme="https://onehr7.github.io/tags/%E5%8D%8F%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python常用脚本</title>
-    <link href="https://onehr7.github.io/2020/04/22/Python%20%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC/"/>
-    <id>https://onehr7.github.io/2020/04/22/Python%20%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC/</id>
-    <published>2020-04-22T04:30:23.000Z</published>
-    <updated>2021-01-14T15:56:33.573Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;计算文本文件中的行数&quot;&gt;&lt;a href=&quot;#计算文本文件中的行数&quot; class=&quot;headerlink&quot; title=&quot;计算文本文件中的行数&quot;&gt;&lt;/a&gt;计算文本文件中的行数&lt;/h3&gt;&lt;pre class=&quot; language-python&quot;&gt;&lt;code</summary>
-        
-      
-    
-    
-    
-    <category term="python" scheme="https://onehr7.github.io/categories/python/"/>
-    
     
   </entry>
   
