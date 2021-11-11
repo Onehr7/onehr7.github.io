@@ -6,7 +6,7 @@
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
-  <updated>2021-11-02T16:38:11.395Z</updated>
+  <updated>2021-11-11T14:50:44.762Z</updated>
   <id>https://onehr7.github.io/</id>
   
   <author>
@@ -17,11 +17,53 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>259周赛总结</title>
+    <title>element 表格解决只筛选当前页面</title>
+    <link href="https://onehr7.github.io/2021/11/11/element%20%E8%A1%A8%E6%A0%BC%E8%A7%A3%E5%86%B3%E5%8F%AA%E7%AD%9B%E9%80%89%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2/"/>
+    <id>https://onehr7.github.io/2021/11/11/element%20%E8%A1%A8%E6%A0%BC%E8%A7%A3%E5%86%B3%E5%8F%AA%E7%AD%9B%E9%80%89%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2/</id>
+    <published>2021-11-11T14:47:00.000Z</published>
+    <updated>2021-11-11T14:50:44.762Z</updated>
+    
+    
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;官方示例&lt;/p&gt;
+&lt;p&gt;当表格分页时，只会对当前页进行筛选。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Vue" scheme="https://onehr7.github.io/categories/Vue/"/>
+    
+    
+    <category term="element" scheme="https://onehr7.github.io/tags/element/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>266周赛总结</title>
+    <link href="https://onehr7.github.io/2021/11/07/266%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
+    <id>https://onehr7.github.io/2021/11/07/266%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</id>
+    <published>2021-11-07T14:38:00.000Z</published>
+    <updated>2021-11-11T14:58:24.887Z</updated>
+    
+    
+    <summary type="html">&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/count-vowel-substrings-of-a-string/&quot;&gt;统计字符串中的元音子字符串&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;暴力，两次遍历找出符合条件的数目&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="周赛" scheme="https://onehr7.github.io/categories/%E5%91%A8%E8%B5%9B/"/>
+    
+    
+    <category term="LeetCode" scheme="https://onehr7.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>265周赛总结</title>
     <link href="https://onehr7.github.io/2021/11/02/265%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
     <id>https://onehr7.github.io/2021/11/02/265%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</id>
     <published>2021-11-02T12:32:00.000Z</published>
-    <updated>2021-11-02T16:38:11.395Z</updated>
+    <updated>2021-11-07T14:46:29.042Z</updated>
     
     
     <summary type="html">&lt;ol&gt;
@@ -412,56 +454,6 @@ SELINUX=disabled&lt;/code&gt;&lt;/pre&gt;</summary>
     
     <category term="JavaScript" scheme="https://onehr7.github.io/categories/JavaScript/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Flask Vue跨域配置</title>
-    <link href="https://onehr7.github.io/2020/10/27/%E9%85%8D%E7%BD%AEFlask+Vue%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/"/>
-    <id>https://onehr7.github.io/2020/10/27/%E9%85%8D%E7%BD%AEFlask+Vue%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/</id>
-    <published>2020-10-27T00:59:18.000Z</published>
-    <updated>2021-01-26T14:40:12.699Z</updated>
-    
-    
-    <summary type="html">&lt;ul&gt;
-&lt;li&gt;&lt;h4 id=&quot;配置Flask&quot;&gt;&lt;a href=&quot;#配置Flask&quot; class=&quot;headerlink&quot; title=&quot;配置Flask&quot;&gt;&lt;/a&gt;配置Flask&lt;/h4&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;# 安装flask_cors
-pip install flask_cors
-
-from flask_cors import *
-#全局配置
-CORS(app, supports_credentials=True)&lt;/code&gt;&lt;/pre&gt;</summary>
-    
-    
-    
-    <category term="python" scheme="https://onehr7.github.io/categories/python/"/>
-    
-    
-    <category term="Web" scheme="https://onehr7.github.io/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>asyncio.Semaphore控制协程并发量</title>
-    <link href="https://onehr7.github.io/2020/10/14/Python%E4%BD%BF%E7%94%A8asyncio.Semaphore%E6%8E%A7%E5%88%B6%E5%8D%8F%E7%A8%8B%E5%B9%B6%E5%8F%91%E9%87%8F/"/>
-    <id>https://onehr7.github.io/2020/10/14/Python%E4%BD%BF%E7%94%A8asyncio.Semaphore%E6%8E%A7%E5%88%B6%E5%8D%8F%E7%A8%8B%E5%B9%B6%E5%8F%91%E9%87%8F/</id>
-    <published>2020-10-14T12:29:26.000Z</published>
-    <updated>2021-01-18T14:57:24.202Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;pre class=&quot; language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;# -*- coding: utf-8</summary>
-        
-      
-    
-    
-    
-    <category term="python" scheme="https://onehr7.github.io/categories/python/"/>
-    
-    
-    <category term="协程" scheme="https://onehr7.github.io/tags/%E5%8D%8F%E7%A8%8B/"/>
     
   </entry>
   

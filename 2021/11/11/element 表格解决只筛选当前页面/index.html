@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="element 表格解决只筛选当前页面"><meta name="keywords" content="element"><meta name="author" content="Hairui Wang"><meta name="copyright" content="Hairui Wang"><title>element 表格解决只筛选当前页面 | WHR blogs</title><link rel="shortcut icon" href="https://i.loli.net/2021/01/14/e3vagq7WDQYRb2u.png"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ef7a543c3e7a72310eea0007355b0331";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '5.3.0'
+} </script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="WHR blogs" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/01/14/STbxQl9M7XLJUkY.jpg"></div><div class="author-info__name text-center">Hairui Wang</div><div class="author-info__description text-center"></div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/Onehr7">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">38</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">22</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">12</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/edocteel-3/">Leetcode</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">WHR blogs</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">element 表格解决只筛选当前页面</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-11-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Vue/">Vue</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><ul>
+<li><p>官方示例</p>
+<p>当表格分页时，只会对当前页进行筛选。</p>
+ <a id="more"></a>
+
+<pre class=" language-vue"><code class="language-vue"><template>
+      <div>
+          <el-table
+                  ref="filterTable"
+                  :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                  style="width: 100%">
+              <el-table-column
+                      prop="date"
+                      label="日期"
+                      sortable
+                      width="180"
+                      column-key="date"
+                      :filters="[&#123;text: '2016-05-01', value: '2016-05-01'&#125;, &#123;text: '2016-05-02', value: '2016-05-02'&#125;, &#123;text: '2016-05-03', value: '2016-05-03'&#125;, &#123;text: '2016-05-04', value: '2016-05-04'&#125;]"
+                      :filter-method="filterHandler"
+              >
+              </el-table-column>
+              <el-table-column
+                      prop="name"
+                      label="姓名"
+                      width="180">
+              </el-table-column>
+              <el-table-column
+                      prop="address"
+                      label="地址"
+                      :formatter="formatter">
+              </el-table-column>
+              <el-table-column
+                      prop="tag"
+                      label="标签"
+                      width="100"
+                      :filters="[&#123; text: '家', value: '家' &#125;, &#123; text: '公司', value: '公司' &#125;]"
+                      :filter-method="filterHandler"
+                      filter-placement="bottom-end">
+                  <template slot-scope="scope">
+                      <el-tag
+                              :type="scope.row.tag === '家' ? 'primary' : 'success'"
+                              disable-transitions>&#123;&#123;scope.row.tag&#125;&#125;</el-tag>
+                  </template>
+              </el-table-column>
+          </el-table>
+          <el-pagination
+                  background
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="currentPage"
+                  :page-sizes="[5, 10, 20, 40]"
+                  :page-size="pagesize"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="tableData.length">
+          </el-pagination>
+      </div>
+  </template>
+  <script>
+      export default &#123;
+          data() &#123;
+              return &#123;
+                  tableData: [
+                      &#123;
+                      date: '2016-05-02',
+                      name: '王小虎',
+                      address: '上海市普陀区金沙江路 1518 弄',
+                      tag: '家'
+                  &#125;, &#123;
+                      date: '2016-05-04',
+                      name: '王小虎',
+                      address: '上海市普陀区金沙江路 1517 弄',
+                      tag: '公司'
+                  &#125;, &#123;
+                      date: '2016-05-01',
+                      name: '王小虎',
+                      address: '上海市普陀区金沙江路 1519 弄',
+                      tag: '家'
+                  &#125;, &#123;
+                      date: '2016-05-03',
+                      name: '王小虎',
+                      address: '上海市普陀区金沙江路 1516 弄',
+                      tag: '公司'
+                  &#125;,&#123;
+                          date: '2016-05-02',
+                          name: '王大虎',
+                          address: '上海市普陀区金沙江路 1518 弄',
+                          tag: '家'
+                      &#125;, &#123;
+                          date: '2016-05-04',
+                          name: '王大虎',
+                          address: '上海市普陀区金沙江路 1517 弄',
+                          tag: '公司'
+                      &#125;, &#123;
+                          date: '2016-05-01',
+                          name: '王大虎',
+                          address: '上海市普陀区金沙江路 1519 弄',
+                          tag: '家'
+                      &#125;, &#123;
+                          date: '2016-05-03',
+                          name: '王大虎',
+                          address: '上海市普陀区金沙江路 1516 弄',
+                          tag: '公司'
+                      &#125;],
+                  currentPage: 1, //初始页
+                  pagesize: 4,    //    每页的数据
+              &#125;
+          &#125;,
+          methods: &#123;
+              filterHandler(value, row, column) &#123;
+                  const property = column['property'];
+                  return row[property] === value;
+              &#125;,
+              formatter(row) &#123;
+                  return row.address;
+              &#125;,
+               handleSizeChange: function (size) &#123;
+              this.pagesize = size
+          &#125;,
+
+          handleCurrentChange: function (currentPage) &#123;
+              this.currentPage = currentPage;
+          &#125;,
+      &#125;
+  &#125;
+  </script></code></pre>
+</li>
+<li><p>针对分页改进</p>
+<ol>
+<li>在el-table上使用filter-change事件监听表格过滤变化。</li>
+<li>在el-colmun上使用column-key自定义列名，代替默认的el-table_1_column_7…</li>
+<li>当触发过滤事件时，手动过滤el-table绑定的数据</li>
+</ol>
+<pre class=" language-vue"><code class="language-vue"><template>
+    <div>
+        <el-table
+                ref="filterTable"
+                :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                style="width: 100%"
+                @filter-change="handleFilterChange">
+            <el-table-column
+                    prop="date"
+                    label="日期"
+                    sortable
+                    width="180"
+                    column-key="date"
+                    :filters="[&#123;text: '2016-05-01', value: '2016-05-01'&#125;, &#123;text: '2016-05-02', value: '2016-05-02'&#125;, &#123;text: '2016-05-03', value: '2016-05-03'&#125;, &#123;text: '2016-05-04', value: '2016-05-04'&#125;]"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="姓名"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="address"
+                    label="地址"
+                    :formatter="formatter">
+            </el-table-column>
+            <el-table-column
+                    prop="tag"
+                    label="标签"
+                    width="100"
+                    :filters="[&#123; text: '家', value: '家' &#125;, &#123; text: '公司', value: '公司' &#125;]"
+                    :filter-method="filterHandler"
+                    filter-placement="bottom-end"
+                    column-key="tags">
+                <template slot-scope="scope">
+                    <el-tag
+                            :type="scope.row.tag === '家' ? 'primary' : 'success'"
+                            disable-transitions>&#123;&#123;scope.row.tag&#125;&#125;</el-tag>
+                </template>
+            </el-table-column>
+        </el-table>
+        <el-pagination
+                background
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[5, 10, 20, 40]"
+                :page-size="pagesize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="tableData.length">
+        </el-pagination>
+    </div>
+</template>
+
+<script>
+    export default &#123;
+        data() &#123;
+            return &#123;
+                sourceData: [
+                    &#123;
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                    tag: '家'
+                &#125;, &#123;
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1517 弄',
+                    tag: '公司'
+                &#125;, &#123;
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄',
+                    tag: '家'
+                &#125;, &#123;
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1516 弄',
+                    tag: '公司'
+                &#125;,&#123;
+                        date: '2016-05-02',
+                        name: '王大虎',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        tag: '家'
+                    &#125;, &#123;
+                        date: '2016-05-04',
+                        name: '王大虎',
+                        address: '上海市普陀区金沙江路 1517 弄',
+                        tag: '公司'
+                    &#125;, &#123;
+                        date: '2016-05-01',
+                        name: '王大虎',
+                        address: '上海市普陀区金沙江路 1519 弄',
+                        tag: '家'
+                    &#125;, &#123;
+                        date: '2016-05-03',
+                        name: '王大虎',
+                        address: '上海市普陀区金沙江路 1516 弄',
+                        tag: '公司'
+                    &#125;],
+                currentPage: 1, //初始页
+                pagesize: 4,    //    每页的数据
+                filter_condition: &#123;&#125;,
+            &#125;
+        &#125;,
+        methods: &#123;
+            filterHandler(value, row, column) &#123;
+                const property = column['property'];
+                return row[property] === value;
+            &#125;,
+            formatter(row) &#123;
+                return row.address;
+            &#125;,
+
+            handleSizeChange: function (size) &#123;
+                this.pagesize = size
+            &#125;,
+
+            handleCurrentChange: function (currentPage) &#123;
+                this.currentPage = currentPage;
+            &#125;,
+
+            handleFilterChange(filter)&#123;
+                for(let key in filter)&#123;
+                    this.$set(this.filter_condition, key, filter[key]);
+                &#125;
+            &#125;,
+        &#125;,
+
+        computed: &#123;
+            tableData()&#123;
+                let tempData = JSON.parse(JSON.stringify(this.sourceData));
+
+                for (let filter_key in this.filter_condition)&#123;
+                    if (this.filter_condition[filter_key].length === 0)&#123;
+                        continue;
+                    &#125;
+
+                    if (filter_key === 'date')&#123;
+                        tempData = this.sourceData.filter(data => this.filter_condition[filter_key].indexOf(data.date) !== -1)
+                    &#125;
+                    else if(filter_key === 'tags')&#123;
+                        tempData = this.sourceData.filter(data => this.filter_condition[filter_key].indexOf(data.tag) !== -1)
+                    &#125;
+                &#125;
+                return tempData
+            &#125;
+        &#125;
+    &#125;
+</script></code></pre>
+</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Hairui Wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://onehr7.github.io/2021/11/11/element 表格解决只筛选当前页面/">https://onehr7.github.io/2021/11/11/element 表格解决只筛选当前页面/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/element/">element</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2021/11/07/266%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"><span>266周赛总结</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2021 By Hairui Wang</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
