@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>WHR blogs</title>
+  <title></title>
   
-  <subtitle>Less hesitation, More action</subtitle>
+  <subtitle>Talk is cheap. Show me the code</subtitle>
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
-  <updated>2022-09-10T12:40:43.691Z</updated>
+  <updated>2022-09-10T12:57:04.194Z</updated>
   <id>https://onehr7.github.io/</id>
   
   <author>
@@ -21,18 +21,10 @@
     <link href="https://onehr7.github.io/2022/01/25/70%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
     <id>https://onehr7.github.io/2022/01/25/70%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</id>
     <published>2022-01-25T10:28:52.000Z</published>
-    <updated>2022-09-10T12:40:43.691Z</updated>
+    <updated>2022-09-10T12:57:04.194Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h2 id=&quot;1-打折购买糖果的最小开销&quot;&gt;&lt;a href=&quot;#1-打折购买糖果的最小开销&quot; class=&quot;headerlink&quot; title=&quot;1 打折购买糖果的最小开销&quot;&gt;&lt;/a&gt;1</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;1-打折购买糖果的最小开销&quot;&gt;&lt;a href=&quot;#1-打折购买糖果的最小开销&quot; class=&quot;headerlink&quot; title=&quot;1 打折购买糖果的最小开销&quot;&gt;&lt;/a&gt;1 打折购买糖果的最小开销&lt;/h2&gt;&lt;p&gt;&lt;code&gt;排序&lt;/code&gt;，倒序每取两个就跳过一个&lt;/p&gt;</summary>
     
     
     
