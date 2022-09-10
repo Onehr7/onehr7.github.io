@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Kafka三节点集群搭建"><meta name="keywords" content=""><meta name="author" content="Hairui Wang"><meta name="copyright" content="Hairui Wang"><title>Kafka三节点集群搭建 | WHR blogs</title><link rel="shortcut icon" href="https://i.loli.net/2021/01/14/e3vagq7WDQYRb2u.png"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ef7a543c3e7a72310eea0007355b0331";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '5.3.0'
+} </script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="WHR blogs" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%95%B4%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">一 整体步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E9%85%8D%E7%BD%AEHosts"><span class="toc-number">2.</span> <span class="toc-text">二 配置Hosts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEZookeeper"><span class="toc-number">3.</span> <span class="toc-text">三 安装配置Zookeeper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-KafKa-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA"><span class="toc-number">4.</span> <span class="toc-text">四 KafKa 集群搭建</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/01/14/STbxQl9M7XLJUkY.jpg"></div><div class="author-info__name text-center">Hairui Wang</div><div class="author-info__description text-center"></div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/Onehr7">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">20</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">12</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">11</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/edocteel-3/">Leetcode</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">WHR blogs</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">Kafka三节点集群搭建</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-01-10</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Kafka/">Kafka</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="一-整体步骤"><a href="#一-整体步骤" class="headerlink" title="一 整体步骤"></a>一 整体步骤</h2><ul>
+<li>hosts配置</li>
+<li>安装配置Zookeeper</li>
+<li>Kafka集群搭建</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="二-配置Hosts"><a href="#二-配置Hosts" class="headerlink" title="二 配置Hosts"></a>二 配置Hosts</h2><ul>
+<li><p>修改hosts文件</p>
+<pre class=" language-shell"><code class="language-shell">sudo vi /etc/hosts
+
+# 配置如下
+127.0.0.1   localhost
+192.168.0.100 master
+192.168.0.101 slave1
+192.168.0.102 slave2</code></pre>
+</li>
+</ul>
+<h2 id="三-安装配置Zookeeper"><a href="#三-安装配置Zookeeper" class="headerlink" title="三 安装配置Zookeeper"></a>三 安装配置Zookeeper</h2><ul>
+<li><p>下载解压</p>
+<pre class=" language-shell"><code class="language-shell"># 使用wget或本地下载后传到服务器
+cd /home/
+sudo mkdir zookeeper
+cd /home/zookeeper
+sudo wget https://dlcdn.apache.org/zookeeper/zookeeper-3.5.9/apache-zookeeper-3.5.9-bin.tar.gz
+sudo tar -zxvf apache-zookeeper-3.5.9-bin.tar.gz</code></pre>
+</li>
+<li><p>配置环境变量</p>
+<pre class=" language-shell"><code class="language-shell"># 修改三台主机
+# sudo vi /etc/profile
+
+# 添加环境变量
+export ZOOKEEPER_HOME=/home/zookeeper/apache-zookeeper-3.5.9-bin
+export PATH=$ZOOKEEPER_HOME/bin:$PATH
+
+source /etc/profile</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>创建目录</p>
+<pre class=" language-shell"><code class="language-shell">cd apache-zookeeper-3.5.9-bin
+sudo mkdir data
+sudo mkdir logs</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>修改配置</p>
+<pre class=" language-shell"><code class="language-shell">cd conf
+sudo cp zoo_sample.cfg zoo.cfg
+sudo vi zoo.cfg
+
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/home/zookeeper/apache-zookeeper-3.5.9-bin/data
+dataLogDir=/home/zookeeper/apache-zookeeper-3.5.9-bin/logs
+clientPort=2181
+
+# 如果为当前主机，则修改为0.0.0.0
+server.1=master:2287:3387
+server.2=slave1:2287:3387
+server.3=slave2:2287:3387</code></pre>
+</li>
+<li><p>创建<code>myid</code>文件</p>
+<blockquote>
+<p>在各服务器节点(<code>master</code>、<code>slave1</code>、<code>slave2</code>)的 <code>dataDir</code> 目录下创建名为 <code>myid</code> 的文件，在文件第一行写上对应的 Server id</p>
+</blockquote>
+<pre class=" language-shell"><code class="language-shell">master:
+echo "1" > myid
+slave1:
+echo "2" > myid
+slave2:
+echo "3" > myid</code></pre>
+</li>
+<li><p>启动测试</p>
+<blockquote>
+<p>启动顺序决定leadert,follower</p>
+</blockquote>
+<pre class=" language-shell"><code class="language-shell"># 分别在三台主机上
+cd /home/zookeeper/apache-zookeeper-3.5.9-bin/bin/
+zkServer.sh start
+
+# 集群验证
+# 查看状态(需全部节点启动)
+zkServer.sh status</code></pre>
+</li>
+<li><p>基本命令</p>
+<pre class=" language-shell"><code class="language-shell"># 停止
+zkServer.sh stop</code></pre>
+</li>
+</ul>
+<h2 id="四-KafKa-集群搭建"><a href="#四-KafKa-集群搭建" class="headerlink" title="四 KafKa 集群搭建"></a>四 KafKa 集群搭建</h2><ul>
+<li><p>下载解压</p>
+<blockquote>
+<p>注意选择版本时，选择<code>Binary downloads</code>,不要选择<code>Source download</code>！！！否则启动时会提示<code>Could not find or load main class kafka.Kafka</code>，此时需要编译后才可以使用 。</p>
+</blockquote>
+<pre class=" language-shell"><code class="language-shell">cd /home
+mkdir Kafka
+cd Kafka
+mkdir data
+sudo wget https://archive.apache.org/dist/kafka/3.0.0/kafka_2.12-3.0.0.tgz
+tar -xzf kafka_2.12-3.0.0.tgz</code></pre>
+</li>
+<li><p>修改配置</p>
+<pre class=" language-shell"><code class="language-shell">cd kafka_2.12-3.0.0/config
+vi server.properties
+
+# 节点1
+# 群中每个节点的唯一标识
+broker.id=0
+# 监听地址
+listeners=PLAINTEXT://master:9092
+# 数据的存储位置
+log.dirs=/home/Kafka/data
+# Zookeeper连接地址
+zookeeper.connect=master:2181,slave1:2181,slave2:2181
+
+# 节点2
+broker.id=1
+listeners=PLAINTEXT://slave1:9092
+log.dirs=/home/Kafka/data
+zookeeper.connect=master:2181,slave1:2181,slave2:2181
+
+# 节点3
+broker.id=2
+listeners=PLAINTEXT://slave2:9092
+log.dirs=/home/Kafka/data
+zookeeper.connect=master:2181,slave1:2181,slave2:2181</code></pre>
+</li>
+<li><p>启动</p>
+<pre class=" language-shell"><code class="language-shell"># 三节点分别运行启动
+cd /home/Kafka/kafka_2.12-3.0.0
+bin/kafka-server-start.sh -daemon config/server.properties </code></pre>
+</li>
+<li><p>测试</p>
+<pre class=" language-shell"><code class="language-shell">bin/kafka-topics.sh --create --bootstrap-server master:9092 --replication-factor 1 --partitions 1 --topic test
+
+bin/kafka-topics.sh --list --bootstrap-server master:9092
+bin/kafka-topics.sh --describe --bootstrap-server master:9092 --topic test</code></pre>
+</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Hairui Wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://onehr7.github.io/2022/01/10/Kafka三节点集群搭建/">https://onehr7.github.io/2022/01/10/Kafka三节点集群搭建/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2022/01/25/70%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"><i class="fa fa-chevron-left">  </i><span>Leetcode 第70场双周赛Python题解</span></a></div><div class="next-post pull-right"><a href="/2021/11/07/266%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"><span>266周赛总结</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2022 By Hairui Wang</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
