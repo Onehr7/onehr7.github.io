@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>310周赛总结</title>
+      <link href="2022/09/11/310%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
+      <url>2022/09/11/310%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-出现最频繁的偶数元素"><a href="#1-出现最频繁的偶数元素" class="headerlink" title="1. 出现最频繁的偶数元素"></a>1. <a href="https://leetcode.cn/problems/most-frequent-even-element/">出现最频繁的偶数元素</a></h3><p><code>计数</code>, 根据题意直接模拟</p><a id="more"></a><pre class=" language-python3"><code class="language-python3">class Solution:    def mostFrequentEven(self, nums: List[int]) -> int:        num_dict = Counter(nums)        res = -1        times = 0        for num, time in num_dict.items():            if num % 2 != 0:                continue            if time > times:                times = time                res = num            elif time == times and res > num:                res = num        return res</code></pre><hr><h3 id="2-子字符串的最优划分"><a href="#2-子字符串的最优划分" class="headerlink" title="2. 子字符串的最优划分"></a>2. <a href="https://leetcode.cn/problems/optimal-partition-of-string/">子字符串的最优划分</a></h3><p>使用<code>set</code>从头开始遍历，当前值存在于set中时，结果+1，并清空set</p><pre class=" language-python3"><code class="language-python3">class Solution:    def partitionString(self, s: str) -> int:        s_set = set()        res = 0        for ch in s:            if ch in s_set:                res += 1                s_set.clear()            s_set.add(ch)        if len(s_set):            res += 1        return res</code></pre><hr><h3 id="3-将区间分为最少组数"><a href="#3-将区间分为最少组数" class="headerlink" title="3. 将区间分为最少组数"></a>3. <a href="https://leetcode.cn/problems/divide-intervals-into-minimum-number-of-groups/">将区间分为最少组数</a></h3><p><code>排序</code>+<code>堆</code>, 将区间按左端点排序，使用堆保存区间组的最右端点。遍历排序好的区间，当堆的最小右端点小于当前的左端点时，更新堆的最右端点。否则新增右端点，最后返回堆的长度即为组的个数。</p><pre class=" language-python3"><code class="language-python3">class Solution:    def minGroups(self, intervals: List[List[int]]) -> int:        intervals.sort()        h = []        for l, r in (intervals):            if h and l > h[0]:                heapreplace(h, r)            else:                heappush(h, r)        return len(h)</code></pre><hr><h3 id="4-最长递增子序列-II"><a href="#4-最长递增子序列-II" class="headerlink" title="4. 最长递增子序列 II"></a>4. <a href="https://leetcode.cn/problems/longest-increasing-subsequence-ii/">最长递增子序列 II</a></h3><p><code>线段树</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 周赛 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode 第70场双周赛Python题解</title>
       <link href="2022/01/25/70%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
       <url>2022/01/25/70%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</url>
