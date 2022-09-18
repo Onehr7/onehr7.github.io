@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>311周赛总结</title>
+      <link href="2022/09/18/311%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
+      <url>2022/09/18/311%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-最小偶倍数"><a href="#1-最小偶倍数" class="headerlink" title="1. 最小偶倍数"></a>1. <a href="https://leetcode.cn/contest/weekly-contest-311/problems/smallest-even-multiple/">最小偶倍数</a></h3><p>直接计算，当n为奇数时，结果为2*n, 否则为n</p><a id="more"></a><pre class=" language-python3"><code class="language-python3">class Solution:    def smallestEvenMultiple(self, n: int) -> int:        if n % 2 == 0:            return n         return n * 2</code></pre><hr><h3 id="2-最长的字母序连续子字符串的长度"><a href="#2-最长的字母序连续子字符串的长度" class="headerlink" title="2. 最长的字母序连续子字符串的长度"></a>2. <a href="https://leetcode.cn/contest/weekly-contest-311/problems/length-of-the-longest-alphabetical-continuous-substring/">最长的字母序连续子字符串的长度</a></h3><p><code>滑动窗口</code></p><pre class=" language-python3"><code class="language-python3">class Solution:    def longestContinuousSubstring(self, s: str) -> int:        res = 1        cur = 1        for i in range(1, len(s)):            ch = s[i]            if ord(ch) - ord(s[i-1]) == 1:                cur += 1            else:                cur = 1            res = max(res, cur)        return res</code></pre><hr><h3 id="3-反转二叉树的奇数层"><a href="#3-反转二叉树的奇数层" class="headerlink" title="3. 反转二叉树的奇数层"></a>3. <a href="https://leetcode.cn/contest/weekly-contest-311/problems/reverse-odd-levels-of-binary-tree/">反转二叉树的奇数层</a></h3><p><code>BFS</code>, 遍历时记录所在层数，当为奇数层时，反转奇数层的节点值</p><pre class=" language-python3"><code class="language-python3"># Definition for a binary tree node.# class TreeNode:#     def __init__(self, val=0, left=None, right=None):#         self.val = val#         self.left = left#         self.right = rightclass Solution:    def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:        queue = deque()        queue.append(root)        deep = 0        while queue:            size = len(queue)            if deep % 2 != 0:                for i in range(size // 2):                    queue[i].val, queue[size-1-i].val = queue[size-1-i].val, queue[i].val            for i in range(size):                cur = queue.popleft()                if cur.left:                    queue.append(cur.left)                    queue.append(cur.right)            deep += 1        return root</code></pre><hr><h3 id="4-字符串的前缀分数和"><a href="#4-字符串的前缀分数和" class="headerlink" title="4. 字符串的前缀分数和"></a>4. <a href="https://leetcode.cn/contest/weekly-contest-311/problems/sum-of-prefix-scores-of-strings/">字符串的前缀分数和</a></h3><p><code>Hash暴力</code></p><pre class=" language-python3"><code class="language-python3">class Solution:    def sumPrefixScores(self, words: List[str]) -> List[int]:        word_dict = defaultdict(int)        n = len(words)        for word in words:            cur = ""            for w in word:                cur += w                word_dict[cur] += 1        res = [0] * n        for i, word in enumerate(words):            cur = ""            for w in word:                cur += w                res[i] += word_dict[cur]        return res</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 周赛 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>87双周赛总结</title>
+      <link href="2022/09/18/87%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
+      <url>2022/09/18/87%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-统计共同度过的日子数"><a href="#1-统计共同度过的日子数" class="headerlink" title="1. 统计共同度过的日子数"></a>1. <a href="https://leetcode.cn/contest/biweekly-contest-87/problems/count-days-spent-together/">统计共同度过的日子数</a></h3><p><code>数组计数</code>, 使用数组将Alice和Bob所在天+1, 统计为2的天数</p><a id="more"></a><pre class=" language-python3"><code class="language-python3">class Solution:    def countDaysTogether(self, arriveAlice: str, leaveAlice: str, arriveBob: str, leaveBob: str) -> int:        month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]        arriveAlice = [int(a) for a in arriveAlice.split("-")]        arriveBob = [int(a) for a in arriveBob.split("-")]        leaveAlice = [int(a) for a in leaveAlice.split("-")]        leaveBob = [int(a) for a in leaveBob.split("-")]        days = [0] * 366        arriveAlice = sum(month[:arriveAlice[0]-1]) + arriveAlice[1]        leaveAlice = sum(month[:leaveAlice[0]-1]) + leaveAlice[1]        arriveBob = sum(month[:arriveBob[0]-1]) + arriveBob[1]        leaveBob = sum(month[:leaveBob[0]-1]) + leaveBob[1]        for i in range(arriveAlice, leaveAlice+1):            days[i] += 1        for i in range(arriveBob, leaveBob+1):            days[i] += 1        res = 0        for day in days:            if day == 2:                res += 1        return res</code></pre><hr><h3 id="2-运动员和训练师的最大匹配数"><a href="#2-运动员和训练师的最大匹配数" class="headerlink" title="2. 运动员和训练师的最大匹配数"></a>2. <a href="https://leetcode.cn/contest/biweekly-contest-87/problems/maximum-matching-of-players-with-trainers/">运动员和训练师的最大匹配数</a></h3><p><code>排序+贪心</code> </p><pre class=" language-python3"><code class="language-python3">class Solution:    def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:        players.sort()        trainers.sort()        i = 0        res = 0        for trainer in trainers:            if i < len(players) and trainer >= players[i]:                res += 1                i += 1        return res</code></pre><hr><h3 id="3-按位或最大的最小子数组长度"><a href="#3-按位或最大的最小子数组长度" class="headerlink" title="3. 按位或最大的最小子数组长度"></a>3. <a href="https://leetcode.cn/contest/biweekly-contest-87/problems/smallest-subarrays-with-maximum-bitwise-or/">按位或最大的最小子数组长度</a></h3><pre class=" language-python3"><code class="language-python3"></code></pre><hr><h3 id="4-完成所有交易的初始最少钱数"><a href="#4-完成所有交易的初始最少钱数" class="headerlink" title="4. 完成所有交易的初始最少钱数"></a>4. <a href="https://leetcode.cn/contest/biweekly-contest-87/problems/minimum-money-required-before-transactions/">完成所有交易的初始最少钱数</a></h3><p><code>贪心+枚举</code>， 每次交易所需的最少金额为当前cost加上之前所有负收益的总和，因此可以枚举每次交易，计算最大的钱数。</p><pre class=" language-python3"><code class="language-python3">class Solution:    def minimumMoney(self, transactions: List[List[int]]) -> int:        neg = 0        # 计算所有的负收益        for cost, cashback in transactions:            if cost > cashback:                neg += (cashback-cost)        res = 0        # 枚举所有的交易，至少花费的钱为负收益加当前花费        for cost, cashback in transactions:            # 当前交易为负交易时，需要从总负交易减去当前负交易            if cost > cashback:                cur_neg = neg - (cashback-cost)            else:                cur_neg = neg            res = max(res, cost - cur_neg)        return res</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 周赛 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>310周赛总结</title>
       <link href="2022/09/11/310%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
       <url>2022/09/11/310%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</url>

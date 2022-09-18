@@ -6,7 +6,7 @@
   <link href="https://onehr7.github.io/atom.xml" rel="self"/>
   
   <link href="https://onehr7.github.io/"/>
-  <updated>2022-09-11T10:53:22.622Z</updated>
+  <updated>2022-09-18T14:46:11.572Z</updated>
   <id>https://onehr7.github.io/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>311周赛总结</title>
+    <link href="https://onehr7.github.io/2022/09/18/311%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
+    <id>https://onehr7.github.io/2022/09/18/311%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</id>
+    <published>2022-09-18T14:45:00.000Z</published>
+    <updated>2022-09-18T14:46:11.572Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;1-最小偶倍数&quot;&gt;&lt;a href=&quot;#1-最小偶倍数&quot; class=&quot;headerlink&quot; title=&quot;1. 最小偶倍数&quot;&gt;&lt;/a&gt;1. &lt;a href=&quot;https://leetcode.cn/contest/weekly-contest-311/problems/smallest-even-multiple/&quot;&gt;最小偶倍数&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;直接计算，当n为奇数时，结果为2*n, 否则为n&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="周赛" scheme="https://onehr7.github.io/categories/%E5%91%A8%E8%B5%9B/"/>
+    
+    
+    <category term="LeetCode" scheme="https://onehr7.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>87双周赛总结</title>
+    <link href="https://onehr7.github.io/2022/09/18/87%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/"/>
+    <id>https://onehr7.github.io/2022/09/18/87%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/</id>
+    <published>2022-09-17T16:23:21.000Z</published>
+    <updated>2022-09-18T15:04:22.867Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;1-统计共同度过的日子数&quot;&gt;&lt;a href=&quot;#1-统计共同度过的日子数&quot; class=&quot;headerlink&quot; title=&quot;1. 统计共同度过的日子数&quot;&gt;&lt;/a&gt;1. &lt;a href=&quot;https://leetcode.cn/contest/biweekly-contest-87/problems/count-days-spent-together/&quot;&gt;统计共同度过的日子数&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;数组计数&lt;/code&gt;, 使用数组将Alice和Bob所在天+1, 统计为2的天数&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="周赛" scheme="https://onehr7.github.io/categories/%E5%91%A8%E8%B5%9B/"/>
+    
+    
+    <category term="LeetCode" scheme="https://onehr7.github.io/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>310周赛总结</title>
@@ -401,56 +439,6 @@ SELINUX=disabled&lt;/code&gt;&lt;/pre&gt;</summary>
     
     <category term="JavaScript" scheme="https://onehr7.github.io/categories/JavaScript/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Flask Vue跨域配置</title>
-    <link href="https://onehr7.github.io/2020/10/27/%E9%85%8D%E7%BD%AEFlask+Vue%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/"/>
-    <id>https://onehr7.github.io/2020/10/27/%E9%85%8D%E7%BD%AEFlask+Vue%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/</id>
-    <published>2020-10-27T00:59:18.000Z</published>
-    <updated>2022-09-10T12:22:01.411Z</updated>
-    
-    
-    <summary type="html">&lt;ul&gt;
-&lt;li&gt;&lt;h4 id=&quot;配置Flask&quot;&gt;&lt;a href=&quot;#配置Flask&quot; class=&quot;headerlink&quot; title=&quot;配置Flask&quot;&gt;&lt;/a&gt;配置Flask&lt;/h4&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;# 安装flask_cors
-pip install flask_cors
-
-from flask_cors import *
-#全局配置
-CORS(app, supports_credentials=True)&lt;/code&gt;&lt;/pre&gt;</summary>
-    
-    
-    
-    <category term="python" scheme="https://onehr7.github.io/categories/python/"/>
-    
-    
-    <category term="Web" scheme="https://onehr7.github.io/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>asyncio.Semaphore控制协程并发量</title>
-    <link href="https://onehr7.github.io/2020/10/14/Python%E4%BD%BF%E7%94%A8asyncio.Semaphore%E6%8E%A7%E5%88%B6%E5%8D%8F%E7%A8%8B%E5%B9%B6%E5%8F%91%E9%87%8F/"/>
-    <id>https://onehr7.github.io/2020/10/14/Python%E4%BD%BF%E7%94%A8asyncio.Semaphore%E6%8E%A7%E5%88%B6%E5%8D%8F%E7%A8%8B%E5%B9%B6%E5%8F%91%E9%87%8F/</id>
-    <published>2020-10-14T12:29:26.000Z</published>
-    <updated>2021-01-18T14:57:24.202Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;pre class=&quot; language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;# -*- coding: utf-8</summary>
-        
-      
-    
-    
-    
-    <category term="python" scheme="https://onehr7.github.io/categories/python/"/>
-    
-    
-    <category term="协程" scheme="https://onehr7.github.io/tags/%E5%8D%8F%E7%A8%8B/"/>
     
   </entry>
   
