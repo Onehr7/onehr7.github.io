@@ -216,7 +216,7 @@ bytes_on_disk:               207.07 MiB
 </ul>
 </li>
 </ul>
-<p><img src="../images/sparse-primary-indexes-01.png" alt="img">UserID.bin、URL.bin 和 EventTime.bin 是磁盘上的数据文件，其中存储了UserID、URL和EventTime列的值。</p>
+<p><img src="/images/sparse-primary-indexes-01.png" alt="img">UserID.bin、URL.bin 和 EventTime.bin 是磁盘上的数据文件，其中存储了UserID、URL和EventTime列的值。</p>
 <blockquote>
 <p><strong>注意</strong></p>
 <ul>
@@ -229,7 +229,7 @@ bytes_on_disk:               207.07 MiB
 <p>列值并不是实际存储在粒度组内部：粒度组只是用于查询处理的列值的 <em>逻辑</em> 组织。</p>
 </blockquote>
 <p>下图说明了我们表的 887 万行（列值）是如何被组织成 1083 个粒度组的，这是由于表的 DDL 语句设置了index_granularity（设置为其默认值 8192）。</p>
-<p><img src="../images/sparse-primary-indexes-02.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-02.png" alt="img"></p>
 <p>第一个（基于磁盘上的物理顺序）8192 行（它们的列值）逻辑上属于粒度 0，然后接下来的 8192 行（它们的列值）属于粒度1，依此类推。</p>
 <blockquote>
 <p><strong>注意</strong></p>
@@ -249,9 +249,9 @@ bytes_on_disk:               207.07 MiB
 <li>第一个索引项（下图中的’mark 0’）存储上图中粒度组0的主键列的最小值，</li>
 <li>第二个索引项（下图中的’mark 1’）存储上图中粒度组1的主键列的最小值，依此类推。</li>
 </ul>
-<p><img src="../images/sparse-primary-indexes-03a.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-03a.png" alt="img"></p>
 <p>我们的表总共有 1083 个索引项，887 万行数据和 1083 个粒度组：</p>
-<p><img src="../images/sparse-primary-indexes-03b.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-03b.png" alt="img"></p>
 <blockquote>
 <p><strong>注意</strong></p>
 <ul>
@@ -350,7 +350,7 @@ Processed 8.19 thousand rows,
 <p>在<strong>第二阶段（数据读取）</strong>，ClickHouse 定位到选定的粒度组，以便将它们的所有行数据流式传输到 ClickHouse 引擎，从而找到实际匹配查询的行。</p>
 <p>我们接下来将再更详细地讨论第二阶段。</p>
 <h2 id="标记文件用于定位粒度组"><a href="#标记文件用于定位粒度组" class="headerlink" title="标记文件用于定位粒度组"></a>标记文件用于定位粒度组</h2><p>下图展示了我们表的主键索引文件的一部分。</p>
-<p><img src="../images/sparse-primary-indexes-04.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-04.png" alt="img"></p>
 <p>如上所述，通过对索引的 1083 个UserID标记进行二分搜索，识别出标记 176。因此，其对应的粒度组176 可能包含 UserID 列值为 749.927.693 的行。</p>
 <blockquote>
 <p>粒度组选择细节</p>
@@ -360,7 +360,7 @@ Processed 8.19 thousand rows,
 <p>为此，ClickHouse 需要知道粒度组 176 的物理位置。</p>
 <p>在 ClickHouse 中，我们表的所有粒度组的物理位置都存储在标记文件中。与数据文件类似，每个列都有一个标记文件。</p>
 <p>下图展示了三个标记文件 UserID.mrk、URL.mrk 和 EventTime.mrk，它们存储了表的 UserID、URL 和 EventTime 列的粒度组的物理位置。</p>
-<p><img src="../images/sparse-primary-indexes-05.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-05.png" alt="img"></p>
 <p>我们已经讨论了主键索引为什么是一个扁平的未压缩数组文件 (primary.idx)，其中包含从 0 开始编号的索引标记。</p>
 <p>同样，标记文件也是一个扁平未压缩的数组文件 (*.mrk)，其中包含从 0 开始编号的标记。</p>
 <p>一旦 ClickHouse 识别并选择了可能包含查询匹配行的粒度组的索引标记，就可以在标记文件中执行查找数组位置，以获得粒度组的实际物理位置。</p>
@@ -382,7 +382,7 @@ Processed 8.19 thousand rows,
 <p>标记文件的存在，间接地避免了在主索引中直接存储所有三列的所有 1083 个粒度的物理位置的条目：从而避免在主内存中存在不必要的（可能未使用的）数据。</p>
 </blockquote>
 <p>下图和下面的文本说明了我们的示例是如何查询 ClickHouse 在 UserID.bin 数据文件中定位粒度 176的。</p>
-<p><img src="../images/sparse-primary-indexes-06.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-06.png" alt="img"></p>
 <p>我们在本文前面讨论过 ClickHouse选择了主索引标记 176，因此粒度 176 可能包含我们查询的匹配行。</p>
 <p>ClickHouse 现在使用从索引中选择的标记编号 (176) 在 UserID.mrk 标记文件中进行数组的位置查找，以获得用于定位颗粒 176 的两个偏移量。</p>
 <p>如图所示，第一个偏移量是在 UserID.bin 数据文件中定位压缩文件块，该文件包含粒度 176 的压缩版本。</p>
@@ -447,7 +447,7 @@ Processed 8.81 million rows,
 <p>我们在下图中用橙色标记了每个颗粒的最小键列值。</p>
 <p><strong>前置键列的基数较低</strong></p>
 <p>假设 UserID 具有低基数。在这种情况下，相同的 UserID 值很可能分布在多个表行和粒度上。对于具有相同 UserID 的索引标记，索引标记的 URL 值按升序排序（因为表行首先按 UserID 排序，然后按 URL 排序）。这能进行有效过滤，如下所示：</p>
-<p><img src="../images/sparse-primary-indexes-07.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-07.png" alt="img"></p>
 <p>上图中我们的抽象样本数据的粒度选择过程有三种不同的场景：</p>
 <ol>
 <li>由于标记索引0、1和2具有相同的UserID值，因此可以排除（最小）<strong>URL值小于W3并且直接后续索引标记的URL值也小于W3的索引标记0。</strong>请注意，此排除的前提是，确保了粒度 0 和下一个粒度1 完全由 U1的 UserID 值组成，因此 ClickHouse 可以推断粒度 0 中的最大 URL 值也小于 W3， 并排除该颗粒。</li>
@@ -456,7 +456,7 @@ Processed 8.81 million rows,
 </ol>
 <p><strong>前置键列的基数的较高</strong></p>
 <p>当 UserID 具有高基数时，相同的 UserID 值不太可能分布在多个表行和粒度上。这意味着索引标记的 URL 值不是单调递增的：</p>
-<p><img src="../images/sparse-primary-indexes-08.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-08.png" alt="img"></p>
 <p>正如我们在上图中看到的，所有显示的 URL 值小于 W3 的标记都被选中，用于将其关联的粒度行都流式传输到 ClickHouse 引擎。</p>
 <p>这是因为虽然图中的所有索引标记都属于上述场景 1，但它们不满足上述排除的前提条件，<em>即两个直接随后的索引标记都具有与当前标记相同的 UserID 值</em>，因此不能被排除.</p>
 <p>例如，考虑索引标记 0 ，其<strong>URL 值小于 W3 并且直接后续索引标记的 URL 值也存在小于 W3</strong>。这<em>不能</em>排除，因为两个紧随其后的索引标记 1 和 2<em>没有</em>与当前标记 0 相同的 UserID 值。</p>
@@ -473,7 +473,7 @@ Processed 8.81 million rows,
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> hits_UserID_URL <span class="token keyword">ADD</span> <span class="token keyword">INDEX</span> url_skipping_index URL <span class="token keyword">TYPE</span> minmax GRANULARITY <span class="token number">4</span><span class="token punctuation">;</span>
 <span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> hits_UserID_URL MATERIALIZE <span class="token keyword">INDEX</span> url_skipping_index<span class="token punctuation">;</span></code></pre>
 <p>ClickHouse 现在创建了一个附加索引，用于存储 - 每组 4 个连续<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-organized-into-granules-for-parallel-data-processing">粒度</a>（注意上面ALTER TABLE语句中的GRANULARITY 4子句） - 的最小和最大 URL 值：</p>
-<p><img src="../images/sparse-primary-indexes-13a.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-13a.png" alt="img"></p>
 <p>第一个索引项（上图中的“mark 0”）存储<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-organized-into-granules-for-parallel-data-processing">表的前 4 个粒度的行</a>的最小和最大 URL 值。</p>
 <p>第二个索引项（’mark 1’）存储表的后续 4 个粒度的行的最小和最大 URL 值，依此类推。</p>
 <p>（ClickHouse 还为跳数索引创建了一个特殊的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#mark-files-are-used-for-locating-granules">标记文件</a>，用于<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#mark-files-are-used-for-locating-granules">定位</a>与索引标记关联的粒度组。）</p>
@@ -491,11 +491,11 @@ Processed 8.81 million rows,
 <p>所有的三个选项都会有效地将我们的样本数据复制到一个附加表中，以便重新组织表的主键索引和行排序顺序。</p>
 <p>但是，这三个选项的不同之处在于附加表对于用户查询和插入语句处理的方便程度。</p>
 <p>当创建了具有不同主键的<strong>第二个表</strong>后，必须将查询显式发送到最适合查询的表中，并且必须将新数据显式插入两个表中以保持表同步：</p>
-<p><img src="../images/sparse-primary-indexes-09a.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-09a.png" alt="img"></p>
 <p>使用<strong>物化视图</strong>会隐式创建附加表，并且两个表之间的数据会自动保持同步：</p>
-<p><img src="../images/sparse-primary-indexes-09b.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-09b.png" alt="img"></p>
 <p><strong>投影</strong>是最方便的选项，因为除了自动保持隐式创建（和隐藏）附加表与同步数据更改之外，ClickHouse 将自动选择最有效的表版本进行查询：</p>
-<p><img src="../images/sparse-primary-indexes-09c.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-09c.png" alt="img"></p>
 <p>在下文中，我们将通过实例来更详细地讨论创建和使用多个主索引的这三个选项。</p>
 <h2 id="选项-1：辅助表"><a href="#选项-1：辅助表" class="headerlink" title="选项 1：辅助表"></a>选项 1：辅助表</h2><p>创建一个新的附加表，在主键中切换了键列的顺序（与原始表相比）：</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> hits_URL_UserID
@@ -518,9 +518,9 @@ SETTINGS index_granularity <span class="token operator">=</span> <span class="to
 <p>最后优化表：</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">OPTIMIZE</span> <span class="token keyword">TABLE</span> hits_URL_UserID FINAL<span class="token punctuation">;</span></code></pre>
 <p>因为我们切换了主键中列的顺序，插入的行现在以不同的字典顺序存储在磁盘上（与我们的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#a-table-with-a-primary-key">原始表</a>相比），因此该表的 1083 个粒度包含与之前不同的值：</p>
-<p><img src="../images/sparse-primary-indexes-10.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-10.png" alt="img"></p>
 <p>这是生成的主键：</p>
-<p><img src="../images/sparse-primary-indexes-11.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-11.png" alt="img"></p>
 <p>现在可以使用它来显着加快我们对 URL 列的示例查询过滤，以计算最常点击的 URL”http: //public_search”的前 10 个用户：</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> UserID<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span>UserID<span class="token punctuation">)</span> <span class="token keyword">AS</span> Count
 <span class="token keyword">FROM</span> hits_URL_UserID
@@ -594,7 +594,7 @@ Processed 8.02 million rows,
 ...Executor): Reading approx. 8028160 rows with 10 streams</code></pre>
 </blockquote>
 <p>我们现在有两张表。分别针对 UserID 的查询过滤和对 URL 的查询过滤进行了优化加速：</p>
-<p><img src="../images/sparse-primary-indexes-12a.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-12a.png" alt="img"></p>
 <h2 id="选项-2：物化视图"><a href="#选项-2：物化视图" class="headerlink" title="选项 2：物化视图"></a>选项 2：物化视图</h2><p>在我们现有的表上创建一个<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/sql-reference/statements/create/view">物化视图</a>。</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> MATERIALIZED <span class="token keyword">VIEW</span> mv_hits_URL_UserID
 <span class="token keyword">ENGINE</span> <span class="token operator">=</span> MergeTree<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -618,9 +618,9 @@ POPULATE
 <li>实际上，隐式创建的表与<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-multiple/#multiple-primary-indexes-via-secondary-tables">我们显式创建的辅助表</a>具有相同的行顺序和主索引：</li>
 </ul>
 </blockquote>
-<p><img src="../images/sparse-primary-indexes-12b-1.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-12b-1.png" alt="img"></p>
 <p>ClickHouse 将隐式创建的表的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-stored-on-disk-ordered-by-primary-key-columns">列数据文件</a>( <em>.bin)、<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#mark-files-are-used-for-locating-granules">标记文件</a>(</em> .mrk2) 和<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#the-primary-index-has-one-entry-per-granule">主键索引文件</a>(primary.idx) 存储在 ClickHouse 服务器数据目录的特殊文件夹中：</p>
-<p><img src="../images/sparse-primary-indexes-12b-2.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-12b-2.png" alt="img"></p>
 <p>支持物化视图的隐式创建的表（以及它的主索引）现在可用于显着加快我们对 URL 列的示例查询过滤的执行速度：</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> UserID<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span>UserID<span class="token punctuation">)</span> <span class="token keyword">AS</span> Count
 <span class="token keyword">FROM</span> mv_hits_URL_UserID
@@ -675,9 +675,9 @@ Processed 335.87 thousand rows,
 <li>实际上，隐式创建的隐藏表与<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-multiple/#multiple-primary-indexes-via-secondary-tables">我们显式创建的辅助表</a>具有相同的行顺序和主键索引：</li>
 </ul>
 </blockquote>
-<p><img src="../images/sparse-primary-indexes-12c-1.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-12c-1.png" alt="img"></p>
 <p>ClickHouse 将隐藏表的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-stored-on-disk-ordered-by-primary-key-columns">列数据文件</a>( <em>.bin)、<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#mark-files-are-used-for-locating-granules">标记文件</a>(</em> .mrk2) 和<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#the-primary-index-has-one-entry-per-granule">主键索引文件</a>(primary.idx) 存储在源表数据文件、标记文件和主索引文件旁边的特殊文件夹中（在下面的截图中标记为橙色）：</p>
-<p><img src="../images/sparse-primary-indexes-12c-2.png" alt="img"></p>
+<p><img src="/images/sparse-primary-indexes-12c-2.png" alt="img"></p>
 <p>由投影创建的隐藏表（以及它的主键索引）现在可以（隐式地）用于显着加快我们在 URL 列上执行示例查询过滤的速度。请注意，查询在语法上以投影的源表为目标。</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> UserID<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span>UserID<span class="token punctuation">)</span> <span class="token keyword">AS</span> Count
 <span class="token keyword">FROM</span> hits_UserID_URL
