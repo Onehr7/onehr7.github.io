@@ -15,7 +15,7 @@
   },
   hexoVersion: '5.3.0'
 } </script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ClickHouse-%E7%A8%80%E7%96%8F%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.1.</span> <span class="toc-text">ClickHouse 稀疏主键索引的最佳实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">1.2.</span> <span class="toc-text">数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%9C%BA%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">测试机器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E8%A1%A8%E6%89%AB%E6%8F%8F"><span class="toc-number">1.4.</span> <span class="toc-text">全表扫描</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ClickHouse-%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">ClickHouse 索引设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E8%A7%84%E6%A8%A1%E4%B8%8B%E7%9A%84%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.1.</span> <span class="toc-text">海量数据规模下的索引设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E6%9C%89%E4%B8%BB%E9%94%AE%E7%9A%84%E8%A1%A8"><span class="toc-number">2.2.</span> <span class="toc-text">具有主键的表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8C%89%E4%B8%BB%E9%94%AE%E5%88%97%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E5%9C%A8%E7%A3%81%E7%9B%98%E4%B8%8A"><span class="toc-number">2.3.</span> <span class="toc-text">数据按主键列顺序存储在磁盘上</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">2.3.0.0.1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A2%AB%E5%88%86%E6%88%90%E7%B2%92%E5%BA%A6%E4%BB%A5%E8%BF%9B%E8%A1%8C%E5%B9%B6%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">2.4.</span> <span class="toc-text">数据被分成粒度以进行并行数据处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E6%AF%8F%E4%B8%AA%E7%B2%92%E5%BA%A6%E7%BB%84%E6%9C%89%E4%B8%80%E4%B8%AA%E7%B4%A2%E5%BC%95%E9%A1%B9"><span class="toc-number">2.5.</span> <span class="toc-text">主键索引每个粒度组有一个索引项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E7%94%A8%E4%BA%8E%E9%80%89%E6%8B%A9%E7%B2%92%E5%BA%A6%E7%BB%84"><span class="toc-number">2.6.</span> <span class="toc-text">主键索引用于选择粒度组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">2.6.0.0.1.</span> <span class="toc-text">结论</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E6%96%87%E4%BB%B6%E7%94%A8%E4%BA%8E%E5%AE%9A%E4%BD%8D%E7%B2%92%E5%BA%A6%E7%BB%84"><span class="toc-number">2.7.</span> <span class="toc-text">标记文件用于定位粒度组</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95"><span class="toc-number">3.</span> <span class="toc-text">使用多个主键索引</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%85%E5%8A%A9%E9%94%AE%E6%98%AF%E5%90%A6%E6%9C%89%E6%95%88"><span class="toc-number">3.1.</span> <span class="toc-text">辅助键是否有效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%8E%92%E9%99%A4%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">通用排除搜索算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E8%B7%B3%E6%95%B0%E7%B4%A2%E5%BC%95"><span class="toc-number">3.3.</span> <span class="toc-text">注意跳数索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95"><span class="toc-number">3.4.</span> <span class="toc-text">需要使用多个主键索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%8E%E5%88%9B%E5%BB%BA%E9%99%84%E5%8A%A0%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E7%9A%84%E9%80%89%E9%A1%B9"><span class="toc-number">3.5.</span> <span class="toc-text">用于创建附加主键索引的选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9-1%EF%BC%9A%E8%BE%85%E5%8A%A9%E8%A1%A8"><span class="toc-number">3.6.</span> <span class="toc-text">选项 1：辅助表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9-2%EF%BC%9A%E7%89%A9%E5%8C%96%E8%A7%86%E5%9B%BE"><span class="toc-number">3.7.</span> <span class="toc-text">选项 2：物化视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9-3%EF%BC%9A%E6%8A%95%E5%BD%B1"><span class="toc-number">3.8.</span> <span class="toc-text">选项 3：投影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.9.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/01/14/STbxQl9M7XLJUkY.jpg"></div><div class="author-info__name text-center">Hairui Wang</div><div class="author-info__description text-center"></div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/Onehr7">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">17</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">10</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">9</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/edocteel-3/">Leetcode</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/"></a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">ClickHouse优化（译） -- 主键索引</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-11-02</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/ClickHouse/">ClickHouse</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p><a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes">原文</a></p>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ClickHouse-%E7%A8%80%E7%96%8F%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.1.</span> <span class="toc-text">ClickHouse 稀疏主键索引的最佳实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">1.2.</span> <span class="toc-text">数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%9C%BA%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">测试机器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E8%A1%A8%E6%89%AB%E6%8F%8F"><span class="toc-number">1.4.</span> <span class="toc-text">全表扫描</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ClickHouse-%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">ClickHouse 索引设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E8%A7%84%E6%A8%A1%E4%B8%8B%E7%9A%84%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.1.</span> <span class="toc-text">海量数据规模下的索引设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E6%9C%89%E4%B8%BB%E9%94%AE%E7%9A%84%E8%A1%A8"><span class="toc-number">2.2.</span> <span class="toc-text">具有主键的表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8C%89%E4%B8%BB%E9%94%AE%E5%88%97%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E5%9C%A8%E7%A3%81%E7%9B%98%E4%B8%8A"><span class="toc-number">2.3.</span> <span class="toc-text">数据按主键列顺序存储在磁盘上</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">2.3.0.0.1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A2%AB%E5%88%86%E6%88%90%E7%B2%92%E5%BA%A6%E4%BB%A5%E8%BF%9B%E8%A1%8C%E5%B9%B6%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">2.4.</span> <span class="toc-text">数据被分成粒度以进行并行数据处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E6%AF%8F%E4%B8%AA%E7%B2%92%E5%BA%A6%E7%BB%84%E6%9C%89%E4%B8%80%E4%B8%AA%E7%B4%A2%E5%BC%95%E9%A1%B9"><span class="toc-number">2.5.</span> <span class="toc-text">主键索引每个粒度组有一个索引项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E7%94%A8%E4%BA%8E%E9%80%89%E6%8B%A9%E7%B2%92%E5%BA%A6%E7%BB%84"><span class="toc-number">2.6.</span> <span class="toc-text">主键索引用于选择粒度组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">2.6.0.0.1.</span> <span class="toc-text">结论</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E6%96%87%E4%BB%B6%E7%94%A8%E4%BA%8E%E5%AE%9A%E4%BD%8D%E7%B2%92%E5%BA%A6%E7%BB%84"><span class="toc-number">2.7.</span> <span class="toc-text">标记文件用于定位粒度组</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95"><span class="toc-number">3.</span> <span class="toc-text">使用多个主键索引</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%85%E5%8A%A9%E9%94%AE%E6%98%AF%E5%90%A6%E6%9C%89%E6%95%88"><span class="toc-number">3.1.</span> <span class="toc-text">辅助键是否有效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%8E%92%E9%99%A4%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">通用排除搜索算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E8%B7%B3%E6%95%B0%E7%B4%A2%E5%BC%95"><span class="toc-number">3.3.</span> <span class="toc-text">注意跳数索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95"><span class="toc-number">3.4.</span> <span class="toc-text">需要使用多个主键索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%8E%E5%88%9B%E5%BB%BA%E9%99%84%E5%8A%A0%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E7%9A%84%E9%80%89%E9%A1%B9"><span class="toc-number">3.5.</span> <span class="toc-text">用于创建附加主键索引的选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9-1%EF%BC%9A%E8%BE%85%E5%8A%A9%E8%A1%A8"><span class="toc-number">3.6.</span> <span class="toc-text">选项 1：辅助表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9-2%EF%BC%9A%E7%89%A9%E5%8C%96%E8%A7%86%E5%9B%BE"><span class="toc-number">3.7.</span> <span class="toc-text">选项 2：物化视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9-3%EF%BC%9A%E6%8A%95%E5%BD%B1"><span class="toc-number">3.8.</span> <span class="toc-text">选项 3：投影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.9.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E6%95%88%E5%9C%B0%E5%AF%B9%E9%94%AE%E5%88%97%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-number">4.</span> <span class="toc-text">有效地对键列进行排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%BE%85%E5%8A%A9%E9%94%AE%E5%88%97%E7%9A%84%E6%9C%89%E6%95%88%E8%BF%87%E6%BB%A4"><span class="toc-number">4.1.</span> <span class="toc-text">对辅助键列的有效过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%9C%80%E4%BD%B3%E5%8E%8B%E7%BC%A9%E7%8E%87"><span class="toc-number">4.2.</span> <span class="toc-text">数据文件的最佳压缩率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-number">4.3.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E6%95%88%E8%AF%86%E5%88%AB%E5%8D%95%E8%A1%8C"><span class="toc-number">5.</span> <span class="toc-text">有效识别单行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%85%B7%E4%BD%93%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">6.</span> <span class="toc-text">一个具体的例子</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/01/14/STbxQl9M7XLJUkY.jpg"></div><div class="author-info__name text-center">Hairui Wang</div><div class="author-info__description text-center"></div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/Onehr7">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">18</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">10</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">9</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/edocteel-3/">Leetcode</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/"></a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">ClickHouse优化（译） -- 主键索引</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-11-02</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/ClickHouse/">ClickHouse</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p><a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes">原文</a></p>
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="ClickHouse-稀疏主键索引的最佳实践"><a href="#ClickHouse-稀疏主键索引的最佳实践" class="headerlink" title="ClickHouse 稀疏主键索引的最佳实践"></a>ClickHouse 稀疏主键索引的最佳实践</h2><p>在本文中，我们将深入研究 ClickHouse 索引。我们将详细说明以下问题：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design#an-index-design-for-massive-data-scales">ClickHouse 中的索引与传统的关系型数据库索引有何不同</a></li>
@@ -216,7 +216,7 @@ bytes_on_disk:               207.07 MiB
 </ul>
 </li>
 </ul>
-<p><img src="/images/sparse-primary-indexes-01.png" alt="img">UserID.bin、URL.bin 和 EventTime.bin 是磁盘上的数据文件，其中存储了UserID、URL和EventTime列的值。</p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-01.png" alt="img">UserID.bin、URL.bin 和 EventTime.bin 是磁盘上的数据文件，其中存储了UserID、URL和EventTime列的值。</p>
 <blockquote>
 <p><strong>注意</strong></p>
 <ul>
@@ -229,7 +229,7 @@ bytes_on_disk:               207.07 MiB
 <p>列值并不是实际存储在粒度组内部：粒度组只是用于查询处理的列值的 <em>逻辑</em> 组织。</p>
 </blockquote>
 <p>下图说明了我们表的 887 万行（列值）是如何被组织成 1083 个粒度组的，这是由于表的 DDL 语句设置了index_granularity（设置为其默认值 8192）。</p>
-<p><img src="/images/sparse-primary-indexes-02.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-02.png" alt="img"></p>
 <p>第一个（基于磁盘上的物理顺序）8192 行（它们的列值）逻辑上属于粒度 0，然后接下来的 8192 行（它们的列值）属于粒度1，依此类推。</p>
 <blockquote>
 <p><strong>注意</strong></p>
@@ -238,7 +238,7 @@ bytes_on_disk:               207.07 MiB
 <li>我们将主键列（UserID、URL）中的一些列值标记为橙色。</li>
 </ul>
 <p>这些橙色标记的列值是每个粒度组中每个主键列的最小值。这里的例外是我们标记最后一个粒度组（上图中的1082粒度组）的最大值。 </p>
-<p> 正如我们将在下面看到的，这些橙色标记的列值将是表的主键索引中的索引项。</p>
+<p>正如我们将在下面看到的，这些橙色标记的列值将是表的主键索引中的索引项。</p>
 <ul>
 <li>我们从 0 开始对粒度组进行编号，以便与 ClickHouse 内部编号方案保持一致，该方案也用于记录消息。</li>
 </ul>
@@ -249,9 +249,9 @@ bytes_on_disk:               207.07 MiB
 <li>第一个索引项（下图中的’mark 0’）存储上图中粒度组0的主键列的最小值，</li>
 <li>第二个索引项（下图中的’mark 1’）存储上图中粒度组1的主键列的最小值，依此类推。</li>
 </ul>
-<p><img src="/images/sparse-primary-indexes-03a.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-03a.png" alt="img"></p>
 <p>我们的表总共有 1083 个索引项，887 万行数据和 1083 个粒度组：</p>
-<p><img src="/images/sparse-primary-indexes-03b.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-03b.png" alt="img"></p>
 <blockquote>
 <p><strong>注意</strong></p>
 <ul>
@@ -350,7 +350,7 @@ Processed 8.19 thousand rows,
 <p>在<strong>第二阶段（数据读取）</strong>，ClickHouse 定位到选定的粒度组，以便将它们的所有行数据流式传输到 ClickHouse 引擎，从而找到实际匹配查询的行。</p>
 <p>我们接下来将再更详细地讨论第二阶段。</p>
 <h2 id="标记文件用于定位粒度组"><a href="#标记文件用于定位粒度组" class="headerlink" title="标记文件用于定位粒度组"></a>标记文件用于定位粒度组</h2><p>下图展示了我们表的主键索引文件的一部分。</p>
-<p><img src="/images/sparse-primary-indexes-04.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-04.png" alt="img"></p>
 <p>如上所述，通过对索引的 1083 个UserID标记进行二分搜索，识别出标记 176。因此，其对应的粒度组176 可能包含 UserID 列值为 749.927.693 的行。</p>
 <blockquote>
 <p>粒度组选择细节</p>
@@ -360,7 +360,7 @@ Processed 8.19 thousand rows,
 <p>为此，ClickHouse 需要知道粒度组 176 的物理位置。</p>
 <p>在 ClickHouse 中，我们表的所有粒度组的物理位置都存储在标记文件中。与数据文件类似，每个列都有一个标记文件。</p>
 <p>下图展示了三个标记文件 UserID.mrk、URL.mrk 和 EventTime.mrk，它们存储了表的 UserID、URL 和 EventTime 列的粒度组的物理位置。</p>
-<p><img src="/images/sparse-primary-indexes-05.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-05.png" alt="img"></p>
 <p>我们已经讨论了主键索引为什么是一个扁平的未压缩数组文件 (primary.idx)，其中包含从 0 开始编号的索引标记。</p>
 <p>同样，标记文件也是一个扁平未压缩的数组文件 (*.mrk)，其中包含从 0 开始编号的标记。</p>
 <p>一旦 ClickHouse 识别并选择了可能包含查询匹配行的粒度组的索引标记，就可以在标记文件中执行查找数组位置，以获得粒度组的实际物理位置。</p>
@@ -382,7 +382,7 @@ Processed 8.19 thousand rows,
 <p>标记文件的存在，间接地避免了在主索引中直接存储所有三列的所有 1083 个粒度的物理位置的条目：从而避免在主内存中存在不必要的（可能未使用的）数据。</p>
 </blockquote>
 <p>下图和下面的文本说明了我们的示例是如何查询 ClickHouse 在 UserID.bin 数据文件中定位粒度 176的。</p>
-<p><img src="/images/sparse-primary-indexes-06.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-06.png" alt="img"></p>
 <p>我们在本文前面讨论过 ClickHouse选择了主索引标记 176，因此粒度 176 可能包含我们查询的匹配行。</p>
 <p>ClickHouse 现在使用从索引中选择的标记编号 (176) 在 UserID.mrk 标记文件中进行数组的位置查找，以获得用于定位颗粒 176 的两个偏移量。</p>
 <p>如图所示，第一个偏移量是在 UserID.bin 数据文件中定位压缩文件块，该文件包含粒度 176 的压缩版本。</p>
@@ -447,7 +447,7 @@ Processed 8.81 million rows,
 <p>我们在下图中用橙色标记了每个颗粒的最小键列值。</p>
 <p><strong>前置键列的基数较低</strong></p>
 <p>假设 UserID 具有低基数。在这种情况下，相同的 UserID 值很可能分布在多个表行和粒度上。对于具有相同 UserID 的索引标记，索引标记的 URL 值按升序排序（因为表行首先按 UserID 排序，然后按 URL 排序）。这能进行有效过滤，如下所示：</p>
-<p><img src="/images/sparse-primary-indexes-07.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-07.png" alt="img"></p>
 <p>上图中我们的抽象样本数据的粒度选择过程有三种不同的场景：</p>
 <ol>
 <li>由于标记索引0、1和2具有相同的UserID值，因此可以排除（最小）<strong>URL值小于W3并且直接后续索引标记的URL值也小于W3的索引标记0。</strong>请注意，此排除的前提是，确保了粒度 0 和下一个粒度1 完全由 U1的 UserID 值组成，因此 ClickHouse 可以推断粒度 0 中的最大 URL 值也小于 W3， 并排除该颗粒。</li>
@@ -456,7 +456,7 @@ Processed 8.81 million rows,
 </ol>
 <p><strong>前置键列的基数的较高</strong></p>
 <p>当 UserID 具有高基数时，相同的 UserID 值不太可能分布在多个表行和粒度上。这意味着索引标记的 URL 值不是单调递增的：</p>
-<p><img src="/images/sparse-primary-indexes-08.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-08.png" alt="img"></p>
 <p>正如我们在上图中看到的，所有显示的 URL 值小于 W3 的标记都被选中，用于将其关联的粒度行都流式传输到 ClickHouse 引擎。</p>
 <p>这是因为虽然图中的所有索引标记都属于上述场景 1，但它们不满足上述排除的前提条件，<em>即两个直接随后的索引标记都具有与当前标记相同的 UserID 值</em>，因此不能被排除.</p>
 <p>例如，考虑索引标记 0 ，其<strong>URL 值小于 W3 并且直接后续索引标记的 URL 值也存在小于 W3</strong>。这<em>不能</em>排除，因为两个紧随其后的索引标记 1 和 2<em>没有</em>与当前标记 0 相同的 UserID 值。</p>
@@ -473,7 +473,7 @@ Processed 8.81 million rows,
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> hits_UserID_URL <span class="token keyword">ADD</span> <span class="token keyword">INDEX</span> url_skipping_index URL <span class="token keyword">TYPE</span> minmax GRANULARITY <span class="token number">4</span><span class="token punctuation">;</span>
 <span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> hits_UserID_URL MATERIALIZE <span class="token keyword">INDEX</span> url_skipping_index<span class="token punctuation">;</span></code></pre>
 <p>ClickHouse 现在创建了一个附加索引，用于存储 - 每组 4 个连续<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-organized-into-granules-for-parallel-data-processing">粒度</a>（注意上面ALTER TABLE语句中的GRANULARITY 4子句） - 的最小和最大 URL 值：</p>
-<p><img src="/images/sparse-primary-indexes-13a.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-13a.png" alt="img"></p>
 <p>第一个索引项（上图中的“mark 0”）存储<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-organized-into-granules-for-parallel-data-processing">表的前 4 个粒度的行</a>的最小和最大 URL 值。</p>
 <p>第二个索引项（’mark 1’）存储表的后续 4 个粒度的行的最小和最大 URL 值，依此类推。</p>
 <p>（ClickHouse 还为跳数索引创建了一个特殊的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#mark-files-are-used-for-locating-granules">标记文件</a>，用于<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#mark-files-are-used-for-locating-granules">定位</a>与索引标记关联的粒度组。）</p>
@@ -491,11 +491,11 @@ Processed 8.81 million rows,
 <p>所有的三个选项都会有效地将我们的样本数据复制到一个附加表中，以便重新组织表的主键索引和行排序顺序。</p>
 <p>但是，这三个选项的不同之处在于附加表对于用户查询和插入语句处理的方便程度。</p>
 <p>当创建了具有不同主键的<strong>第二个表</strong>后，必须将查询显式发送到最适合查询的表中，并且必须将新数据显式插入两个表中以保持表同步：</p>
-<p><img src="/images/sparse-primary-indexes-09a.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-09a.png" alt="img"></p>
 <p>使用<strong>物化视图</strong>会隐式创建附加表，并且两个表之间的数据会自动保持同步：</p>
-<p><img src="/images/sparse-primary-indexes-09b.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-09b.png" alt="img"></p>
 <p><strong>投影</strong>是最方便的选项，因为除了自动保持隐式创建（和隐藏）附加表与同步数据更改之外，ClickHouse 将自动选择最有效的表版本进行查询：</p>
-<p><img src="/images/sparse-primary-indexes-09c.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-09c.png" alt="img"></p>
 <p>在下文中，我们将通过实例来更详细地讨论创建和使用多个主索引的这三个选项。</p>
 <h2 id="选项-1：辅助表"><a href="#选项-1：辅助表" class="headerlink" title="选项 1：辅助表"></a>选项 1：辅助表</h2><p>创建一个新的附加表，在主键中切换了键列的顺序（与原始表相比）：</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> hits_URL_UserID
@@ -518,9 +518,9 @@ SETTINGS index_granularity <span class="token operator">=</span> <span class="to
 <p>最后优化表：</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">OPTIMIZE</span> <span class="token keyword">TABLE</span> hits_URL_UserID FINAL<span class="token punctuation">;</span></code></pre>
 <p>因为我们切换了主键中列的顺序，插入的行现在以不同的字典顺序存储在磁盘上（与我们的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#a-table-with-a-primary-key">原始表</a>相比），因此该表的 1083 个粒度包含与之前不同的值：</p>
-<p><img src="/images/sparse-primary-indexes-10.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-10.png" alt="img"></p>
 <p>这是生成的主键：</p>
-<p><img src="/images/sparse-primary-indexes-11.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-11.png" alt="img"></p>
 <p>现在可以使用它来显着加快我们对 URL 列的示例查询过滤，以计算最常点击的 URL”http: //public_search”的前 10 个用户：</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> UserID<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span>UserID<span class="token punctuation">)</span> <span class="token keyword">AS</span> Count
 <span class="token keyword">FROM</span> hits_URL_UserID
@@ -588,13 +588,13 @@ Processed 8.02 million rows,
 <p>服务器日志</p>
 <pre class=" language-log"><code class="language-log">...Executor): Key condition: (column 1 in [749927693, 749927693])
 ...Executor): Used generic exclusion search over index for part all_1_9_2
-              with 1453 steps
+           with 1453 steps
 ...Executor): Selected 1/1 parts by partition key, 1 parts by primary key,
-              980/1083 marks by primary key, 980 marks to read from 23 ranges
+           980/1083 marks by primary key, 980 marks to read from 23 ranges
 ...Executor): Reading approx. 8028160 rows with 10 streams</code></pre>
 </blockquote>
 <p>我们现在有两张表。分别针对 UserID 的查询过滤和对 URL 的查询过滤进行了优化加速：</p>
-<p><img src="/images/sparse-primary-indexes-12a.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-12a.png" alt="img"></p>
 <h2 id="选项-2：物化视图"><a href="#选项-2：物化视图" class="headerlink" title="选项 2：物化视图"></a>选项 2：物化视图</h2><p>在我们现有的表上创建一个<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/sql-reference/statements/create/view">物化视图</a>。</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> MATERIALIZED <span class="token keyword">VIEW</span> mv_hits_URL_UserID
 <span class="token keyword">ENGINE</span> <span class="token operator">=</span> MergeTree<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -618,9 +618,9 @@ POPULATE
 <li>实际上，隐式创建的表与<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-multiple/#multiple-primary-indexes-via-secondary-tables">我们显式创建的辅助表</a>具有相同的行顺序和主索引：</li>
 </ul>
 </blockquote>
-<p><img src="/images/sparse-primary-indexes-12b-1.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-12b-1.png" alt="img"></p>
 <p>ClickHouse 将隐式创建的表的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-stored-on-disk-ordered-by-primary-key-columns">列数据文件</a>( <em>.bin)、<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#mark-files-are-used-for-locating-granules">标记文件</a>(</em> .mrk2) 和<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#the-primary-index-has-one-entry-per-granule">主键索引文件</a>(primary.idx) 存储在 ClickHouse 服务器数据目录的特殊文件夹中：</p>
-<p><img src="/images/sparse-primary-indexes-12b-2.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-12b-2.png" alt="img"></p>
 <p>支持物化视图的隐式创建的表（以及它的主索引）现在可用于显着加快我们对 URL 列的示例查询过滤的执行速度：</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> UserID<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span>UserID<span class="token punctuation">)</span> <span class="token keyword">AS</span> Count
 <span class="token keyword">FROM</span> mv_hits_URL_UserID
@@ -675,9 +675,9 @@ Processed 335.87 thousand rows,
 <li>实际上，隐式创建的隐藏表与<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-multiple/#multiple-primary-indexes-via-secondary-tables">我们显式创建的辅助表</a>具有相同的行顺序和主键索引：</li>
 </ul>
 </blockquote>
-<p><img src="/images/sparse-primary-indexes-12c-1.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-12c-1.png" alt="img"></p>
 <p>ClickHouse 将隐藏表的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-stored-on-disk-ordered-by-primary-key-columns">列数据文件</a>( <em>.bin)、<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#mark-files-are-used-for-locating-granules">标记文件</a>(</em> .mrk2) 和<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#the-primary-index-has-one-entry-per-granule">主键索引文件</a>(primary.idx) 存储在源表数据文件、标记文件和主索引文件旁边的特殊文件夹中（在下面的截图中标记为橙色）：</p>
-<p><img src="/images/sparse-primary-indexes-12c-2.png" alt="img"></p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-12c-2.png" alt="img"></p>
 <p>由投影创建的隐藏表（以及它的主键索引）现在可以（隐式地）用于显着加快我们在 URL 列上执行示例查询过滤的速度。请注意，查询在语法上以投影的源表为目标。</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> UserID<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span>UserID<span class="token punctuation">)</span> <span class="token keyword">AS</span> Count
 <span class="token keyword">FROM</span> hits_UserID_URL
@@ -722,7 +722,176 @@ Processed 319.49 thousand rows, 1
 <p>因此，从主键索引中删除第二个键列（从而减少索引的内存消耗）并改用多个主键索引是有意义的。</p>
 <p>但是，如果复合主键中的键列在基数上有很大差异，则按基数升序排列的主键列对查询是有帮助的。</p>
 <p>键列之间的基数差异越大，这些列在键中的顺序就越重要。 我们将在下一节中说明这一点。</p>
-</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Hairui Wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://onehr7.github.io/2022/11/02/ClickHouse优化（译） -- 主键索引/">https://onehr7.github.io/2022/11/02/ClickHouse优化（译） -- 主键索引/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="next-post pull-right"><a href="/2022/01/10/Kafka%E4%B8%89%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"><span>Kafka三节点集群搭建</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2022 By Hairui Wang</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+<h1 id="有效地对键列进行排序"><a href="#有效地对键列进行排序" class="headerlink" title="有效地对键列进行排序"></a>有效地对键列进行排序</h1><p>在复合主键中，键列的顺序会明显影响以下两点：</p>
+<ul>
+<li>查询中辅助键列的过滤效率，以及</li>
+<li>表的数据文件的压缩率。</li>
+</ul>
+<p>为了证明这一点，我们将使用我们的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-intro/#data-set">网络流量示例数据集</a>的一个版本， 其中每行包含三列，代表互联网“用户”（<code>UserID</code>列）对 URL（<code>URL</code>列）的访问是否被标记为机器人流量（<code>IsRobot</code>列）。</p>
+<p>我们将使用包含所有上述三个列的复合主键，可用于加速典型的 Web 分析查询</p>
+<ul>
+<li>到特定 URL 的流量有多少（百分比）来自机器人</li>
+<li>我们判断特定用户是否为机器人的准确程度（来自该用户的流量有多少百分比是否被假定为机器人流量）</li>
+</ul>
+<p>我们使用此查询来计算要用作复合主键中的键列的三列的基数（请注意，我们正在使用<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/sql-reference/table-functions/url">URL 表函数</a>来临时查询 TSV 数据，而无需创建本地表） . 在<code>clickhouse client</code>运行此查询：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span>
+    formatReadableQuantity<span class="token punctuation">(</span>uniq<span class="token punctuation">(</span>URL<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> cardinality_URL<span class="token punctuation">,</span>
+    formatReadableQuantity<span class="token punctuation">(</span>uniq<span class="token punctuation">(</span>UserID<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> cardinality_UserID<span class="token punctuation">,</span>
+    formatReadableQuantity<span class="token punctuation">(</span>uniq<span class="token punctuation">(</span>IsRobot<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> cardinality_IsRobot
+<span class="token keyword">FROM</span>
+<span class="token punctuation">(</span>
+    <span class="token keyword">SELECT</span>
+        <span class="token number">c11</span>::UInt64 <span class="token keyword">AS</span> UserID<span class="token punctuation">,</span>
+        <span class="token number">c15</span>::String <span class="token keyword">AS</span> URL<span class="token punctuation">,</span>
+        <span class="token number">c20</span>::UInt8 <span class="token keyword">AS</span> IsRobot
+    <span class="token keyword">FROM</span> url<span class="token punctuation">(</span>'https:<span class="token comment" spellcheck="true">//datasets.clickhouse.com/hits/tsv/hits_v1.tsv.xz')</span>
+    <span class="token keyword">WHERE</span> URL <span class="token operator">!=</span> <span class="token string">''</span>
+<span class="token punctuation">)</span></code></pre>
+<p>响应如下：</p>
+<pre class=" language-response"><code class="language-response">┌─cardinality_URL─┬─cardinality_UserID─┬─cardinality_IsRobot─┐
+│ 2.39 million    │ 119.08 thousand    │ 4.00                │
+└─────────────────┴────────────────────┴─────────────────────┘
+
+1 row in set. Elapsed: 118.334 sec. Processed 8.87 million rows, 15.88 GB (74.99 thousand rows/s., 134.21 MB/s.)</code></pre>
+<p>我们可以看到基数之间存在很大差异，尤其是<code>URL</code>和<code>IsRobot</code>列之间。因此复合主键中列的顺序，对于有效加快对该列的查询过滤和实现最佳表的列数据文件压缩比都十分重要。</p>
+<p>为了说明这一点，流量分析数据创建了两个表版本：</p>
+<ul>
+<li>具有复合主键<code>(URL, UserID, IsRobot)</code>的表<code>hits_URL_UserID_IsRobot</code>，我们按基数降序对键列进行排序</li>
+<li>具有复合主键<code>(IsRobot, UserID, URL)</code>的表<code>hits_IsRobot_UserID_URL</code>，我们按基数升序对键列进行排序</li>
+</ul>
+<p>使用复合主键<code>(URL, UserID, IsRobot)</code>创建表<code>hits_URL_UserID_IsRobot</code>：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> hits_URL_UserID_IsRobot
+<span class="token punctuation">(</span>
+    <span class="token punctuation">`</span>UserID<span class="token punctuation">`</span> UInt32<span class="token punctuation">,</span>
+    <span class="token punctuation">`</span>URL<span class="token punctuation">`</span> String<span class="token punctuation">,</span>
+    <span class="token punctuation">`</span>IsRobot<span class="token punctuation">`</span> UInt8
+<span class="token punctuation">)</span>
+<span class="token keyword">ENGINE</span> <span class="token operator">=</span> MergeTree
+<span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>URL<span class="token punctuation">,</span> UserID<span class="token punctuation">,</span> IsRobot<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>并用 887 万行填充它：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> hits_URL_UserID_IsRobot <span class="token keyword">SELECT</span>
+    intHash32<span class="token punctuation">(</span><span class="token number">c11</span>::UInt64<span class="token punctuation">)</span> <span class="token keyword">AS</span> UserID<span class="token punctuation">,</span>
+    <span class="token number">c15</span> <span class="token keyword">AS</span> URL<span class="token punctuation">,</span>
+    <span class="token number">c20</span> <span class="token keyword">AS</span> IsRobot
+<span class="token keyword">FROM</span> url<span class="token punctuation">(</span>'https:<span class="token comment" spellcheck="true">//datasets.clickhouse.com/hits/tsv/hits_v1.tsv.xz')</span>
+<span class="token keyword">WHERE</span> URL <span class="token operator">!=</span> <span class="token string">''</span><span class="token punctuation">;</span></code></pre>
+<p>响应如下：</p>
+<pre class=" language-response"><code class="language-response">0 rows in set. Elapsed: 104.729 sec. Processed 8.87 million rows, 15.88 GB (84.73 thousand rows/s., 151.64 MB/s.)</code></pre>
+<p>接下来，使用复合主键<code>(IsRobot, UserID, URL)</code>创建表<code>hits_IsRobot_UserID_URL</code>：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> hits_IsRobot_UserID_URL
+<span class="token punctuation">(</span>
+    <span class="token punctuation">`</span>UserID<span class="token punctuation">`</span> UInt32<span class="token punctuation">,</span>
+    <span class="token punctuation">`</span>URL<span class="token punctuation">`</span> String<span class="token punctuation">,</span>
+    <span class="token punctuation">`</span>IsRobot<span class="token punctuation">`</span> UInt8
+<span class="token punctuation">)</span>
+<span class="token keyword">ENGINE</span> <span class="token operator">=</span> MergeTree
+<span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>IsRobot<span class="token punctuation">,</span> UserID<span class="token punctuation">,</span> URL<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>并用我们填充上一个表的相同的 887 万行来填充它：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> hits_IsRobot_UserID_URL <span class="token keyword">SELECT</span>
+    intHash32<span class="token punctuation">(</span><span class="token number">c11</span>::UInt64<span class="token punctuation">)</span> <span class="token keyword">AS</span> UserID<span class="token punctuation">,</span>
+    <span class="token number">c15</span> <span class="token keyword">AS</span> URL<span class="token punctuation">,</span>
+    <span class="token number">c20</span> <span class="token keyword">AS</span> IsRobot
+<span class="token keyword">FROM</span> url<span class="token punctuation">(</span>'https:<span class="token comment" spellcheck="true">//datasets.clickhouse.com/hits/tsv/hits_v1.tsv.xz')</span>
+<span class="token keyword">WHERE</span> URL <span class="token operator">!=</span> <span class="token string">''</span><span class="token punctuation">;</span></code></pre>
+<p>响应如下：</p>
+<pre class=" language-response"><code class="language-response">0 rows in set. Elapsed: 95.959 sec. Processed 8.87 million rows, 15.88 GB (92.48 thousand rows/s., 165.50 MB/s.)</code></pre>
+<h2 id="对辅助键列的有效过滤"><a href="#对辅助键列的有效过滤" class="headerlink" title="对辅助键列的有效过滤"></a>对辅助键列的有效过滤</h2><p>当查询过滤在作为复合键的一部分并且是第一个键列的至少一列上时，<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#the-primary-index-is-used-for-selecting-granules">ClickHouse 将在键列的索引标记上运行二分搜索算法</a>。</p>
+<p>当查询（仅）对作为复合键的一部分但不是第一个键列的列进行过滤时，<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-multiple/#secondary-key-columns-can-not-be-inefficient">ClickHouse 将在键列的索引标记上使用通用排除搜索算法</a>。</p>
+<p>对于第二种情况，复合主键中键列的排序对于<a target="_blank" rel="noopener" href="https://github.com/ClickHouse/ClickHouse/blob/22.3/src/Storages/MergeTree/MergeTreeDataSelectExecutor.cpp#L1444">通用排除搜索算法</a>的高效性非常重要。</p>
+<p>这是一个过滤<code>UserID</code>列的查询，其中表<code>(URL, UserID, IsRobot)</code>按基数降序对键列进行排序：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> hits_URL_UserID_IsRobot
+<span class="token keyword">WHERE</span> UserID <span class="token operator">=</span> <span class="token number">112304</span></code></pre>
+<p>响应为：</p>
+<pre class=" language-response"><code class="language-response">┌─count()─┐
+│      73 │
+└─────────┘
+
+1 row in set. Elapsed: 0.026 sec.
+Processed 7.92 million rows, 
+31.67 MB (306.90 million rows/s., 1.23 GB/s.)</code></pre>
+<p>这是对表<code>(IsRobot, UserID, URL)</code>执行的相同查询，其中表按基数升序对键列进行排序：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> hits_IsRobot_UserID_URL
+<span class="token keyword">WHERE</span> UserID <span class="token operator">=</span> <span class="token number">112304</span></code></pre>
+<p>响应是：</p>
+<pre class=" language-response"><code class="language-response">┌─count()─┐
+│      73 │
+└─────────┘
+
+1 row in set. Elapsed: 0.003 sec.
+Processed 20.32 thousand rows, 
+81.28 KB (6.61 million rows/s., 26.44 MB/s.)</code></pre>
+<p>我们可以看到，在我们按基数以升序对键列进行排序的表上，查询执行明显更有效、更快。</p>
+<p>原因是<a target="_blank" rel="noopener" href="https://github.com/ClickHouse/ClickHouse/blob/22.3/src/Storages/MergeTree/MergeTreeDataSelectExecutor.cpp#L1444">通用排除搜索算法</a>最有效，当通过辅助键列选择<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#the-primary-index-is-used-for-selecting-granules">粒度</a>时，前导键列具有较低的基数。我们在本指南的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-multiple/#generic-exclusion-search-algorithm">前一节中详细说明了这一点。</a></p>
+<h2 id="数据文件的最佳压缩率"><a href="#数据文件的最佳压缩率" class="headerlink" title="数据文件的最佳压缩率"></a>数据文件的最佳压缩率</h2><p>此查询比较我们在上面创建的两个表之间的<code>UserID</code>列的压缩率：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span>
+    <span class="token keyword">table</span> <span class="token keyword">AS</span> <span class="token keyword">Table</span><span class="token punctuation">,</span>
+    name <span class="token keyword">AS</span> <span class="token keyword">Column</span><span class="token punctuation">,</span>
+    formatReadableSize<span class="token punctuation">(</span>data_uncompressed_bytes<span class="token punctuation">)</span> <span class="token keyword">AS</span> Uncompressed<span class="token punctuation">,</span>
+    formatReadableSize<span class="token punctuation">(</span>data_compressed_bytes<span class="token punctuation">)</span> <span class="token keyword">AS</span> Compressed<span class="token punctuation">,</span>
+    <span class="token function">round</span><span class="token punctuation">(</span>data_uncompressed_bytes <span class="token operator">/</span> data_compressed_bytes<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> Ratio
+<span class="token keyword">FROM</span> system<span class="token punctuation">.</span><span class="token keyword">columns</span>
+<span class="token keyword">WHERE</span> <span class="token punctuation">(</span><span class="token keyword">table</span> <span class="token operator">=</span> <span class="token string">'hits_URL_UserID_IsRobot'</span> <span class="token operator">OR</span> <span class="token keyword">table</span> <span class="token operator">=</span> <span class="token string">'hits_IsRobot_UserID_URL'</span><span class="token punctuation">)</span> <span class="token operator">AND</span> <span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">'UserID'</span><span class="token punctuation">)</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> Ratio <span class="token keyword">ASC</span></code></pre>
+<p>响应如下：</p>
+<pre class=" language-response"><code class="language-response">┌─Table───────────────────┬─Column─┬─Uncompressed─┬─Compressed─┬─Ratio─┐
+│ hits_URL_UserID_IsRobot │ UserID │ 33.83 MiB    │ 11.24 MiB  │     3 │
+│ hits_IsRobot_UserID_URL │ UserID │ 33.83 MiB    │ 877.47 KiB │    39 │
+└─────────────────────────┴────────┴──────────────┴────────────┴───────┘
+
+2 rows in set. Elapsed: 0.006 sec. </code></pre>
+<p>我们可以看到，对于我们按基数以升序对键列<code>(IsRobot, UserID, URL)</code>进行排序的表，<code>UserID</code>列的压缩率明显更高。</p>
+<p>尽管在两个表中存储了完全相同的数据（我们在两个表中插入了相同的 887 万行），但复合主键中键列的顺序对表的列<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-stored-on-disk-ordered-by-primary-key-columns">数据文件</a>中的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/introduction/distinctive-features/#data-compression">压缩</a>数据占用多少磁盘空间有很大影响：</p>
+<ul>
+<li>在具有复合主键<code>(URL, UserID, IsRobot)</code>的表<code>hits_URL_UserID_IsRobot</code>中，我们按基数降序排列键列，<code>UserID.bin</code>数据文件占用<strong>11.24 MiB</strong>的磁盘空间</li>
+<li>在具有复合主键<code>(IsRobot, UserID, URL)</code>的表<code>hits_IsRobot_UserID_URL</code>中，我们按基数升序对键列进行排序，<code>UserID.bin</code>数据文件仅占用<strong>877.47 KiB</strong>磁盘空间</li>
+</ul>
+<p>磁盘上的表列数据具有良好的压缩比不仅可以节省磁盘空间，而且还可以使需要从该列读取数据的查询（尤其是分析查询）更快，因为从磁盘到主存（操作系统的文件缓存）移动列的数据所需的 i/o 更少。</p>
+<p>下面我们将说明为什么主键按基数升序排列对表列的压缩率有好处。</p>
+<p>下图描绘了主键在磁盘上的行顺序，其中键列按基数升序排列：</p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-14a.png" alt="img"></p>
+<p>我们说明了<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-stored-on-disk-ordered-by-primary-key-columns">表的行数据按主键列排序存储在磁盘上</a>。</p>
+<p>在上图中，表的行（它们在磁盘上的列值）首先按<code>cl</code>值排序，具有相同<code>cl</code>值的行按其<code>ch</code>值排序。并且由于第一个键列<code>cl</code>的基数较低，很可能存在具有相同<code>cl</code>值的行。因此，<code>ch</code>值也可能是有序的（局部 - 对于具有相同<code>cl</code>值的行）。</p>
+<p>如果在一列中，相似的数据彼此靠近放置，例如通过排序，那么该数据将被更好地进行压缩。一般来说，压缩算法受益于数据的长度（数据越多，压缩效果越好）和局部性（数据越相似，压缩比越好）。</p>
+<p>与上图相反，下图描绘了磁盘上行顺序按主键基数降序排列：</p>
+<p><img src="%5Cimages%5Csparse-primary-indexes-14b.png" alt="img"></p>
+<p>现在表的行首先按它们的<code>ch</code>值排序，具有相同<code>ch</code>值的行按它们的<code>cl</code>值排序。但是因为第一个键列<code>ch</code>的基数很高，所以不可能有相同<code>ch</code>值的行。并且因此也不太可能对<code>cl</code>值进行排序（局部 - 对于具有相同<code>ch</code>值的行）。</p>
+<p>因此，这些<code>cl</code>值很可能是随机顺序的，因此分别具有较差的局部性和压缩比。</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>对于提升查询中的辅助键列的有效过滤和表的列数据文件的压缩率，将主键中的列按其基数升序排列是有帮助的。</p>
+<h1 id="有效识别单行"><a href="#有效识别单行" class="headerlink" title="有效识别单行"></a>有效识别单行</h1><p>虽然通常它<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/faq/use-cases/key-value">不是</a>ClickHouse 的最佳用例，但有时在 构建ClickHouse 之上的应用程序需要识别 ClickHouse 表的单行。</p>
+<p>一个直观的解决方案是使用每行具有唯一值的<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>列，并将该列用作主键列以快速检索行。</p>
+<p>为了最快的检索，UUID 列<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#the-primary-index-is-used-for-selecting-granules">需要是第一个键列</a>。</p>
+<p>我们讨论了因为<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#data-is-stored-on-disk-ordered-by-primary-key-columns">ClickHouse 表的行数据存储在按主键列排序的磁盘上</a>，因此在主键或复合主键中具有非常高的基数的列（如 UUID 列）在具有较低基数的列之外<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-cardinality/#optimal-compression-ratio-of-data-files">是不利于表列的压缩比</a>。</p>
+<p>最快检索和最佳数据压缩之间的折衷方案是使用复合主键，其中 UUID 是最后一个键列，位于用于确保某些表列的良好压缩比的低基数键列之后。</p>
+<h1 id="一个具体的例子"><a href="#一个具体的例子" class="headerlink" title="一个具体的例子"></a>一个具体的例子</h1><p>一个具体的例子是Alexey Milovidov 开发并<a target="_blank" rel="noopener" href="https://clickhouse.com/blog/building-a-paste-service-with-clickhouse/">提到</a>的文本粘贴服务<a target="_blank" rel="noopener" href="https://pastila.nl/">https://pastila.nl</a>。</p>
+<p>每次更改文本区域时，数据都会自动保存到 ClickHouse 表行（每次更改一行）。</p>
+<p>识别和检索（特定版本）粘贴内容的一种方法是使用内容的hash作为包含该内容的表行的 UUID。</p>
+<p>下图说明</p>
+<ul>
+<li>内容更改时行的插入顺序（例如，由于在文本区域中输入文本）和</li>
+<li>使用<code>PRIMARY KEY (hash)</code>时插入的行数据在磁盘上的顺序：<img src="/images/sparse-primary-indexes-15a.png" alt="img"></li>
+</ul>
+<p>因为该<code>hash</code>列被用作主键列</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/#the-primary-index-is-used-for-selecting-granules">可以非常快速</a>地检索特定的行，但是</li>
+<li>表的行（它们的列数据）按（唯一和随机）哈希值升序排列存储在磁盘上。因此，内容列的值也以随机顺序存储，没有数据局部性，导致<strong>内容列数据文件的压缩率次优</strong>。</li>
+</ul>
+<p>为了显着提高内容列的压缩率，同时仍然实现对特定行的快速检索，pasila.nl 使用两个哈希值（和一个复合主键）来识别特定行：</p>
+<ul>
+<li>如上所述，内容的哈希值对于不同的数据是不同的，以及</li>
+<li>一个<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">局部敏感的hash（指纹）</a>，<strong>不</strong>会因数据的微小变化而改变。</li>
+</ul>
+<p>下图显示</p>
+<ul>
+<li>内容更改时行的插入顺序（例如，由于在文本区域中输入文本）和</li>
+<li>使用复合主键<code>PRIMARY KEY (fingerprint, hash)</code>时插入行数据在磁盘上的顺序：</li>
+</ul>
+<p><img src="%5Cimages%5Csparse-primary-indexes-15b.png" alt="img"></p>
+<p>现在磁盘上的行首先按<code>fingerprint</code>排序，对于具有相同指纹值的行，它们的<code>hash</code>值决定了最终的顺序。</p>
+<p>因为只有微小变化的数据会获得相同的指纹值，所以现在相似的数据存储在磁盘上的内容列中彼此靠近。这对内容列的压缩率非常有利，因为压缩算法通常受益于数据局部性（数据越相似，压缩率越好）。</p>
+<p>折衷方案是检索特定行需要两个字段 (<code>fingerprint</code>和<code>hash</code>)，以便最佳地利用产生的复合主索引<code>PRIMARY KEY (fingerprint, hash)</code>。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Hairui Wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://onehr7.github.io/2022/11/02/ClickHouse优化（译） -- 主键索引/">https://onehr7.github.io/2022/11/02/ClickHouse优化（译） -- 主键索引/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2022/11/04/ClickHouse%E4%BC%98%E5%8C%96%EF%BC%88%E8%AF%91%EF%BC%89%20--%20%E8%B7%B3%E6%95%B0%E7%B4%A2%E5%BC%95/"><i class="fa fa-chevron-left">  </i><span>ClickHouse优化（译） -- 跳数索引</span></a></div><div class="next-post pull-right"><a href="/2022/01/10/Kafka%E4%B8%89%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"><span>Kafka三节点集群搭建</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2022 By Hairui Wang</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')
