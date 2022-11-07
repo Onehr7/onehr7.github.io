@@ -15,7 +15,7 @@
   },
   hexoVersion: '5.3.0'
 } </script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%97%E5%88%B0nums-0-nums-1-nums-1-nums-0-%E8%A1%8C%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%BA"><span class="toc-number">1.</span> <span class="toc-text">得到nums[0], nums[1] &#x3D; nums[1], nums[0]行的执行过程为</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#co-consts"><span class="toc-number">2.</span> <span class="toc-text">co_consts</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#co-varnames"><span class="toc-number">3.</span> <span class="toc-text">co_varnames</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/01/14/STbxQl9M7XLJUkY.jpg"></div><div class="author-info__name text-center">Hairui Wang</div><div class="author-info__description text-center"></div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/Onehr7">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">19</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">11</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">9</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/edocteel-3/">Leetcode</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/"></a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">Python字节码分析两值互换</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-11-07</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/">Python</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>在Python的语法中，可以在一行中不通过临时变量，即可交换变量。如：<code>a, b = b, a</code>。</p>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/01/14/STbxQl9M7XLJUkY.jpg"></div><div class="author-info__name text-center">Hairui Wang</div><div class="author-info__description text-center"></div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/Onehr7">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">19</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">11</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">9</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/edocteel-3/">Leetcode</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/"></a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">Python字节码分析两值互换</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-11-07</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/">Python</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>在Python的语法中，可以在一行中不通过临时变量，即可交换变量。如：<code>a, b = b, a</code>。</p>
 <p>在直觉上，<code>a, b = b, a</code>与<code>b, a = a, b</code>得到的a, b值应当相等。但在实际中，如果a, b 在赋值过程中，存在引用关系的情况下，则得到值就会有差异，以下是一次字节码的详细分析。</p>
 <a id="more"></a>
 
@@ -31,47 +31,82 @@
     nums <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
     nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
 
-</code></pre>
+dis<span class="token punctuation">.</span>dis<span class="token punctuation">(</span>test<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 得到nums[0], nums[1] = nums[1], nums[0]行的执行过程为</span>
+<span class="token number">24</span> LOAD_FAST                <span class="token number">0</span> <span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
+<span class="token number">26</span> LOAD_CONST               <span class="token number">1</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token number">28</span> BINARY_SUBSCR
+<span class="token number">30</span> LOAD_FAST                <span class="token number">0</span> <span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
+<span class="token number">32</span> LOAD_CONST               <span class="token number">5</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token number">34</span> BINARY_SUBSCR
+<span class="token number">36</span> ROT_TWO
+<span class="token number">38</span> LOAD_FAST                <span class="token number">0</span> <span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
+<span class="token number">40</span> LOAD_CONST               <span class="token number">5</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token number">42</span> STORE_SUBSCR
+<span class="token number">44</span> LOAD_FAST                <span class="token number">0</span> <span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
+<span class="token number">46</span> LOAD_CONST               <span class="token number">1</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token number">48</span> STORE_SUBSCR
+<span class="token number">50</span> LOAD_CONST               <span class="token number">0</span> <span class="token punctuation">(</span>None<span class="token punctuation">)</span>
+<span class="token number">52</span> RETURN_VALUE
+
+<span class="token comment" spellcheck="true"># co_consts</span>
+<span class="token punctuation">(</span>None<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># co_varnames</span>
+<span class="token punctuation">(</span><span class="token string">'nums'</span><span class="token punctuation">,</span><span class="token punctuation">)</span></code></pre>
+<p>字节码说明</p>
+<table>
+<thead>
+<tr>
+<th>code</th>
+<th>DESC</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LOAD_FAST</td>
+<td>将指向局部对象 <code>co_varnames[var_num]</code> 的引用推入栈顶。</td>
+</tr>
+<tr>
+<td>LOAD_CONST</td>
+<td>将 <code>co_consts[consti]</code> 推入栈顶。</td>
+</tr>
+<tr>
+<td>BINARY_SUBSCR</td>
+<td>先POP得到k值,再对栈顶执行 d = d[k]</td>
+</tr>
+<tr>
+<td>ROT_TWO</td>
+<td>交换两个最顶层的堆栈项。</td>
+</tr>
+<tr>
+<td>STORE_SUBSCR</td>
+<td>实现 <code>TOS1[TOS] = TOS2</code> 。再将栈顶头三个移出</td>
+</tr>
+<tr>
+<td>RETURN_VALUE</td>
+<td>返回 TOS 到函数的调用者。</td>
+</tr>
+</tbody></table>
+<p>得出流程图为</p>
+<p><img src="/images/Python%E5%AD%97%E8%8A%82%E7%A0%81.jpg" alt="code"></p>
+<p>可以看出，在等号两边执行时，都为从左到右执行。</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 因此分析以下赋值结果</span>
+
+nums <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span>
+nums<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span>
+nums <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+
+nums <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span>
+nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span>
+nums<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span>
+nums <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span></code></pre>
 </li>
 </ul>
-<p>  dis.dis(test)</p>
-<h1 id="得到nums-0-nums-1-nums-1-nums-0-行的执行过程为"><a href="#得到nums-0-nums-1-nums-1-nums-0-行的执行过程为" class="headerlink" title="得到nums[0], nums[1] = nums[1], nums[0]行的执行过程为"></a>得到nums[0], nums[1] = nums[1], nums[0]行的执行过程为</h1><p>  24 LOAD_FAST                0 (nums)<br>  26 LOAD_CONST               1 (1)<br>  28 BINARY_SUBSCR<br>  30 LOAD_FAST                0 (nums)<br>  32 LOAD_CONST               5 (0)<br>  34 BINARY_SUBSCR<br>  36 ROT_TWO<br>  38 LOAD_FAST                0 (nums)<br>  40 LOAD_CONST               5 (0)<br>  42 STORE_SUBSCR<br>  44 LOAD_FAST                0 (nums)<br>  46 LOAD_CONST               1 (1)<br>  48 STORE_SUBSCR<br>  50 LOAD_CONST               0 (None)<br>  52 RETURN_VALUE</p>
-<h1 id="co-consts"><a href="#co-consts" class="headerlink" title="co_consts"></a>co_consts</h1><p>  (None, 1, 2, 3, 4, 0)</p>
-<h1 id="co-varnames"><a href="#co-varnames" class="headerlink" title="co_varnames"></a>co_varnames</h1><p>  (‘nums’,)</p>
-<pre><code>
-字节码说明
-
-| code          | DESC                                                   |
-| ------------- | ------------------------------------------------------ |
-| LOAD_FAST     | 将指向局部对象 `co_varnames[var_num]` 的引用推入栈顶。 |
-| LOAD_CONST    | 将 `co_consts[consti]` 推入栈顶。                      |
-| BINARY_SUBSCR | 先POP得到k值,再对栈顶执行 d = d[k]                     |
-| ROT_TWO       | 交换两个最顶层的堆栈项。                               |
-| STORE_SUBSCR  | 实现 `TOS1[TOS] = TOS2` 。再将栈顶头三个移出           |
-| RETURN_VALUE  | 返回 TOS 到函数的调用者。                              |
-
-得出流程图为
-
-![code](/images/Python字节码.jpg)
-
-可以看出，在等号两边执行时，都为从左到右执行。
-
-```python
-# 因此分析以下赋值结果
-
-nums = [1, 2, 3, 4]
-nums[nums[1]], nums[1] = nums[1], nums[nums[1]]
-nums[nums[1]], nums[1] = 2, 3
-nums[2], nums[1] = 2, 3
-nums = [1, 3, 2, 4]
-
-
-nums = [1, 2, 3, 4]
-nums[1], nums[nums[1]] = nums[nums[1]], nums[1]
-nums[1], nums[nums[1]] = 3, 2
-nums[1] = 3
-nums[3] = 2
-nums = [1, 3, 3, 2]</code></pre>
 </div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Hairui Wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://onehr7.github.io/2022/11/07/Python字节码分析两值互换/">https://onehr7.github.io/2022/11/07/Python字节码分析两值互换/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%97%E8%8A%82%E7%A0%81/">字节码</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2022/11/04/ClickHouse%E4%BC%98%E5%8C%96%EF%BC%88%E8%AF%91%EF%BC%89%20--%20%E8%B7%B3%E6%95%B0%E7%B4%A2%E5%BC%95/"><span>ClickHouse优化（译） -- 跳数索引</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://i.loli.net/2021/01/14/aJn4RNHLOvf3dDj.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2022 By Hairui Wang</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
