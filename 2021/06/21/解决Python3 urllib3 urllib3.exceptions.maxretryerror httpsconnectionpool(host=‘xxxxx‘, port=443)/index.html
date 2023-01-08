@@ -17,16 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>解决Python3 urllib3 urllib3.exceptions.maxretryerror httpsconnectionpool(host=‘xxxxx‘, port=443) | Hexo</title>
-  <meta name="description" content="报错原因在使用代理进行请求时，代理只通过HTTP请求，此时请求进行HTTPS验证时验证失败。">
+  <title>解决Python3 urllib3 urllib3.exceptions.maxretryerror httpsconnectionpool(host=‘xxxxx‘, port=443) | Onehr7</title>
+  <meta name="description" content="报错原因在使用代理进行请求时，代理只通过HTTP请求，此时请求进行HTTPS验证时验证失败。 两种解决方案 在1.25版本之前，请求时不会进行HTTPS验证。故可降低urllib3版本。     1.25 (2019-04-22)    Require and validate certificates by default when using HTTPS (Pull #1507) pip in">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决Python3 urllib3 urllib3.exceptions.maxretryerror httpsconnectionpool(host&#x3D;‘xxxxx‘, port&#x3D;443)">
 <meta property="og:url" content="https://onehr7.github.io/2021/06/21/%E8%A7%A3%E5%86%B3Python3%20urllib3%20urllib3.exceptions.maxretryerror%20httpsconnectionpool(host=%E2%80%98xxxxx%E2%80%98,%20port=443)/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="报错原因在使用代理进行请求时，代理只通过HTTP请求，此时请求进行HTTPS验证时验证失败。">
+<meta property="og:description" content="报错原因在使用代理进行请求时，代理只通过HTTP请求，此时请求进行HTTPS验证时验证失败。 两种解决方案 在1.25版本之前，请求时不会进行HTTPS验证。故可降低urllib3版本。     1.25 (2019-04-22)    Require and validate certificates by default when using HTTPS (Pull #1507) pip in">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-21T12:11:35.000Z">
-<meta property="article:modified_time" content="2022-09-10T12:30:34.592Z">
+<meta property="article:modified_time" content="2023-01-08T13:42:37.972Z">
 <meta property="article:author" content="Hairui Wang">
 <meta property="article:tag" content="ssl">
 <meta name="twitter:card" content="summary">
@@ -285,8 +285,6 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <h3 id="报错原因"><a href="#报错原因" class="headerlink" title="报错原因"></a>报错原因</h3><p>在使用代理进行请求时，代理只通过<code>HTTP</code>请求，此时请求进行<code>HTTPS</code>验证时验证失败。</p>
-<a id="more"></a>
-
 <h3 id="两种解决方案"><a href="#两种解决方案" class="headerlink" title="两种解决方案"></a>两种解决方案</h3><ol>
 <li>在<code>1.25</code>版本之前，请求时不会进行HTTPS验证。故可降低urllib3版本。</li>
 </ol>
@@ -397,8 +395,9 @@ res <span class="token operator">=</span> requests<span class="token punctuation
 
     <div class="copyright">
     	
+        &copy; 2023 Hairui Wang
+        
         <div class="publishby">
-        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
         </div>
     </div>
 </footer>

@@ -17,18 +17,18 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Flask Vue跨域配置 | Hexo</title>
-  <meta name="description" content="配置Flask# 安装flask_cors pip install flask_cors  from flask_cors import * #全局配置 CORS(app, supports_credentials&#x3D;True)">
+  <title>Flask Vue跨域配置 | Onehr7</title>
+  <meta name="description" content="配置Flask# 安装flask_cors pip install flask_cors  from flask_cors import * #全局配置 CORS(app, supports_credentials&#x3D;True)    配置Vue1.找到config目录下的index.js，在proxyTable下添加配置信息: &#39;&#x2F;api&#39;: &amp;#123;  target: &#39;http:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flask Vue跨域配置">
 <meta property="og:url" content="https://onehr7.github.io/2020/10/27/%E9%85%8D%E7%BD%AEFlask+Vue%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="配置Flask# 安装flask_cors pip install flask_cors  from flask_cors import * #全局配置 CORS(app, supports_credentials&#x3D;True)">
+<meta property="og:description" content="配置Flask# 安装flask_cors pip install flask_cors  from flask_cors import * #全局配置 CORS(app, supports_credentials&#x3D;True)    配置Vue1.找到config目录下的index.js，在proxyTable下添加配置信息: &#39;&#x2F;api&#39;: &amp;#123;  target: &#39;http:">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/9403344-10e8372429b51b34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/9403344-aaa1a996feda6586.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2020-10-27T00:59:18.000Z">
-<meta property="article:modified_time" content="2022-09-10T12:22:01.411Z">
+<meta property="article:modified_time" content="2023-01-08T13:42:26.605Z">
 <meta property="article:author" content="Hairui Wang">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -294,8 +294,9 @@ pip install flask_cors
 <span class="token keyword">from</span> flask_cors <span class="token keyword">import</span> <span class="token operator">*</span>
 <span class="token comment" spellcheck="true">#全局配置</span>
 CORS<span class="token punctuation">(</span>app<span class="token punctuation">,</span> supports_credentials<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre>
-<a id="more"></a>
 </li>
+</ul>
+<ul>
 <li><h4 id="配置Vue"><a href="#配置Vue" class="headerlink" title="配置Vue"></a>配置Vue</h4><p>1.找到config目录下的index.js，在proxyTable下添加配置信息:</p>
 <pre class=" language-js"><code class="language-js"><span class="token string">'/api'</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
  target<span class="token punctuation">:</span> <span class="token string">'http://localhost:5000/'</span><span class="token punctuation">,</span>    <span class="token comment" spellcheck="true">//后端接口地址</span>
@@ -400,8 +401,9 @@ CORS<span class="token punctuation">(</span>app<span class="token punctuation">,
 
     <div class="copyright">
     	
+        &copy; 2023 Hairui Wang
+        
         <div class="publishby">
-        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
         </div>
     </div>
 </footer>
