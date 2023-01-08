@@ -269,14 +269,14 @@
   </url>
   
   <url>
-    <loc>https://onehr7.github.io/tags/pandas/</loc>
+    <loc>https://onehr7.github.io/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/</loc>
     <lastmod>2023-01-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://onehr7.github.io/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/</loc>
+    <loc>https://onehr7.github.io/tags/pandas/</loc>
     <lastmod>2023-01-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -320,6 +320,13 @@
   </url>
   
   <url>
+    <loc>https://onehr7.github.io/categories/JavaScript/</loc>
+    <lastmod>2023-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://onehr7.github.io/categories/Kafka/</loc>
     <lastmod>2023-01-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -335,13 +342,6 @@
   
   <url>
     <loc>https://onehr7.github.io/categories/Python/</loc>
-    <lastmod>2023-01-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://onehr7.github.io/categories/JavaScript/</loc>
     <lastmod>2023-01-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
