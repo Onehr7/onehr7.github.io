@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>351 LeetCode周赛 | Onehr7</title>
+  <meta name="description" content="一 美丽下标对的数目 模拟 GCD  Python class Solution:     def countBeautifulPairs(self, nums: List[int]) -&gt; int:         n &#x3D; len(nums)         ans &#x3D; 0          for i in range(n):             first &#x3D; nums[i]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="351 LeetCode周赛">
+<meta property="og:url" content="https://onehr7.github.io/2023/06/25/351%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="一 美丽下标对的数目 模拟 GCD  Python class Solution:     def countBeautifulPairs(self, nums: List[int]) -&gt; int:         n &#x3D; len(nums)         ans &#x3D; 0          for i in range(n):             first &#x3D; nums[i]">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-25T08:12:00.000Z">
+<meta property="article:modified_time" content="2023-07-17T14:00:15.516Z">
+<meta property="article:author" content="Hairui Wang">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://onehr7.github.io/2023/06/25/351%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Onehr7" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">mortal</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Chengdu, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Onehr7" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ClickHouse/">ClickHouse</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kafka/">Kafka</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LeetCode/">LeetCode</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8C%87%E4%BB%A4/">指令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReplacingMergeTree/" rel="tag">ReplacingMergeTree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/" rel="tag">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/" rel="tag">selenium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/" rel="tag">ssl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8F%E7%A8%8B/" rel="tag">协程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">字节码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E4%BB%A4/" rel="tag">指令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Context/" style="font-size: 13px;">Context</a> <a href="/tags/PyInstaller/" style="font-size: 13px;">PyInstaller</a> <a href="/tags/ReplacingMergeTree/" style="font-size: 13px;">ReplacingMergeTree</a> <a href="/tags/Web/" style="font-size: 13px;">Web</a> <a href="/tags/pandas/" style="font-size: 13px;">pandas</a> <a href="/tags/selenium/" style="font-size: 13px;">selenium</a> <a href="/tags/ssl/" style="font-size: 13px;">ssl</a> <a href="/tags/%E5%8D%8F%E7%A8%8B/" style="font-size: 13px;">协程</a> <a href="/tags/%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 13px;">字节码</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 13px;">并发</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 13px;">并查集</a> <a href="/tags/%E6%8C%87%E4%BB%A4/" style="font-size: 13px;">指令</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-351周赛总结" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      351 LeetCode周赛
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/06/25/351%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" class="article-date">
+	  <time datetime="2023-06-25T08:12:00.000Z" itemprop="datePublished">2023-06-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/06/25/351%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 898(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="一-美丽下标对的数目"><a href="#一-美丽下标对的数目" class="headerlink" title="一 美丽下标对的数目"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-beautiful-pairs/">一 美丽下标对的数目</a></h4><ul>
+<li><p><code>模拟</code> <code>GCD</code></p>
+</li>
+<li><p>Python</p>
+<pre><code>class Solution:
+    def countBeautifulPairs(self, nums: List[int]) -&gt; int:
+        n = len(nums)
+        ans = 0
+
+        for i in range(n):
+            first = nums[i]
+            while first &gt;= 10:
+                first //= 10
+            for j in range(i+1, n):
+                last = nums[j] % 10
+                if gcd(first, last) == 1:
+                    ans += 1
+        return ans
+
+</code></pre>
+</li>
+</ul>
+<p>  def gcd(a, b):<br>      if b == 0:<br>          return a<br>      return gcd(b, a % b)</p>
+<pre><code>
+- Golang
+</code></pre>
+<p>  func countBeautifulPairs(nums []int) (ans int) {<br>      n := len(nums)</p>
+<pre><code>  for i := 0; i &lt; n; i++ &#123;
+      first := nums[i]
+      for first &gt;= 10 &#123;
+          first /= 10
+      &#125;
+      for j := i + 1; j &lt; n; j++ &#123;
+          last := nums[j] % 10
+          if gcd(first, last) == 1&#123;
+              ans++
+          &#125;
+      &#125;
+  &#125;
+  return ans</code></pre>
+<p>  }</p>
+<p>  func gcd(a, b int) int {<br>      if b == 0 {<br>          return a<br>      }<br>      return gcd(b, a%b)<br>  }</p>
+<pre><code>
+
+
+#### [[二 得到整数零需要执行的最少操作数](https://leetcode.cn/problems/minimum-operations-to-make-the-integer-zero/)]
+
+- `枚举`
+
+从1开始枚举k, 设`x=num1-num2*k`， x为k个 2 **i 之和
+
+当x &lt; k时，但k个 2 **i 之和最小为k，此时操作不成立。且随着k增大，x减小，之后条件也不会成立。因此，此时返回-1
+
+当k最小为 bitCount(x)，bitCount为x中1的个数，由于2 **i 可以由两个2**i-1组成。因此k的取值范围为   bitCount(x) &lt;=k &lt; x
+
+- Python
+</code></pre>
+<p>  class Solution:<br>      def makeTheIntegerZero(self, num1: int, num2: int) -&gt; int:<br>          k = 1<br>          while True:<br>              x = num1 - k * num2</p>
+<pre><code>          if x &lt; k:
+              return -1
+
+          if k &gt;= x.bit_count():
+              return k
+          k += 1</code></pre>
+<pre><code>
+- Golang
+</code></pre>
+<p>  func makeTheIntegerZero(num1 int, num2 int) int {<br>      k := 1<br>      for {<br>          x := num1 - num2*k</p>
+<pre><code>      if x &lt; k &#123;
+          return -1
+      &#125;
+
+      if k &gt;= bitCount(x) &#123;
+          return k
+      &#125;
+      k++
+  &#125;</code></pre>
+<p>  }</p>
+<p>  func bitCount(a int) (c int) {<br>      for a != 0 {<br>          if a%2 != 0 {<br>              c++<br>          }<br>          a /= 2<br>      }<br>      return<br>  }</p>
+<pre><code>
+
+
+#### [[三 将数组划分成若干好子数组的方式](https://leetcode.cn/problems/ways-to-split-array-into-good-subarrays/)]
+
+- `数学`
+
+- Python
+</code></pre>
+<p>  class Solution:<br>      def numberOfGoodSubarraySplits(self, nums: List[int]) -&gt; int:<br>          if sum(nums) == 0:<br>              return 0<br>          ans = 1<br>          pre = 1<br>          i = 0</p>
+<pre><code>      while nums[i] != 1:
+          i += 1
+
+      while i &lt; len(nums):
+          if nums[i] == 1:
+              ans *= pre
+              ans %= (10**9 + 7)
+              pre = 1
+          else:
+              pre += 1
+          i += 1
+      return ans</code></pre>
+<pre><code>
+- Golang
+</code></pre>
+<p>  func numberOfGoodSubarraySplits(nums []int) int {<br>      i := 0<br>      n := len(nums)</p>
+<pre><code>  for i &lt; n &amp;&amp; nums[i] == 0 &#123;
+      i++
+  &#125;
+
+  if i == n &#123;
+      return 0
+  &#125;
+
+  ans := 1
+  pre := 1
+  for i &lt; n &#123;
+      if nums[i] == 1 &#123;
+          ans *= pre
+          pre = 1
+          ans %= 1e9  + 7
+      &#125;else&#123;
+          pre ++
+      &#125;
+      i++
+  &#125;
+  return ans</code></pre>
+<p>  }</p>
+<pre><code>
+
+
+#### [四 机器人碰撞](https://leetcode.cn/problems/robot-collisions/)
+
+- `栈` `排序` 
+
+- Python
+</code></pre>
+<p>  class Solution:<br>      def survivedRobotsHealths(self, positions: List[int], healths: List[int], directions: str) -&gt; List[int]:<br>          stack = []<br>          n = len(positions)<br>          robots = [[positions[i], healths[i], directions[i], i] for i in range(n)]<br>          robots.sort(key=lambda x: x[0])</p>
+<pre><code>      for i in range(n):
+          if robots[i][2] == &quot;L&quot;:
+              while stack and stack[-1][0] == &quot;R&quot; and stack[-1][1] &lt; robots[i][1]:
+                  stack.pop()
+                  robots[i][1] -= 1
+              if stack and stack[-1][0] == &quot;R&quot;:
+                  if stack[-1][1] &gt; robots[i][1]:
+                      stack[-1][1] -= 1
+                  elif stack[-1][1] == robots[i][1]:
+                      stack.pop()
+              else:
+                  stack.append([robots[i][2], robots[i][1], robots[i][3]])
+          else:
+              stack.append([robots[i][2], robots[i][1], robots[i][3]])
+
+      stack.sort(key=lambda x: x[2])
+
+      return [stack[i][1] for i in range(len(stack))]</code></pre>
+<pre><code>
+- Golang
+</code></pre>
+<p>  func survivedRobotsHealths(positions []int, healths []int, directions string) []int {<br>      n := len(positions)</p>
+<pre><code>  type robot struct &#123;
+      p   int
+      h   int
+      d   byte
+      idx int
+  &#125;
+
+  robots := make([]robot, n)
+
+  for i := 0; i &lt; n; i++ &#123;
+      robots[i] = robot&#123;positions[i], healths[i], directions[i], i&#125;
+  &#125;
+
+  sort.Slice(robots, func(i, j int) bool &#123;
+      return robots[i].p &lt; robots[j].p
+  &#125;)
+
+  stack := make([]robot, 0)
+
+  for i := 0; i &lt; n; i++ &#123;
+      if robots[i].d == &#39;L&#39; &#123;
+          for len(stack) &gt; 0 &amp;&amp; stack[len(stack)-1].d == &#39;R&#39; &amp;&amp; stack[len(stack)-1].h &lt; robots[i].h &#123;
+              stack = stack[:len(stack)-1]
+              robots[i].h--
+          &#125;
+          if len(stack) &gt; 0 &amp;&amp; stack[len(stack)-1].d == &#39;R&#39; &#123;
+              if stack[len(stack)-1].h &gt; robots[i].h &#123;
+                  stack[len(stack)-1].h--
+              &#125; else &#123;
+                  stack = stack[:len(stack)-1]
+              &#125;
+          &#125; else &#123;
+              stack = append(stack, robots[i])
+          &#125;
+      &#125; else &#123;
+          stack = append(stack, robots[i])
+      &#125;
+  &#125;
+
+  ans := make([]int, 0)
+  sort.Slice(stack, func(i, j int) bool &#123;
+      return stack[i].idx &lt; stack[j].idx
+  &#125;)
+
+  for i := 0; i &lt; len(stack); i++ &#123;
+      ans = append(ans, stack[i].h)
+  &#125;
+
+  return ans</code></pre>
+<p>  }</p>
+<pre><code></code></pre>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://onehr7.github.io/2023/06/25/351%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" title="351 LeetCode周赛" target="_blank" rel="external">https://onehr7.github.io/2023/06/25/351周赛总结/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Onehr7" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Onehr7" target="_blank"><span class="text-dark">mortal</span><small class="ml-1x"></small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/05/14/345%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" title="345 LeetCode周赛"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Onehr7" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 Hairui Wang
+        
+        <div class="publishby">
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'cf74f9ce49741617bcff',
+    clientSecret: 'c75adc2334e996980ecd8c0eaa329e74e82c407f',
+    repo: 'comment',
+    owner: 'Onehr7',
+    admin: ['Onehr7'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true'
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
