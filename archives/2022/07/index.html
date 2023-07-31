@@ -17,21 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Python生产者消费者模型 | Onehr7</title>
-  <meta name="description" content="import time import queue import threading   class ThreadProductorConsumer():      # 初始化模型     def __init__(self):         # 大小为15的缓冲池，用于容纳产品         self.q &#x3D; queue.Queue(15)         self.screen_lock &#x3D;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Python生产者消费者模型">
-<meta property="og:url" content="https://onehr7.github.io/2020/11/06/Python%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/index.html">
+  <title>归档: 2022/7 | Onehr7</title>
+  <meta property="og:type" content="website">
+<meta property="og:title">
+<meta property="og:url" content="https://onehr7.github.io/archives/2022/07/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="import time import queue import threading   class ThreadProductorConsumer():      # 初始化模型     def __init__(self):         # 大小为15的缓冲池，用于容纳产品         self.q &#x3D; queue.Queue(15)         self.screen_lock &#x3D;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-06T15:12:05.000Z">
-<meta property="article:modified_time" content="2023-01-08T13:42:26.670Z">
 <meta property="article:author" content="Hairui Wang">
-<meta property="article:tag" content="并发">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://onehr7.github.io/2020/11/06/Python%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/index.html">
+  <link rel="canonical" href="https://onehr7.github.io/archives/2022/07/index.html">
   
     <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -236,182 +231,48 @@
   
   
 <main class="main" role="main">
-  <div class="content">
-  <article id="post-Python 生产者消费者模型" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  	<article class="content article article-archives article-type-list" itemscope="">
+	    <header class="article-header">
+	      <h1 itemprop="title">归档: 2022/7</h1>
+	      <p class="text-muted">共 24 篇文章</p>
+	    </header>
+	    <div class="article-body">
+	      
+  
+  
     
-    <div class="article-header">
+    
       
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Python生产者消费者模型
-    </h1>
-  
-
       
-      <div class="article-meta">
-        <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/11/06/Python%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/" class="article-date">
-	  <time datetime="2020-11-06T15:12:05.000Z" itemprop="datePublished">2020-11-06</time>
-	</a>
-</span>
-        
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </span>
-
-        
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a>
-  </span>
-
-
-        
-
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/11/06/Python%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/#comments" class="article-comment-link">评论</a></span>
-        
-	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 237(字)</span>
-	
-	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
-	
-
-      </div>
-    </div>
-    <div class="article-entry marked-body" itemprop="articleBody">
-      
-        <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> time
-<span class="token keyword">import</span> queue
-<span class="token keyword">import</span> threading
-
-
-<span class="token keyword">class</span> <span class="token class-name">ThreadProductorConsumer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-
-    <span class="token comment" spellcheck="true"># 初始化模型</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 大小为15的缓冲池，用于容纳产品</span>
-        self<span class="token punctuation">.</span>q <span class="token operator">=</span> queue<span class="token punctuation">.</span>Queue<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>screen_lock <span class="token operator">=</span> threading<span class="token punctuation">.</span>Semaphore<span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">productor</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> product<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 生产者不停的每3秒生产一个产品</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>q<span class="token punctuation">.</span>put<span class="token punctuation">(</span>product<span class="token punctuation">)</span>
-            cur_time <span class="token operator">=</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y-%m-%d %H:%M:%S'</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            cur_name <span class="token operator">=</span> threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name
-            <span class="token comment" spellcheck="true"># print是线程不安全的,需要信号量确保没有冲突</span>
-            self<span class="token punctuation">.</span>screen_lock<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>cur_time<span class="token operator">+</span><span class="token string">"  "</span> <span class="token operator">+</span> cur_name <span class="token operator">+</span> <span class="token string">" 生产了一个产品"</span><span class="token punctuation">,</span> sep<span class="token operator">=</span><span class="token string">'\n'</span><span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>screen_lock<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">consumer</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 消费者不停的每2秒消费一个产品</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            cur_time <span class="token operator">=</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y-%m-%d %H:%M:%S'</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            cur_name <span class="token operator">=</span> threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name
-            self<span class="token punctuation">.</span>screen_lock<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>cur_time <span class="token operator">+</span> <span class="token string">"  "</span> <span class="token operator">+</span> cur_name <span class="token operator">+</span> <span class="token string">" 消费了一个产品"</span><span class="token punctuation">,</span> sep<span class="token operator">=</span><span class="token string">'\n'</span><span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>screen_lock<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
-
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
-    tpc <span class="token operator">=</span> ThreadProductorConsumer<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-    p <span class="token operator">=</span> <span class="token string">"product"</span>
-    <span class="token comment" spellcheck="true"># 实例化了3个生产者</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        t <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>tpc<span class="token punctuation">.</span>productor<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-    <span class="token comment" spellcheck="true"># 实例化了6个消费者</span>
-    <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        v <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>tpc<span class="token punctuation">.</span>consumer<span class="token punctuation">)</span>
-        v<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre>
-
-      
-    </div>
-    <div class="article-footer">
-      <blockquote class="mt-2x">
-  <ul class="post-copyright list-unstyled">
+      <section class="panel panel-default b-no">
+        <div class="panel-heading" role="tab">
+          <h3 class="panel-title">
+            <a data-toggle="collapse" href="#collapse2022" aria-expanded="true">
+              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
+              2022
+            </a>
+            <!-- <a href="/archives/2022" class="archive-year">2022</a> -->
+          </h3>
+        </div>
+        <div id="collapse2022" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2022">
+        <div class="panel-body">
+          <div class="collection">
     
-    <li class="post-copyright-link hidden-xs">
-      <strong>本文链接：</strong>
-      <a href="https://onehr7.github.io/2020/11/06/Python%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/" title="Python生产者消费者模型" target="_blank" rel="external">https://onehr7.github.io/2020/11/06/Python 生产者消费者模型/</a>
-    </li>
     
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li>
-  </ul>
-</blockquote>
-
-
-<div class="panel panel-default panel-badger">
-  <div class="panel-body">
-    <figure class="media">
-      <div class="media-left">
-        <a href="https://github.com/Onehr7" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
-        </a>
-      </div>
-      <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/Onehr7" target="_blank"><span class="text-dark">mortal</span><small class="ml-1x"></small></a></h3>
-        <div>个人简介。</div>
-      </div>
-    </figure>
-  </div>
-</div>
-
-
-    </div>
-  </article>
-  
-    
-  <section id="comments">
-  	
-           
-    
-  </section>
+<a href="/2022/07/03/Golang%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" class="collection-item"   itemprop="url">
+  <time datetime="2022-07-03T13:15:33.000Z" itemprop="datePublished">2022-07-03</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> Go 逃逸分析
+</a>
 
 
   
-</div>
-
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
-  <div class="bar-inner">
   
-  <ul class="pager pull-left">
-    
-    <li class="prev">
-      <a href="/2020/11/16/Python%E4%BD%BF%E7%94%A8Virtualenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" title="Python虚拟环境配置"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
-    
-    <li class="next">
-      <a href="/2020/10/27/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="JavaScript浅析"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-  </ul>
-  
-  
-  
-  <div class="bar-right">
-    
-  </div>
-  </div>
-</nav>
+    </div></div></div></section>
   
 
-
+	    </div>
+  	</article>
+  	 	
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -467,32 +328,6 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-
-   
-
-
-
-
-   
-    
-  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
-  <script type="text/javascript">
-  var gitalk = new Gitalk({
-    clientID: 'cf74f9ce49741617bcff',
-    clientSecret: 'c75adc2334e996980ecd8c0eaa329e74e82c407f',
-    repo: 'comment',
-    owner: 'Onehr7',
-    admin: ['Onehr7'],
-    id: md5(location.pathname),
-    distractionFreeMode: true,
-    language: 'zh-CN',
-    enableHotKey: 'true'
-  })
-  gitalk.render('comments')
-  </script>
-      
 
 
 

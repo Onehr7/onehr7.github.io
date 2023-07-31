@@ -166,6 +166,31 @@
   </entry>
   
   <entry>
+    <title>Go 逃逸分析</title>
+    <link href="https://onehr7.github.io/2022/07/03/Golang%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/"/>
+    <id>https://onehr7.github.io/2022/07/03/Golang%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/</id>
+    <published>2022-07-03T13:15:33.000Z</published>
+    <updated>2023-07-31T03:05:04.131Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;p&gt;Go</summary>
+        
+      
+    
+    
+    
+    <category term="Golang" scheme="https://onehr7.github.io/categories/Golang/"/>
+    
+    
+    <category term="内存" scheme="https://onehr7.github.io/tags/%E5%86%85%E5%AD%98/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Go Context</title>
     <link href="https://onehr7.github.io/2022/05/21/Go%20Context/"/>
     <id>https://onehr7.github.io/2022/05/21/Go%20Context/</id>
@@ -489,32 +514,6 @@
     
     
     <category term="并发" scheme="https://onehr7.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript浅析</title>
-    <link href="https://onehr7.github.io/2020/10/27/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>https://onehr7.github.io/2020/10/27/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
-    <published>2020-10-27T08:08:37.000Z</published>
-    <updated>2023-01-08T13:42:26.624Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;一、数据类型&quot;&gt;&lt;a href=&quot;#一、数据类型&quot; class=&quot;headerlink&quot; title=&quot;一、数据类型&quot;&gt;&lt;/a&gt;一、数据类型&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Number :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;整数，浮点数，NaN（Not a</summary>
-        
-      
-    
-    
-    
-    <category term="JavaScript" scheme="https://onehr7.github.io/categories/JavaScript/"/>
-    
     
   </entry>
   
