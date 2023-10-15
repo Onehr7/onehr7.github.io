@@ -17,20 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Kafka三节点集群搭建 | Onehr7</title>
-  <meta name="description" content="一 整体步骤 hosts配置 安装配置Zookeeper Kafka集群搭建  二 配置Hosts 修改hosts文件 sudo vi &#x2F;etc&#x2F;hosts  # 配置如下 127.0.0.1   localhost 192.168.0.100 master 192.168.0.101 slave1 192.168.0.102 slave2   三 安装配置Zookeeper 下载解压 # 使用w">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Kafka三节点集群搭建">
-<meta property="og:url" content="https://onehr7.github.io/2022/01/10/Kafka%E4%B8%89%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/index.html">
+  <title>归档: 2023/10 | Onehr7</title>
+  <meta property="og:type" content="website">
+<meta property="og:title">
+<meta property="og:url" content="https://onehr7.github.io/archives/2023/10/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="一 整体步骤 hosts配置 安装配置Zookeeper Kafka集群搭建  二 配置Hosts 修改hosts文件 sudo vi &#x2F;etc&#x2F;hosts  # 配置如下 127.0.0.1   localhost 192.168.0.100 master 192.168.0.101 slave1 192.168.0.102 slave2   三 安装配置Zookeeper 下载解压 # 使用w">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-10T11:50:15.000Z">
-<meta property="article:modified_time" content="2023-01-08T13:41:34.984Z">
 <meta property="article:author" content="Hairui Wang">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://onehr7.github.io/2022/01/10/Kafka%E4%B8%89%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/index.html">
+  <link rel="canonical" href="https://onehr7.github.io/archives/2023/10/index.html">
   
     <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -235,265 +231,48 @@
   
   
 <main class="main" role="main">
-  <div class="content">
-  <article id="post-Kafka三节点集群搭建" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  	<article class="content article article-archives article-type-list" itemscope="">
+	    <header class="article-header">
+	      <h1 itemprop="title">归档: 2023/10</h1>
+	      <p class="text-muted">共 25 篇文章</p>
+	    </header>
+	    <div class="article-body">
+	      
+  
+  
     
-    <div class="article-header">
+    
       
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Kafka三节点集群搭建
-    </h1>
-  
-
       
-      <div class="article-meta">
-        <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2022/01/10/Kafka%E4%B8%89%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="article-date">
-	  <time datetime="2022-01-10T11:50:15.000Z" itemprop="datePublished">2022-01-10</time>
-	</a>
-</span>
-        
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Kafka/">Kafka</a>
-  </span>
-
-        
-
-        
-
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/01/10/Kafka%E4%B8%89%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/#comments" class="article-comment-link">评论</a></span>
-        
-	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 626(字)</span>
-	
-	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
-	
-
-      </div>
-    </div>
-    <div class="article-entry marked-body" itemprop="articleBody">
-      
-        <h2 id="一-整体步骤"><a href="#一-整体步骤" class="headerlink" title="一 整体步骤"></a>一 整体步骤</h2><ul>
-<li>hosts配置</li>
-<li>安装配置Zookeeper</li>
-<li>Kafka集群搭建</li>
-</ul>
-<h2 id="二-配置Hosts"><a href="#二-配置Hosts" class="headerlink" title="二 配置Hosts"></a>二 配置Hosts</h2><ul>
-<li><p>修改hosts文件</p>
-<pre class=" language-shell"><code class="language-shell">sudo vi /etc/hosts
-
-# 配置如下
-127.0.0.1   localhost
-192.168.0.100 master
-192.168.0.101 slave1
-192.168.0.102 slave2</code></pre>
-</li>
-</ul>
-<h2 id="三-安装配置Zookeeper"><a href="#三-安装配置Zookeeper" class="headerlink" title="三 安装配置Zookeeper"></a>三 安装配置Zookeeper</h2><ul>
-<li><p>下载解压</p>
-<pre class=" language-shell"><code class="language-shell"># 使用wget或本地下载后传到服务器
-cd /home/
-sudo mkdir zookeeper
-cd /home/zookeeper
-sudo wget https://dlcdn.apache.org/zookeeper/zookeeper-3.5.9/apache-zookeeper-3.5.9-bin.tar.gz
-sudo tar -zxvf apache-zookeeper-3.5.9-bin.tar.gz</code></pre>
-</li>
-<li><p>配置环境变量</p>
-<pre class=" language-shell"><code class="language-shell"># 修改三台主机
-# sudo vi /etc/profile
-
-# 添加环境变量
-export ZOOKEEPER_HOME=/home/zookeeper/apache-zookeeper-3.5.9-bin
-export PATH=$ZOOKEEPER_HOME/bin:$PATH
-
-source /etc/profile</code></pre>
-</li>
-</ul>
-<ul>
-<li><p>创建目录</p>
-<pre class=" language-shell"><code class="language-shell">cd apache-zookeeper-3.5.9-bin
-sudo mkdir data
-sudo mkdir logs</code></pre>
-</li>
-</ul>
-<ul>
-<li><p>修改配置</p>
-<pre class=" language-shell"><code class="language-shell">cd conf
-sudo cp zoo_sample.cfg zoo.cfg
-sudo vi zoo.cfg
-
-tickTime=2000
-initLimit=10
-syncLimit=5
-dataDir=/home/zookeeper/apache-zookeeper-3.5.9-bin/data
-dataLogDir=/home/zookeeper/apache-zookeeper-3.5.9-bin/logs
-clientPort=2181
-
-# 如果为当前主机，则修改为0.0.0.0
-server.1=master:2287:3387
-server.2=slave1:2287:3387
-server.3=slave2:2287:3387</code></pre>
-</li>
-<li><p>创建<code>myid</code>文件</p>
-<blockquote>
-<p>在各服务器节点(<code>master</code>、<code>slave1</code>、<code>slave2</code>)的 <code>dataDir</code> 目录下创建名为 <code>myid</code> 的文件，在文件第一行写上对应的 Server id</p>
-</blockquote>
-<pre class=" language-shell"><code class="language-shell">master:
-echo "1" > myid
-slave1:
-echo "2" > myid
-slave2:
-echo "3" > myid</code></pre>
-</li>
-<li><p>启动测试</p>
-<blockquote>
-<p>启动顺序决定leadert,follower</p>
-</blockquote>
-<pre class=" language-shell"><code class="language-shell"># 分别在三台主机上
-cd /home/zookeeper/apache-zookeeper-3.5.9-bin/bin/
-zkServer.sh start
-
-# 集群验证
-# 查看状态(需全部节点启动)
-zkServer.sh status</code></pre>
-</li>
-<li><p>基本命令</p>
-<pre class=" language-shell"><code class="language-shell"># 停止
-zkServer.sh stop</code></pre>
-</li>
-</ul>
-<h2 id="四-KafKa-集群搭建"><a href="#四-KafKa-集群搭建" class="headerlink" title="四 KafKa 集群搭建"></a>四 KafKa 集群搭建</h2><ul>
-<li><p>下载解压</p>
-<blockquote>
-<p>注意选择版本时，选择<code>Binary downloads</code>,不要选择<code>Source download</code>！！！否则启动时会提示<code>Could not find or load main class kafka.Kafka</code>，此时需要编译后才可以使用 。</p>
-</blockquote>
-<pre class=" language-shell"><code class="language-shell">cd /home
-mkdir Kafka
-cd Kafka
-mkdir data
-sudo wget https://archive.apache.org/dist/kafka/3.0.0/kafka_2.12-3.0.0.tgz
-tar -xzf kafka_2.12-3.0.0.tgz</code></pre>
-</li>
-<li><p>修改配置</p>
-<pre class=" language-shell"><code class="language-shell">cd kafka_2.12-3.0.0/config
-vi server.properties
-
-# 节点1
-# 群中每个节点的唯一标识
-broker.id=0
-# 监听地址
-listeners=PLAINTEXT://master:9092
-# 数据的存储位置
-log.dirs=/home/Kafka/data
-# Zookeeper连接地址
-zookeeper.connect=master:2181,slave1:2181,slave2:2181
-
-# 节点2
-broker.id=1
-listeners=PLAINTEXT://slave1:9092
-log.dirs=/home/Kafka/data
-zookeeper.connect=master:2181,slave1:2181,slave2:2181
-
-# 节点3
-broker.id=2
-listeners=PLAINTEXT://slave2:9092
-log.dirs=/home/Kafka/data
-zookeeper.connect=master:2181,slave1:2181,slave2:2181</code></pre>
-</li>
-<li><p>启动</p>
-<pre class=" language-shell"><code class="language-shell"># 三节点分别运行启动
-cd /home/Kafka/kafka_2.12-3.0.0
-bin/kafka-server-start.sh -daemon config/server.properties </code></pre>
-</li>
-<li><p>测试</p>
-<pre class=" language-shell"><code class="language-shell">bin/kafka-topics.sh --create --bootstrap-server master:9092 --replication-factor 1 --partitions 1 --topic test
-
-bin/kafka-topics.sh --list --bootstrap-server master:9092
-bin/kafka-topics.sh --describe --bootstrap-server master:9092 --topic test</code></pre>
-</li>
-</ul>
-
-      
-    </div>
-    <div class="article-footer">
-      <blockquote class="mt-2x">
-  <ul class="post-copyright list-unstyled">
+      <section class="panel panel-default b-no">
+        <div class="panel-heading" role="tab">
+          <h3 class="panel-title">
+            <a data-toggle="collapse" href="#collapse2023" aria-expanded="true">
+              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
+              2023
+            </a>
+            <!-- <a href="/archives/2023" class="archive-year">2023</a> -->
+          </h3>
+        </div>
+        <div id="collapse2023" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2023">
+        <div class="panel-body">
+          <div class="collection">
     
-    <li class="post-copyright-link hidden-xs">
-      <strong>本文链接：</strong>
-      <a href="https://onehr7.github.io/2022/01/10/Kafka%E4%B8%89%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" title="Kafka三节点集群搭建" target="_blank" rel="external">https://onehr7.github.io/2022/01/10/Kafka三节点集群搭建/</a>
-    </li>
     
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li>
-  </ul>
-</blockquote>
-
-
-<div class="panel panel-default panel-badger">
-  <div class="panel-body">
-    <figure class="media">
-      <div class="media-left">
-        <a href="https://github.com/Onehr7" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
-        </a>
-      </div>
-      <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/Onehr7" target="_blank"><span class="text-dark">mortal</span><small class="ml-1x"></small></a></h3>
-        <div>个人简介。</div>
-      </div>
-    </figure>
-  </div>
-</div>
-
-
-    </div>
-  </article>
-  
-    
-  <section id="comments">
-  	
-           
-    
-  </section>
+<a href="/2023/10/15/367%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" class="collection-item"   itemprop="url">
+  <time datetime="2023-10-15T11:42:00.000Z" itemprop="datePublished">2023-10-15</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> 367 LeetCode周赛
+</a>
 
 
   
-</div>
-
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
-  <div class="bar-inner">
   
-  <ul class="pager pull-left">
-    
-    <li class="prev">
-      <a href="/2022/05/21/Go%20Context/" title="Go Context"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
-    
-    <li class="next">
-      <a href="/2021/09/07/%E5%BD%93Clickhouse%20Distributed%E9%81%87%E5%88%B0ReplacingMergeTree/" title="当Clickhouse Distributed遇到ReplacingMergeTree"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-  </ul>
-  
-  
-  
-  <div class="bar-right">
-    
-  </div>
-  </div>
-</nav>
+    </div></div></div></section>
   
 
-
+	    </div>
+  	</article>
+  	 	
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -549,32 +328,6 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-
-   
-
-
-
-
-   
-    
-  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
-  <script type="text/javascript">
-  var gitalk = new Gitalk({
-    clientID: 'cf74f9ce49741617bcff',
-    clientSecret: 'c75adc2334e996980ecd8c0eaa329e74e82c407f',
-    repo: 'comment',
-    owner: 'Onehr7',
-    admin: ['Onehr7'],
-    id: md5(location.pathname),
-    distractionFreeMode: true,
-    language: 'zh-CN',
-    enableHotKey: 'true'
-  })
-  gitalk.render('comments')
-  </script>
-      
 
 
 
